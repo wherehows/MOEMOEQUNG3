@@ -5,6 +5,7 @@
  */
 
 // You can delete this file if you're not using it
+require('firebase/compat/database')
 
 exports.onRenderBody = ({ setHeadComponents }) => {
   setHeadComponents([<script src="./src/utils/darkMode.ts" />])

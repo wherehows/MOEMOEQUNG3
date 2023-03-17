@@ -30,7 +30,6 @@ const Wrapper = styled('div')(() => ({
   alignItems: 'flex-end',
   position: 'fixed',
   left: 0,
-  top: 0,
   overflow: 'scroll',
 }));
 

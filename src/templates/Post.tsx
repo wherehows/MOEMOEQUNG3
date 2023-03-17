@@ -21,7 +21,7 @@ export default function Post({
     <>
       <GlobalCss />
       <Sidebar documentTree={documentTree} />
-      <Content selectedDocument={selectedDocument} />
+      <Content selectedDocument={selectedDocument} pathname={path} />
     </>
   );
 }

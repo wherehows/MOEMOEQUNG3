@@ -1,21 +1,26 @@
 import styled from '@emotion/styled';
 import { CONTENT_LEFT_MARGIN_WIDTH, CONTENT_WIDTH } from '@utils/const';
 import CustomLink from './CustomLink';
+import ViewCounter from './ViewCounter';
 
 interface ContentProps {
+  pathname?: string;
   documents?: MarkdownDocument[];
   selectedDocument?: string | null;
 }
 
-const Content = ({ documents, selectedDocument }: ContentProps) => {
+const Content = ({ documents, selectedDocument, pathname }: ContentProps) => {
   if (typeof document === 'undefined') return <></>;
 
   return (
     <Wrapper>
-      {selectedDocument ? (
-        <MarkdownRenderer
-          dangerouslySetInnerHTML={{ __html: selectedDocument }}
-        />
+      {selectedDocument && pathname ? (
+        <>
+          <ViewCounter pathname={pathname} />
+          <MarkdownRenderer
+            dangerouslySetInnerHTML={{ __html: selectedDocument }}
+          />
+        </>
       ) : (
         <DocumentList>
           {documents?.map(({ html, title, date, slug }: MarkdownDocument) => (

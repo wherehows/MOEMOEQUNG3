@@ -22,10 +22,7 @@ module.exports = {
           apiKey: process.env.apiKey,
           authDomain: process.env.authDomain,
           databaseURL: process.env.databaseURL,
-          projectId: (() => {
-            console.log('😀', process.env.apiKey, process.env.projectId)
-            return process.env.projectId;
-          })(),
+          projectId: process.env.projectId,
           storageBucket: process.env.storageBucket,
           messagingSenderId: process.env.messagingSenderId,
           appId: process.env.appId

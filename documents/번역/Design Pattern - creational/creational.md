@@ -1,10 +1,10 @@
 ---
 date: '2022-10-14'
-title: 'creational'
-subTitle: 'creational'
+title: 'creational-pattern'
+subTitle: 'creational-pattern'
 grandParent: ''
 parent: 'Design Pattern'
-slug: '/design-pattern/creational'
+slug: '/design-pattern/creational-pattern'
 ---
 
 본 글은 [refactoring.guru](https://refactoring.guru/), [sbcode](https://sbcode.net/typescript/), [patterns.dev](https://www.patterns.dev/posts/proxy-pattern/)의 내용을 참고, 번역했습니다.

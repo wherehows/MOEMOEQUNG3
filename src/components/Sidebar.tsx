@@ -35,7 +35,6 @@ const Wrapper = styled('div')(() => ({
 
 const CategoryList = styled('ul')(() => ({
   width: SIDEBAR_PURE_WIDTH,
-  height: '100vh',
   backgroundColor: 'transparent',
   position: 'relative',
   padding: 0,

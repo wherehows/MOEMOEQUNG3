@@ -37,5 +37,6 @@ const CategoryList = styled('ul')(() => ({
   width: SIDEBAR_PURE_WIDTH,
   backgroundColor: 'transparent',
   position: 'relative',
+  marginTop: 0,
   padding: 0,
 }));

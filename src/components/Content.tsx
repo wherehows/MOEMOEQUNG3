@@ -27,7 +27,9 @@ const Content = ({ documents, selectedDocument, pathname }: ContentProps) => {
             <DocumentItem key={slug}>
               <Button to={slug}>
                 <Title>{title}</Title>
-                <PostDate>{formatDate(date)}</PostDate>
+                <PostDate dateTime={date.toString()}>
+                  {formatDate(date)}
+                </PostDate>
                 <Description>{changeMarkdownToTextContent(html)}</Description>
               </Button>
             </DocumentItem>
@@ -76,14 +78,15 @@ const Button = styled(CustomLink)(() => ({
   outline: 'none',
 }));
 
-const Title = styled('div')(() => ({
+const Title = styled('h2')(() => ({
   textAlign: 'left',
   width: '100%',
+  margin: 0,
   fontSize: '1.4rem',
   color: 'var(--colors-primary)',
 }));
 
-const PostDate = styled('div')(() => ({
+const PostDate = styled('time')(() => ({
   fontSize: '0.9rem',
   textAlign: 'left',
   width: '100%',

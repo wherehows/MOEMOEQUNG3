@@ -6,7 +6,9 @@ import DarkModeToggle from './DarkModeToggle';
 const SidebarHeader = () => {
   return (
     <Wrapper>
-      <Name to="/">Younghoo Kim</Name>
+      <NameWrapper>
+        <Name to="/">Younghoo Kim</Name>
+      </NameWrapper>
       <SubFeature>
         <DarkModeToggle />
       </SubFeature>
@@ -25,6 +27,11 @@ const Wrapper = styled('div')(() => ({
 
 const Name = styled(CustomLink)(() => ({
   fontWeight: 'bold',
+}));
+
+const NameWrapper = styled('h1')(() => ({
+  margin: '0 0 0.4rem 0',
+  fontSize: '1.8rem',
 }));
 
 const SubFeature = styled('div')(() => ({

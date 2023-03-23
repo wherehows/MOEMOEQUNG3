@@ -22,7 +22,7 @@ exports.onCreateBabelConfig = ({ actions }) => {
 
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions
-  const Post = path.resolve(`src/templates/Post.tsx`)
+  const PostDetail = path.resolve(`src/templates/PostDetail.tsx`)
   const result = await graphql(`
     {
       allMarkdownRemark(sort: {order: DESC, fields: frontmatter___date}) {
@@ -45,7 +45,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   result.data.allMarkdownRemark.edges.forEach(({ node }) => {
     createPage({
       path: node.frontmatter.slug,
-      component: Post,
+      component: PostDetail,
     })
   })
 }

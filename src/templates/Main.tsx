@@ -7,7 +7,7 @@ import {
 } from '@utils/helpers';
 import GlobalCss from '@components/GlobalCss';
 
-const IndexPage = ({
+const Main = ({
   data: {
     allMarkdownRemark: { edges },
   },
@@ -24,7 +24,7 @@ const IndexPage = ({
   );
 };
 
-export default IndexPage;
+export default Main;
 
 export const getPostList = graphql`
   query getPostList {

@@ -8,7 +8,7 @@ interface QueryResultType {
   allMarkdownRemark: { edges: Edge[] };
 }
 
-export default function Post({
+export default function PostDetail({
   data: {
     allMarkdownRemark: { edges },
   },

@@ -109,7 +109,7 @@ const Description = styled('div')(() => ({
 
 const DocumentList = styled('ul')(() => ({
   padding: 0,
-  marginTop: '1rem',
+  margin: 0,
 }));
 
 const changeMarkdownToTextContent = (html: MarkdownDocument['html']) => {

@@ -26,26 +26,10 @@ const Main = ({
 
 export default Main;
 
-export const getPostList = graphql`
-  query getPostList {
-    allMarkdownRemark(
-      sort: { order: DESC, fields: [frontmatter___date, frontmatter___title] }
-    ) {
-      edges {
-        node {
-          html
-          id
-          frontmatter {
-            date
-            grandParent
-            parent
-            title
-            subTitle
-            parent
-            slug
-          }
-        }
-      }
+export const getPosts = graphql`
+  query {
+    allMarkdownRemark(sort: { fields: frontmatter___date, order: DESC }) {
+      ...MarkdownRemarkFields
     }
   }
 `;

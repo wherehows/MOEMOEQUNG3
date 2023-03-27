@@ -36,22 +36,10 @@ const getSelectedDocument = (edges: Edge[], targetDocumentPath: string) => {
   return edge && edge.node.html;
 };
 
-export const getDocuments = graphql`
-  query getDocuments {
+export const getPosts = graphql`
+  query {
     allMarkdownRemark(sort: { fields: frontmatter___date, order: DESC }) {
-      edges {
-        node {
-          frontmatter {
-            date
-            grandParent
-            parent
-            slug
-            subTitle
-            title
-          }
-          html
-        }
-      }
+      ...MarkdownRemarkFields
     }
   }
 `;

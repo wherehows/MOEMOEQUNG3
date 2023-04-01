@@ -1,3 +1,5 @@
+export const isOnDevelopment = () => process.env.GATSBY_MODE === 'development';
+
 export const getFolderStructureTree = (edges: Edge[]) => {
   const grandParentData: GrandParentData = {};
   const parentData: ParentData = {};

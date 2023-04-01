@@ -94,26 +94,3 @@ export const moveWeeklyJournalToLast = (
   tempWeeklyJournalToLast && res.push(tempWeeklyJournalToLast);
   return res;
 };
-
-export const getAllDocumentsWithSort = (edges: Edge[]) =>
-  edges
-    .reduce((res: MarkdownDocument[], { node }: Edge) => {
-      const { frontmatter, html, id } = node;
-      const { date, title, subTitle, grandParent, parent, slug, index } =
-        frontmatter;
-
-      res.push({
-        html,
-        id,
-        date,
-        title,
-        subTitle,
-        grandParent,
-        parent,
-        slug,
-        index,
-      });
-
-      return res;
-    }, [])
-    .sort((a, b) => +new Date(b.date) - +new Date(a.date));

@@ -1,10 +1,7 @@
 import { graphql } from 'gatsby';
 import Sidebar from '@components/Sidebar';
 import Content from '@components/Content';
-import {
-  getAllDocumentsWithSort,
-  getFolderStructureTree,
-} from '@utils/helpers';
+import { getFolderStructureTree } from '@utils/helpers';
 import GlobalCss from '@components/GlobalCss';
 
 const Main = ({
@@ -13,7 +10,7 @@ const Main = ({
   },
 }: IndexPageProps) => {
   const documentTree = getFolderStructureTree(edges);
-  const documents = getAllDocumentsWithSort(edges);
+  const documents = getDocuments(edges);
 
   return (
     <>
@@ -33,3 +30,9 @@ export const getPosts = graphql`
     }
   }
 `;
+
+const getDocuments = (edges: Edge[]) =>
+  edges.map(({ node }: Edge) => ({
+    ...node,
+    ...node.frontmatter,
+  }));

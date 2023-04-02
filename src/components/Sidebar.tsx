@@ -7,18 +7,16 @@ interface SidebarProps {
   documentTree: GrandParentData[keyof GrandParentData][];
 }
 
-const Sidebar = ({ documentTree }: SidebarProps) => {
-  return (
-    <Wrapper>
-      <SidebarHeader />
-      <CategoryList>
-        {documentTree.map((folder, index) => (
-          <CategoryItem key={index} folder={folder} />
-        ))}
-      </CategoryList>
-    </Wrapper>
-  );
-};
+const Sidebar = ({ documentTree }: SidebarProps) => (
+  <Wrapper>
+    <SidebarHeader />
+    <CategoryList>
+      {documentTree.map((folder, index) => (
+        <CategoryItem key={index} folder={folder} />
+      ))}
+    </CategoryList>
+  </Wrapper>
+);
 
 export default Sidebar;
 

@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
 import CustomLink from './CustomLink';
 
-interface CategoryItem {
+interface FolderItem {
   folder: GrandParentData[keyof GrandParentData];
 }
 
-const CategoryItem = ({ folder }: CategoryItem) => {
+const FolderItem = ({ folder }: FolderItem) => {
   const { parent, children } = folder;
 
   return (
@@ -15,7 +15,7 @@ const CategoryItem = ({ folder }: CategoryItem) => {
         {children.map((child, index) => (
           <ChildListWrapper key={index}>
             {'children' in child ? (
-              <CategoryItem folder={child} />
+              <FolderItem folder={child} />
             ) : (
               <LinkButton to={child.slug}>{child.subTitle}</LinkButton>
             )}
@@ -26,7 +26,7 @@ const CategoryItem = ({ folder }: CategoryItem) => {
   );
 };
 
-export default CategoryItem;
+export default FolderItem;
 
 const Wrapper = styled('li')(() => ({
   listStyleType: 'none',

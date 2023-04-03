@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { SIDEBAR_PURE_WIDTH, SIDEBAR_WIDTH } from '@utils/const';
-import CategoryItem from './CategoryItem';
+import FolderItem from './FolderItem';
 import SidebarHeader from './SidebarHeader';
 import { getFolders } from '@utils/helpers';
 
@@ -14,11 +14,11 @@ const Sidebar = ({ edges }: SidebarProps) => {
   return (
     <Wrapper>
       <SidebarHeader />
-      <CategoryList>
+      <FolderList>
         {folders.map((folder, index) => (
-          <CategoryItem key={index} folder={folder} />
+          <FolderItem key={index} folder={folder} />
         ))}
-      </CategoryList>
+      </FolderList>
     </Wrapper>
   );
 };
@@ -36,7 +36,7 @@ const Wrapper = styled('div')(() => ({
   overflow: 'scroll',
 }));
 
-const CategoryList = styled('ul')(() => ({
+const FolderList = styled('ul')(() => ({
   width: SIDEBAR_PURE_WIDTH,
   backgroundColor: 'transparent',
   position: 'relative',

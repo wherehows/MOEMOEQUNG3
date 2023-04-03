@@ -1,98 +1,62 @@
 export const isOnDevelopment = () => process.env.GATSBY_MODE === 'development';
 
+interface FolderNameToFolderInformationMap {
+  [key: string]: FolderInformation;
+}
+
 export const getFolders = (edges: Edge[]) => {
-  const grandParentData: GrandParentData = {};
-  const parentData: ParentData = {};
-
-  edges.forEach(({ node }: Edge) => {
-    const { frontmatter, html, id } = node;
-    const { date, title, subTitle, grandParent, parent, slug, index } =
-      frontmatter;
-    const childDocument = {
-      date,
-      grandParent,
-      parent,
-      title,
-      subTitle,
-      index,
-      slug,
-      html,
-      id,
-    };
-
-    if (!grandParent.length && parent && !(parent in grandParentData)) {
-      grandParentData[parent] = {
-        grandParent,
-        parent,
-        children: [childDocument],
+  const folderNameToFolderInformationMap = edges.reduce(
+    (acc: FolderNameToFolderInformationMap, { node }: Edge) => {
+      const { frontmatter, html, id } = node;
+      const { date, title, subTitle, folder, slug, index } = frontmatter;
+      const documentInformation = {
+        date,
+        folder,
+        title,
+        subTitle,
+        index,
+        slug,
+        html,
+        id,
       };
-      return;
-    }
 
-    if (!grandParent.length && parent && parent in grandParentData) {
-      grandParentData[parent].children.push(childDocument);
-      return;
-    }
+      if (!Reflect.has(acc, folder)) {
+        acc[folder] = {
+          folder,
+          documents: [documentInformation],
+        };
+      } else {
+        acc[folder].documents.push(documentInformation);
+      }
 
-    if (grandParent.length && parent && !(parent in parentData)) {
-      parentData[parent] = {
-        grandParent,
-        parent,
-        children: [childDocument],
-      };
-      return;
-    }
+      return acc;
+    },
+    {},
+  );
 
-    if (grandParent.length && parent && parent in parentData) {
-      parentData[parent].children.push(childDocument);
-      return;
-    }
-  });
+  return moveTargetToLast(
+    moveTargetToLast(
+      Object.values(folderNameToFolderInformationMap),
+      target => target.folder === 'ETC',
+    ),
+    target => target.folder === 'Weekly Journal',
+  );
+};
 
-  for (const folder of Object.values(parentData)) {
-    const { grandParent } = folder;
+export const moveTargetToLast = <T>(
+  arr: T[],
+  matcher: (arg: T) => boolean,
+): T[] => {
+  const res = [];
+  let lastValue = null;
 
-    if (grandParent && grandParent in grandParentData) {
-      grandParentData[grandParent].children.push(folder);
-      continue;
-    }
-
-    if (grandParent && !(grandParent in grandParentData)) {
-      grandParentData[grandParent] = {
-        grandfolder: '',
-        folder: grandParent,
-        children: [folder],
-      };
-      continue;
+  for (let i = 0; i < arr.length; i++) {
+    if (matcher(arr[i])) {
+      lastValue = arr[i];
+    } else {
+      res.push(arr[i]);
     }
   }
 
-  return moveWeeklyJournalToLast(Object.values(grandParentData).reverse());
-};
-
-export const moveWeeklyJournalToLast = (
-  documentTree: GrandParentData[keyof GrandParentData][],
-) => {
-  let tempWeeklyJournalToLast = null;
-
-  const res = documentTree.reduce(
-    (
-      res: GrandParentData[keyof GrandParentData][],
-      markdownDocumentNode: GrandParentData[keyof GrandParentData],
-    ) => {
-      const { parent } = markdownDocumentNode;
-
-      if (parent === 'Weekly Journal') {
-        tempWeeklyJournalToLast = markdownDocumentNode;
-        return res;
-      }
-
-      res.push(markdownDocumentNode);
-      return res;
-    },
-    [],
-  );
-
-  tempWeeklyJournalToLast && res.push(tempWeeklyJournalToLast);
-  return res;
+  return lastValue ? [...res, lastValue] : res;
 };

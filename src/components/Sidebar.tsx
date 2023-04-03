@@ -4,14 +4,14 @@ import CategoryItem from './CategoryItem';
 import SidebarHeader from './SidebarHeader';
 
 interface SidebarProps {
-  documentTree: GrandParentData[keyof GrandParentData][];
+  folders: GrandParentData[keyof GrandParentData][];
 }
 
-const Sidebar = ({ documentTree }: SidebarProps) => (
+const Sidebar = ({ folders }: SidebarProps) => (
   <Wrapper>
     <SidebarHeader />
     <CategoryList>
-      {documentTree.map((folder, index) => (
+      {folders.map((folder, index) => (
         <CategoryItem key={index} folder={folder} />
       ))}
     </CategoryList>

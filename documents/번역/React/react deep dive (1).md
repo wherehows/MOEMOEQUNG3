@@ -2,7 +2,7 @@
 date: '2022-09-30'
 title: '리액트 deep dive (1)'
 subTitle: '리액트 deep dive (1)'
-parent: 'React'
+folder: 'React'
 slug: '/react/react-deep-dive-1'
 ---
 

@@ -2,7 +2,7 @@
 date: '2022-08-29'
 title: 'eslint와 prettier'
 subTitle: 'eslint와 prettier'
-parent: 'Lint'
+folder: 'Lint'
 slug: '/lint/eslint-prettier'
 ---
 

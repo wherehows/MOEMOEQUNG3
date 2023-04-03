@@ -11,8 +11,8 @@ interface Edge {
       date: Date;
       title: string;
       subTitle: string;
-      grandParent: string;
-      parent: string;
+      grandfolder: string;
+      folder: string;
       slug: string;
       index: number;
     };
@@ -23,8 +23,8 @@ interface Edge {
 
 interface MarkdownDocument {
   date: Date;
-  grandParent: string;
-  parent: string;
+  grandfolder: string;
+  folder: string;
   title: string;
   subTitle: string;
   index: number;
@@ -35,8 +35,8 @@ interface MarkdownDocument {
 
 interface GrandParentData {
   [key: string]: {
-    grandParent: string;
-    parent: string;
+    grandfolder: string;
+    folder: string;
     children: (MarkdownDocument | MarkdownDocumentNode)[];
   };
 }
@@ -46,8 +46,8 @@ interface ParentData {
 }
 
 interface MarkdownDocumentNode {
-  grandParent: string;
-  parent: string;
+  grandfolder: string;
+  folder: string;
   children: MarkdownDocument[];
 }
 

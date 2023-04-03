@@ -59,8 +59,8 @@ export const getFolders = (edges: Edge[]) => {
 
     if (grandParent && !(grandParent in grandParentData)) {
       grandParentData[grandParent] = {
-        grandParent: '',
-        parent: grandParent,
+        grandfolder: '',
+        folder: grandParent,
         children: [folder],
       };
       continue;

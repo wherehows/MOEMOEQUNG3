@@ -8,11 +8,9 @@ export const markdownRemarkFieldFragment = graphql`
         id
         frontmatter {
           date
-          grandParent
-          parent
+          folder
           title
           subTitle
-          parent
           slug
         }
       }

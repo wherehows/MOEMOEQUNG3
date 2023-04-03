@@ -2,21 +2,26 @@ import styled from '@emotion/styled';
 import { SIDEBAR_PURE_WIDTH, SIDEBAR_WIDTH } from '@utils/const';
 import CategoryItem from './CategoryItem';
 import SidebarHeader from './SidebarHeader';
+import { getFolders } from '@utils/helpers';
 
 interface SidebarProps {
-  folders: GrandParentData[keyof GrandParentData][];
+  edges: Edge[];
 }
 
-const Sidebar = ({ folders }: SidebarProps) => (
-  <Wrapper>
-    <SidebarHeader />
-    <CategoryList>
-      {folders.map((folder, index) => (
-        <CategoryItem key={index} folder={folder} />
-      ))}
-    </CategoryList>
-  </Wrapper>
-);
+const Sidebar = ({ edges }: SidebarProps) => {
+  const folders = getFolders(edges);
+
+  return (
+    <Wrapper>
+      <SidebarHeader />
+      <CategoryList>
+        {folders.map((folder, index) => (
+          <CategoryItem key={index} folder={folder} />
+        ))}
+      </CategoryList>
+    </Wrapper>
+  );
+};
 
 export default Sidebar;
 

@@ -1,7 +1,6 @@
 import { graphql } from 'gatsby';
 import Sidebar from '@components/Sidebar';
 import Content from '@components/Content';
-import { getFolders } from '@utils/helpers';
 import GlobalCss from '@components/GlobalCss';
 
 const Main = ({
@@ -9,13 +8,12 @@ const Main = ({
     allMarkdownRemark: { edges },
   },
 }: IndexPageProps) => {
-  const folders = getFolders(edges);
   const documents = getDocuments(edges);
 
   return (
     <>
       <GlobalCss />
-      <Sidebar folders={folders} />
+      <Sidebar edges={edges} />
       <Content documents={documents} />
     </>
   );

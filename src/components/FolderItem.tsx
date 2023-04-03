@@ -1,24 +1,20 @@
 import styled from '@emotion/styled';
 import CustomLink from './CustomLink';
 
-interface FolderItem {
-  folder: GrandParentData[keyof GrandParentData];
+interface FolderItemProps {
+  folderInformation: FolderInformation;
 }
 
-const FolderItem = ({ folder }: FolderItem) => {
-  const { parent, children } = folder;
+const FolderItem = ({ folderInformation }: FolderItemProps) => {
+  const { folder, documents } = folderInformation;
 
   return (
     <Wrapper>
-      <FolderName>{parent}</FolderName>
+      <FolderName>{folder}</FolderName>
       <ParentWrapper>
-        {children.map((child, index) => (
-          <ChildListWrapper key={index}>
-            {'children' in child ? (
-              <FolderItem folder={child} />
-            ) : (
-              <LinkButton to={child.slug}>{child.subTitle}</LinkButton>
-            )}
+        {documents.map(({ slug, subTitle, id }) => (
+          <ChildListWrapper key={id}>
+            <LinkButton to={slug}>{subTitle}</LinkButton>
           </ChildListWrapper>
         ))}
       </ParentWrapper>

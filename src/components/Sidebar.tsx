@@ -9,14 +9,14 @@ interface SidebarProps {
 }
 
 const Sidebar = ({ edges }: SidebarProps) => {
-  const folders = getFolders(edges);
+  const folderInformations = getFolders(edges);
 
   return (
     <Wrapper>
       <SidebarHeader />
       <FolderList>
-        {folders.map((folder, index) => (
-          <FolderItem key={index} folder={folder} />
+        {folderInformations.map((folderInformation, index) => (
+          <FolderItem key={index} folderInformation={folderInformation} />
         ))}
       </FolderList>
     </Wrapper>

@@ -1,6 +1,5 @@
 import Content from '@components/Content';
 import Sidebar from '@components/Sidebar';
-import { getFolderStructureTree } from '@utils/helpers';
 import GlobalCss from '@components/GlobalCss';
 import { graphql, PageProps } from 'gatsby';
 
@@ -14,13 +13,12 @@ export default function PostDetail({
   },
   path,
 }: PageProps<QueryResultType>) {
-  const documentTree = getFolderStructureTree(edges);
   const selectedDocument = getSelectedDocument(edges, path);
 
   return (
     <>
       <GlobalCss />
-      <Sidebar documentTree={documentTree} />
+      <Sidebar edges={edges} />
       <Content selectedDocument={selectedDocument} pathname={path} />
     </>
   );

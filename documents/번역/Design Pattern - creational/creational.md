@@ -2,8 +2,7 @@
 date: '2022-10-14'
 title: 'creational-pattern'
 subTitle: 'creational-pattern'
-grandParent: ''
-parent: 'Design Pattern'
+folder: 'Design Pattern'
 slug: '/design-pattern/creational-pattern'
 ---
 

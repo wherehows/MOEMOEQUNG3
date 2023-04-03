@@ -2,8 +2,7 @@
 date: '2022-09-21'
 title: 'structural-pattern'
 subTitle: 'structural-pattern'
-grandParent: ''
-parent: 'Design Pattern'
+folder: 'Design Pattern'
 slug: '/design-pattern/structural-pattern'
 ---
 

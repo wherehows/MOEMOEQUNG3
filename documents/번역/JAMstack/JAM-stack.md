@@ -2,8 +2,7 @@
 date: '2022-10-09'
 title: 'Jamstack'
 subTitle: 'Jamstack'
-grandParent: ''
-parent: 'Web'
+folder: 'Web'
 slug: '/web/jamstack'
 ---
 

@@ -5,26 +5,14 @@ interface IndexPageProps {
     };
   };
 }
-interface Edge {
-  node: {
-    frontmatter: {
-      date: Date;
-      title: string;
-      subTitle: string;
-      grandParent: string;
-      parent: string;
-      slug: string;
-      index: number;
-    };
-    html: string;
-    id: string;
-  };
+interface FolderInformation {
+  folder: string;
+  documents: DocumentInformation[];
 }
 
-interface MarkdownDocument {
+interface DocumentInformation {
   date: Date;
-  grandParent: string;
-  parent: string;
+  folder: string;
   title: string;
   subTitle: string;
   index: number;
@@ -33,22 +21,19 @@ interface MarkdownDocument {
   id: string;
 }
 
-interface GrandParentData {
-  [key: string]: {
-    grandParent: string;
-    parent: string;
-    children: (MarkdownDocument | MarkdownDocumentNode)[];
+interface Edge {
+  node: {
+    frontmatter: {
+      date: Date;
+      title: string;
+      subTitle: string;
+      folder: string;
+      slug: string;
+      index: number;
+    };
+    html: string;
+    id: string;
   };
-}
-
-interface ParentData {
-  [key: string]: MarkdownDocumentNode;
-}
-
-interface MarkdownDocumentNode {
-  grandParent: string;
-  parent: string;
-  children: MarkdownDocument[];
 }
 
 type Theme = 'dark' | 'light';

@@ -2,7 +2,6 @@
 date: '2022-08-29'
 title: 'eslint와 prettier'
 subTitle: 'eslint와 prettier'
-grandParent: ''
 parent: 'Lint'
 slug: '/lint/eslint-prettier'
 ---

@@ -2,7 +2,6 @@
 date: '2022-09-03'
 title: 'React 상태 관리 라이브러리 (1)'
 subTitle: 'React 상태 관리 라이브러리 (1)'
-grandParent: ''
 parent: 'React'
 slug: '/react/react-state-management-1'
 ---

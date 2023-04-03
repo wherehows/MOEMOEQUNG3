@@ -2,7 +2,6 @@
 date: '2022-10-13'
 title: 'Mastering mapped types in TypeScript'
 subTitle: 'mapped type 마스터하기'
-grandParent: ''
 parent: 'Typescript'
 slug: '/typescript/mapped-type'
 ---

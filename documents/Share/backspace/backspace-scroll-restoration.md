@@ -2,7 +2,6 @@
 date: '2023-02-09'
 title: 'nextjs 스크롤 복원'
 subTitle: 'nextjs에서 뒤로가기시 스크롤 복원하는 방법'
-grandParent: ''
 parent: 'Share'
 slug: '/share/nextjs-scroll-restore'
 ---

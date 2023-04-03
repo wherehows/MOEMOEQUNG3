@@ -2,7 +2,6 @@
 date: '2022-10-02'
 title: 'Web History (1)'
 subTitle: 'Web History (1)'
-grandParent: ''
 parent: 'Web'
 slug: '/web/web-history-1'
 ---

@@ -2,7 +2,6 @@
 date: '2022-09-11'
 title: 'tsconfig --downlevelIteration'
 subTitle: 'DownlevelIteration'
-grandParent: ''
 parent: 'Typescript'
 slug: '/typescript/downlevel-iteration'
 ---

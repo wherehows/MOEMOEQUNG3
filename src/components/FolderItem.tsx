@@ -11,13 +11,13 @@ const FolderItem = ({ folderInformation }: FolderItemProps) => {
   return (
     <Wrapper>
       <FolderName>{folder}</FolderName>
-      <ParentWrapper>
+      <DocumentList>
         {documents.map(({ slug, subTitle, id }) => (
-          <ChildListWrapper key={id}>
+          <DocumentItem key={id}>
             <LinkButton to={slug}>{subTitle}</LinkButton>
-          </ChildListWrapper>
+          </DocumentItem>
         ))}
-      </ParentWrapper>
+      </DocumentList>
     </Wrapper>
   );
 };
@@ -30,7 +30,7 @@ const Wrapper = styled('li')(() => ({
   margin: '0',
 }));
 
-const ParentWrapper = styled('ul')(() => ({
+const DocumentList = styled('ul')(() => ({
   padding: 0,
   margin: '0.14rem 0 0 0',
 }));
@@ -57,7 +57,7 @@ const LinkButton = styled(CustomLink)(() => ({
   },
 }));
 
-const ChildListWrapper = styled('li')(() => ({
+const DocumentItem = styled('li')(() => ({
   listStyleType: 'none',
   padding: '0',
   margin: '0 0 0 1.8rem',

@@ -14,11 +14,13 @@ const Sidebar = ({ edges }: SidebarProps) => {
   return (
     <Wrapper>
       <SidebarHeader />
-      <FolderList>
-        {folderInformations.map((folderInformation, index) => (
-          <FolderItem key={index} folderInformation={folderInformation} />
-        ))}
-      </FolderList>
+      <FolderListWrapper>
+        <FolderList>
+          {folderInformations.map((folderInformation, index) => (
+            <FolderItem key={index} folderInformation={folderInformation} />
+          ))}
+        </FolderList>
+      </FolderListWrapper>
     </Wrapper>
   );
 };
@@ -35,6 +37,8 @@ const Wrapper = styled('div')(() => ({
   left: 0,
   overflow: 'scroll',
 }));
+
+const FolderListWrapper = styled('nav')(() => ({}))
 
 const FolderList = styled('ul')(() => ({
   width: SIDEBAR_PURE_WIDTH,

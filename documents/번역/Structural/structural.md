@@ -1,7 +1,7 @@
 ---
 date: '2022-09-21'
-title: 'structural-pattern'
-subTitle: 'structural-pattern'
+title: 'structural'
+subTitle: 'structural'
 folder: 'Design Pattern'
 slug: '/design-pattern/structural-pattern'
 ---

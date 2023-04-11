@@ -1,7 +1,7 @@
 ---
 date: '2022-10-14'
-title: 'creational-pattern'
-subTitle: 'creational-pattern'
+title: 'creational'
+subTitle: 'creational'
 folder: 'Design Pattern'
 slug: '/design-pattern/creational-pattern'
 ---

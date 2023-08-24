@@ -35,10 +35,10 @@ const Wrapper = styled('div')(() => ({
   alignItems: 'flex-end',
   position: 'fixed',
   left: 0,
-  overflow: 'scroll',
+  overflowY: 'scroll',
 }));
 
-const FolderListWrapper = styled('nav')(() => ({}))
+const FolderListWrapper = styled('nav')(() => ({}));
 
 const FolderList = styled('ul')(() => ({
   width: SIDEBAR_PURE_WIDTH,

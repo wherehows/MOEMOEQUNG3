@@ -35,6 +35,7 @@ const GlobalCss = () => {
         }
 
         body {
+          margin: 0;
           line-height: 1.5;
           -webkit-font-smoothing: antialiased;
           background: var(--dark-background);

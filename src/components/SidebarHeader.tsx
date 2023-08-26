@@ -7,7 +7,7 @@ const SidebarHeader = () => {
   return (
     <Wrapper>
       <NameWrapper>
-        <Name to="/">녕후김</Name>
+        <Name to="/">녕후킴</Name>
       </NameWrapper>
       <DarkModeToggle />
     </Wrapper>

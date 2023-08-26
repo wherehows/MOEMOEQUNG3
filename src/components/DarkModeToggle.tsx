@@ -33,6 +33,7 @@ const DarkModeToggle = () => {
 
 const Wrapper = styled('label')(() => ({
   marginRight: '0.5rem',
+  cursor: 'pointer',
 }));
 
 const ToggleBody = styled('input')(() => ({

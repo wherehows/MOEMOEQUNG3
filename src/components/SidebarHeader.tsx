@@ -9,9 +9,7 @@ const SidebarHeader = () => {
       <NameWrapper>
         <Name to="/">녕후김</Name>
       </NameWrapper>
-      <SubFeature>
-        <DarkModeToggle />
-      </SubFeature>
+      <DarkModeToggle />
     </Wrapper>
   );
 };
@@ -20,7 +18,8 @@ export default SidebarHeader;
 
 const Wrapper = styled('div')(() => ({
   display: 'flex',
-  flexDirection: 'column',
+  justifyContent: 'space-between',
+  alignItems: 'center',
   fontSize: '1.6rem',
   width: SIDEBAR_PURE_WIDTH,
 }));
@@ -32,10 +31,4 @@ const Name = styled(CustomLink)(() => ({
 const NameWrapper = styled('div')(() => ({
   margin: '0 0 0.4rem 0',
   fontSize: '1.8rem',
-}));
-
-const SubFeature = styled('div')(() => ({
-  display: 'flex',
-  justifyContent: 'flex-end',
-  alignItems: 'center',
 }));

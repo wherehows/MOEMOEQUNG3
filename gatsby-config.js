@@ -16,7 +16,15 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
-      resolve: "gatsby-plugin-firebase",
+      resolve: 'gatsby-plugin-react-svg',
+      options: {
+        rule: {
+          include: /assets/,
+        },
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-firebase',
       options: {
         credentials: {
           apiKey: process.env.apiKey,

@@ -1,6 +1,6 @@
-require("dotenv").config({
+require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
-})
+});
 
 module.exports = {
   siteMetadata: {
@@ -33,9 +33,9 @@ module.exports = {
           projectId: process.env.projectId,
           storageBucket: process.env.storageBucket,
           messagingSenderId: process.env.messagingSenderId,
-          appId: process.env.appId
-        }
-      }
+          appId: process.env.appId,
+        },
+      },
     },
     {
       resolve: `gatsby-plugin-typescript`,
@@ -90,5 +90,4 @@ module.exports = {
       },
     },
   ],
-}
-
+};

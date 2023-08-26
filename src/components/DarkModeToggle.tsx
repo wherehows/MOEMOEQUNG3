@@ -1,4 +1,6 @@
 import styled from '@emotion/styled';
+import Sun from '@assets/sun.inline.svg';
+import Moon from '@assets/moon.inline.svg';
 import { ChangeEvent, useState } from 'react';
 
 const DarkModeToggle = () => {

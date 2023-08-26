@@ -29,7 +29,7 @@ const Name = styled(CustomLink)(() => ({
   fontWeight: 'bold',
 }));
 
-const NameWrapper = styled('h1')(() => ({
+const NameWrapper = styled('div')(() => ({
   margin: '0 0 0.4rem 0',
   fontSize: '1.8rem',
 }));

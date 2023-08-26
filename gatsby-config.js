@@ -1,6 +1,6 @@
-require("dotenv").config({
+require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
-})
+});
 
 module.exports = {
   siteMetadata: {
@@ -16,7 +16,15 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
-      resolve: "gatsby-plugin-firebase",
+      resolve: 'gatsby-plugin-react-svg',
+      options: {
+        rule: {
+          include: /assets/,
+        },
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-firebase',
       options: {
         credentials: {
           apiKey: process.env.apiKey,
@@ -25,9 +33,9 @@ module.exports = {
           projectId: process.env.projectId,
           storageBucket: process.env.storageBucket,
           messagingSenderId: process.env.messagingSenderId,
-          appId: process.env.appId
-        }
-      }
+          appId: process.env.appId,
+        },
+      },
     },
     {
       resolve: `gatsby-plugin-typescript`,
@@ -82,5 +90,4 @@ module.exports = {
       },
     },
   ],
-}
-
+};

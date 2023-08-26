@@ -1,4 +1,4 @@
-const path = require('path')
+const path = require('path');
 
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
@@ -6,10 +6,11 @@ exports.onCreateWebpackConfig = ({ actions }) => {
       alias: {
         '@components': path.resolve(__dirname, './src/components'),
         '@utils': path.resolve(__dirname, './src/utils'),
+        '@assets': path.resolve(__dirname, './src/assets'),
       },
     },
-  })
-}
+  });
+};
 
 exports.onCreateBabelConfig = ({ actions }) => {
   actions.setBabelPlugin({
@@ -21,13 +22,13 @@ exports.onCreateBabelConfig = ({ actions }) => {
 };
 
 exports.createPages = async ({ actions, graphql, reporter }) => {
-  const { createPage } = actions
-  const PostDetail = path.resolve(`src/templates/PostDetail.tsx`)
-  const Main = path.resolve(`src/templates/Main.tsx`)
+  const { createPage } = actions;
+  const PostDetail = path.resolve(`src/templates/PostDetail.tsx`);
+  const Main = path.resolve(`src/templates/Main.tsx`);
 
   const result = await graphql(`
     {
-      allMarkdownRemark(sort: {order: DESC, fields: frontmatter___date}) {
+      allMarkdownRemark(sort: { order: DESC, fields: frontmatter___date }) {
         edges {
           node {
             frontmatter {
@@ -37,23 +38,22 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         }
       }
     }
-  `)
+  `);
 
   if (result.errors) {
-    reporter.panicOnBuild(`Error while running GraphQL query.`)
-    return
+    reporter.panicOnBuild(`Error while running GraphQL query.`);
+    return;
   }
 
   createPage({
     path: '/',
-    component: Main
-  })
+    component: Main,
+  });
 
   result.data.allMarkdownRemark.edges.forEach(({ node }) => {
     createPage({
       path: node.frontmatter.slug,
       component: PostDetail,
-    })
-  })
-}
-
+    });
+  });
+};

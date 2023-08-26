@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import NotoSansKR from '../fonts/NotoSansKR-Medium.otf';
+import NotoSansKR from '@assets/NotoSansKR-Medium.otf';
 
 export default css`
   @font-face {

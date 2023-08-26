@@ -1,5 +1,8 @@
 import styled from '@emotion/styled';
+import Sun from '@assets/sun.svg';
+import Moon from '@assets/moon.svg';
 import { ChangeEvent, useState } from 'react';
+import { css } from '@emotion/react';
 
 const DarkModeToggle = () => {
   if (typeof window === 'undefined') {
@@ -23,7 +26,7 @@ const DarkModeToggle = () => {
         checked={isOn}
         onChange={handleClickCheckBox}
       />
-      <Circle isOn={isOn} />
+      {isOn ? <MoonIcon /> : <SunIcon />}
     </Wrapper>
   );
 };
@@ -37,42 +40,21 @@ const ToggleBody = styled('input')(() => ({
   display: 'none',
 }));
 
-const Circle = styled('span')<{ isOn: boolean }>(({ isOn }) => ({
-  position: 'relative',
-  display: 'block',
-  width: '60px',
-  height: '30px',
-  background: isOn ? 'var(--colors-secondary)' : '#eadbdb',
-  cursor: 'pointer',
-  borderRadius: '20px',
-  overflow: 'hidden',
-  transition: 'ease-in 0.5s',
+const marginRightOfIcon = css`
+  marginright: 4px;
+`;
 
-  '&:before': {
-    content: '""',
-    position: 'absolute',
-    top: '3px',
-    left: '3px',
-    backgroundColor: '#fff',
-    width: '24px',
-    height: '24px',
-    borderRadius: '50%',
-    transition: '0.5s',
-    transform: isOn ? 'translateX(0px)' : 'translateX(-60px)',
-  },
+const SunIcon = styled(Sun)(() => ({
+  marginRightOfIcon,
+  width: '24px',
+  height: '24px',
+}));
 
-  '&:after': {
-    content: '""',
-    position: 'absolute',
-    top: '3px',
-    left: '3px',
-    backgroundColor: '#fff',
-    width: '24px',
-    height: '24px',
-    borderRadius: '50%',
-    transition: '0.5s',
-    transform: isOn ? 'translateX(60px)' : 'translateX(0px)',
-  },
+const MoonIcon = styled(Moon)(() => ({
+  marginRightOfIcon,
+  width: '24px',
+  height: '24px',
+  color: '#ffffff',
 }));
 
 export default DarkModeToggle;

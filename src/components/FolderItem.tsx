@@ -40,7 +40,7 @@ const FolderName = styled('div')(() => ({
   border: 'none',
   fontSize: '1rem',
   fontWeight: 'bold',
-  color: 'var(--colors-primary)',
+  // color: 'var(--colors-primary)',
 }));
 
 const LinkButton = styled(CustomLink)(() => ({

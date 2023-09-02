@@ -11,9 +11,7 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-emotion`,
-    `gatsby-plugin-react-helmet`,
     `gatsby-plugin-image`,
-    `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
       resolve: 'gatsby-plugin-react-svg',
@@ -77,7 +75,6 @@ module.exports = {
           },
           {
             resolve: 'gatsby-remark-copy-linked-files',
-            options: {},
           },
           {
             resolve: 'gatsby-remark-external-links',

@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 export interface IndexPageProps {
   data: {
     allMarkdownRemark: {
@@ -37,3 +39,7 @@ export interface Edge {
 }
 
 export type Theme = 'dark' | 'light';
+
+export type StrictPropsWithChildren<P> = P & {
+  children: ReactNode;
+};

@@ -1,16 +1,16 @@
-interface IndexPageProps {
+export interface IndexPageProps {
   data: {
     allMarkdownRemark: {
       edges: Edge[];
     };
   };
 }
-interface FolderInformation {
+export interface FolderInformation {
   folder: string;
   documents: DocumentInformation[];
 }
 
-interface DocumentInformation {
+export interface DocumentInformation {
   date: Date;
   folder: string;
   title: string;
@@ -21,7 +21,7 @@ interface DocumentInformation {
   id: string;
 }
 
-interface Edge {
+export interface Edge {
   node: {
     frontmatter: {
       date: Date;
@@ -36,4 +36,4 @@ interface Edge {
   };
 }
 
-type Theme = 'dark' | 'light';
+export type Theme = 'dark' | 'light';

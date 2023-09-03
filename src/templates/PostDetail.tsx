@@ -2,6 +2,7 @@ import Content from '@components/Content';
 import Sidebar from '@components/Sidebar';
 import GlobalCss from '@components/GlobalCss';
 import { graphql, PageProps } from 'gatsby';
+import { Edge } from '@customTypes/common';
 
 interface QueryResultType {
   allMarkdownRemark: { edges: Edge[] };

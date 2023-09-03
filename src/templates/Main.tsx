@@ -2,6 +2,7 @@ import { graphql } from 'gatsby';
 import Sidebar from '@components/Sidebar';
 import Content from '@components/Content';
 import GlobalCss from '@components/GlobalCss';
+import { Edge, IndexPageProps } from '@customTypes/common';
 
 const Main = ({
   data: {

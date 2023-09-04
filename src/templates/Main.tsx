@@ -15,8 +15,8 @@ const Main = ({
 
   return (
     <>
+      <GlobalCss />
       <ThemeProvider theme={theme}>
-        <GlobalCss />
         <Sidebar edges={edges} />
         <Content documents={documents} />
       </ThemeProvider>

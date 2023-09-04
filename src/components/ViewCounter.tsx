@@ -43,6 +43,7 @@ const incrementViews = async (pathname: ViewCounter['pathname']) => {
   });
 };
 
-const View = styled('div')(() => ({
+const View = styled('div')(({ theme }) => ({
+  ...theme.typography.label,
   color: '#7e7e7e',
 }));

@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { CONTENT_LEFT_MARGIN_WIDTH, CONTENT_WIDTH } from '@utils/const';
 import CustomLink from './CustomLink';
 import ViewCounter from './ViewCounter';
+import Typography from './Typography';
 
 interface ContentProps {
   pathname?: string;
@@ -26,11 +27,13 @@ const Content = ({ documents, selectedDocument, pathname }: ContentProps) => {
           {documents?.map(({ html, title, date, slug }: MarkdownDocument) => (
             <DocumentItem key={slug}>
               <Button to={slug}>
-                <Title>{title}</Title>
+                <Typography variant="h2">{title}</Typography>
                 <PostDate dateTime={date.toString()}>
                   {formatDate(date)}
                 </PostDate>
-                <Description>{changeMarkdownToTextContent(html)}</Description>
+                <Typography as={Description}>
+                  {changeMarkdownToTextContent(html)}
+                </Typography>
               </Button>
             </DocumentItem>
           ))}
@@ -78,19 +81,8 @@ const Button = styled(CustomLink)(() => ({
   outline: 'none',
 }));
 
-const Title = styled('h2')(() => ({
-  textAlign: 'left',
-  width: '100%',
-  margin: 0,
-  fontSize: '1.4rem',
-  // color: 'var(--colors-primary)',
-}));
-
-const PostDate = styled('time')(() => ({
-  fontSize: '0.9rem',
-  textAlign: 'left',
-  width: '100%',
-  marginBottom: '0.4rem',
+const PostDate = styled('time')(({ theme }) => ({
+  ...theme.typography.label,
 }));
 
 const Description = styled('div')(() => ({

@@ -29,6 +29,5 @@ const Name = styled(CustomLink)(() => ({
 }));
 
 const NameWrapper = styled('div')(() => ({
-  margin: '0 0 0.4rem 0',
   fontSize: '1.8rem',
 }));

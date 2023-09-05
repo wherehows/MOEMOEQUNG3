@@ -14,10 +14,10 @@
     "removeComments": false,
     "baseUrl": "./src",
     "paths": {
-      "@components/*": ["components/*"],
-      "@utils/*": ["utils/*"],
-      "@assets/*": ["assets/*"],
-      "@customTypes/*": ["customTypes/*"]
+      "@/components/*": ["components/*"],
+      "@/utils/*": ["utils/*"],
+      "@/assets/*": ["assets/*"],
+      "@/types/*": ["types/*"]
     }
   }
 }

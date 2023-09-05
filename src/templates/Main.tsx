@@ -1,10 +1,10 @@
 import { graphql } from 'gatsby';
-import Sidebar from '@components/Sidebar';
-import Content from '@components/Content';
-import GlobalCss from '@components/GlobalCss';
-import { Edge, IndexPageProps } from '@customTypes/common';
+import Sidebar from '@/components/Sidebar';
+import Content from '@/components/Content';
+import GlobalCss from '@/components/GlobalCss';
+import { Edge, IndexPageProps } from '@/types/common';
 import { ThemeProvider } from '@emotion/react';
-import { theme } from '@utils/const';
+import { theme } from '@/utils/const';
 
 const Main = ({
   data: {

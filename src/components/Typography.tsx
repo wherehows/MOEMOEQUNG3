@@ -1,4 +1,4 @@
-import { StrictPropsWithChildren } from '@customTypes/common';
+import { StrictPropsWithChildren } from '@/types/common';
 import { Theme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { ElementType } from 'react';

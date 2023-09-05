@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { SIDEBAR_PURE_WIDTH } from '@utils/const';
+import { SIDEBAR_PURE_WIDTH } from '@/utils/const';
 import CustomLink from './CustomLink';
 import DarkModeToggle from './DarkModeToggle';
 

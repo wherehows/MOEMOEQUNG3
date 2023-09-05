@@ -1,4 +1,4 @@
-import { Edge, FolderInformation } from '@customTypes/common';
+import { Edge, FolderInformation } from '@/types/common';
 
 export const isOnDevelopment = () => process.env.GATSBY_MODE === 'development';
 

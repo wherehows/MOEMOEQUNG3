@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { CONTENT_LEFT_MARGIN_WIDTH, CONTENT_WIDTH } from '@utils/const';
+import { CONTENT_LEFT_MARGIN_WIDTH, CONTENT_WIDTH } from '@/utils/const';
 import CustomLink from './CustomLink';
 import ViewCounter from './ViewCounter';
 import Typography from './Typography';

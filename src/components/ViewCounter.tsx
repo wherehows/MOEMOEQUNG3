@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import firebase from 'gatsby-plugin-firebase';
 import styled from '@emotion/styled';
-import { isOnDevelopment } from '@utils/helpers';
+import { isOnDevelopment } from '@/utils/helpers';
 
 interface ViewCounter {
   pathname: string;

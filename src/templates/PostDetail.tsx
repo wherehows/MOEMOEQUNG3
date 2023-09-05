@@ -1,10 +1,10 @@
-import Content from '@components/Content';
-import Sidebar from '@components/Sidebar';
-import GlobalCss from '@components/GlobalCss';
+import Content from '@/components/Content';
+import Sidebar from '@/components/Sidebar';
+import GlobalCss from '@/components/GlobalCss';
 import { graphql, PageProps } from 'gatsby';
-import { Edge } from '@customTypes/common';
+import { Edge } from '@/types/common';
 import { ThemeProvider } from '@emotion/react';
-import { theme } from '@utils/const';
+import { theme } from '@/utils/const';
 
 interface QueryResultType {
   allMarkdownRemark: { edges: Edge[] };

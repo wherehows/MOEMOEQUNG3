@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
-import { SIDEBAR_PURE_WIDTH, SIDEBAR_WIDTH } from '@utils/const';
+import { SIDEBAR_PURE_WIDTH, SIDEBAR_WIDTH } from '@/utils/const';
 import FolderItem from './FolderItem';
 import SidebarHeader from './SidebarHeader';
-import { getFolders } from '@utils/helpers';
-import { Edge } from '@customTypes/common';
+import { getFolders } from '@/utils/helpers';
+import { Edge } from '@/types/common';
 
 interface SidebarProps {
   edges: Edge[];

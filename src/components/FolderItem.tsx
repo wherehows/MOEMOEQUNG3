@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import CustomLink from './CustomLink';
-import { FolderInformation } from '@customTypes/common';
+import { FolderInformation } from '@/types/common';
 import Typography from './Typography';
 
 interface FolderItemProps {

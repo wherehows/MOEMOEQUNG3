@@ -4,10 +4,10 @@ exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
     resolve: {
       alias: {
-        '@components': path.resolve(__dirname, './src/components'),
-        '@utils': path.resolve(__dirname, './src/utils'),
-        '@assets': path.resolve(__dirname, './src/assets'),
-        '@customTypes': path.resolve(__dirname, './src/customTypes'),
+        '@/components': path.resolve(__dirname, './src/components'),
+        '@/utils': path.resolve(__dirname, './src/utils'),
+        '@/assets': path.resolve(__dirname, './src/assets'),
+        '@/types': path.resolve(__dirname, './src/types'),
       },
     },
   });

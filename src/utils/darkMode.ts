@@ -1,3 +1,5 @@
+import { Theme } from '@customTypes/common';
+
 const isTheme = (theme: string): theme is Theme =>
   theme === 'dark' || theme === 'light';
 

@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 import CustomLink from './CustomLink';
+import { FolderInformation } from '@customTypes/common';
+import Typography from './Typography';
 
 interface FolderItemProps {
   folderInformation: FolderInformation;
@@ -10,7 +12,7 @@ const FolderItem = ({ folderInformation }: FolderItemProps) => {
 
   return (
     <Wrapper>
-      <FolderName>{folder}</FolderName>
+      <Typography variant="subtitle">{folder}</Typography>
       <DocumentList>
         {documents.map(({ slug, subTitle, id }) => (
           <DocumentItem key={id}>
@@ -35,25 +37,12 @@ const DocumentList = styled('ul')(() => ({
   margin: '0.14rem 0 0 0',
 }));
 
-const FolderName = styled('div')(() => ({
-  backgroundColor: 'transparent',
-  border: 'none',
-  fontSize: '1rem',
-  fontWeight: 'bold',
-  // color: 'var(--colors-primary)',
-}));
-
-const LinkButton = styled(CustomLink)(() => ({
-  fontFamily: 'inherit',
-  backgroundColor: 'transparent',
-  border: 'none',
+const LinkButton = styled(CustomLink)(({ theme }) => ({
+  ...theme.typography.body,
   cursor: 'pointer',
-  fontSize: '1rem',
-  padding: '0',
-  outline: 'none',
 
   '&:hover': {
-    fontWeight: 'bold',
+    fontWeight: 600,
   },
 }));
 

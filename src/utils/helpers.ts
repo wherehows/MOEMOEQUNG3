@@ -1,3 +1,5 @@
+import { Edge, FolderInformation } from '@customTypes/common';
+
 export const isOnDevelopment = () => process.env.GATSBY_MODE === 'development';
 
 interface FolderNameToFolderInformationMap {

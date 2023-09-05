@@ -1,5 +1,9 @@
 import { Global, css } from '@emotion/react';
-import Font from '../fonts/Font';
+import {
+  pretendardExtraBold,
+  pretendardBold,
+  pretendardMedium,
+} from '../fonts/Font';
 
 const GlobalCss = () => {
   return (
@@ -17,7 +21,9 @@ const GlobalCss = () => {
 export default GlobalCss;
 
 const globalCss = css`
-  ${Font}
+  ${pretendardExtraBold}
+  ${pretendardBold}
+  ${pretendardMedium}
 
   :root {
     --colors-primary: #d58135;
@@ -35,7 +41,7 @@ const globalCss = css`
   }
 
   body {
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: 'Pretendard', sans-serif;
   }
 `;
 

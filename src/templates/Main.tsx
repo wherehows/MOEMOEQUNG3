@@ -2,6 +2,9 @@ import { graphql } from 'gatsby';
 import Sidebar from '@components/Sidebar';
 import Content from '@components/Content';
 import GlobalCss from '@components/GlobalCss';
+import { Edge, IndexPageProps } from '@customTypes/common';
+import { ThemeProvider } from '@emotion/react';
+import { theme } from '@utils/const';
 
 const Main = ({
   data: {
@@ -13,8 +16,10 @@ const Main = ({
   return (
     <>
       <GlobalCss />
-      <Sidebar edges={edges} />
-      <Content documents={documents} />
+      <ThemeProvider theme={theme}>
+        <Sidebar edges={edges} />
+        <Content documents={documents} />
+      </ThemeProvider>
     </>
   );
 };

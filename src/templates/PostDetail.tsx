@@ -2,6 +2,9 @@ import Content from '@components/Content';
 import Sidebar from '@components/Sidebar';
 import GlobalCss from '@components/GlobalCss';
 import { graphql, PageProps } from 'gatsby';
+import { Edge } from '@customTypes/common';
+import { ThemeProvider } from '@emotion/react';
+import { theme } from '@utils/const';
 
 interface QueryResultType {
   allMarkdownRemark: { edges: Edge[] };
@@ -18,8 +21,10 @@ export default function PostDetail({
   return (
     <>
       <GlobalCss />
-      <Sidebar edges={edges} />
-      <Content selectedDocument={selectedDocument} pathname={path} />
+      <ThemeProvider theme={theme}>
+        <Sidebar edges={edges} />
+        <Content selectedDocument={selectedDocument} pathname={path} />
+      </ThemeProvider>
     </>
   );
 }

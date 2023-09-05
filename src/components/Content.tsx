@@ -15,6 +15,9 @@ const Content = ({ documents, selectedDocument, pathname }: ContentProps) => {
 
   return (
     <Wrapper>
+      <Typography variant="h1">
+        프론트엔드 개발 및 관심사를 기록하는 블로그
+      </Typography>
       {selectedDocument && pathname ? (
         <>
           <ViewCounter pathname={pathname} />

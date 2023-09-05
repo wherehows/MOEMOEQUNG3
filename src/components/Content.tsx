@@ -13,6 +13,8 @@ interface ContentProps {
 const Content = ({ documents, selectedDocument, pathname }: ContentProps) => {
   if (typeof document === 'undefined') return <></>;
 
+  console.log(documents);
+
   return (
     <Wrapper>
       <Typography variant="h1">

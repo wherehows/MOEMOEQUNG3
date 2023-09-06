@@ -3,7 +3,7 @@ import { SIDEBAR_PURE_WIDTH, SIDEBAR_WIDTH } from '@/utils/const';
 import FolderItem from './FolderItem';
 import SidebarHeader from './SidebarHeader';
 import { getFolders } from '@/utils/helpers';
-import { Edge } from '@/types/common';
+import { Edge } from '@/types/document';
 
 interface SidebarProps {
   edges: Edge[];

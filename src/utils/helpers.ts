@@ -1,4 +1,4 @@
-import { Edge, FolderInformation } from '@/types/common';
+import { Edge, FolderInformation } from '@/types/document';
 
 export const isOnDevelopment = () => process.env.GATSBY_MODE === 'development';
 
@@ -10,13 +10,12 @@ export const getFolders = (edges: Edge[]) => {
   const folderNameToFolderInformationMap = edges.reduce(
     (acc: FolderNameToFolderInformationMap, { node }: Edge) => {
       const { frontmatter, html, id } = node;
-      const { date, title, subTitle, folder, slug, index } = frontmatter;
+      const { date, title, subTitle, folder, slug } = frontmatter;
       const documentInformation = {
         date,
         folder,
         title,
         subTitle,
-        index,
         slug,
         html,
         id,

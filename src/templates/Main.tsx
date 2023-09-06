@@ -2,7 +2,7 @@ import { graphql } from 'gatsby';
 import Sidebar from '@/components/Sidebar';
 import Content from '@/components/Content';
 import GlobalCss from '@/components/GlobalCss';
-import { Edge, IndexPageProps } from '@/types/common';
+import { Edge, IndexPageProps } from '@/types/document';
 import { ThemeProvider } from '@emotion/react';
 import { theme } from '@/utils/const';
 

@@ -6,44 +6,51 @@ import Typography from './Typography';
 import { MarkdownDocument } from '@/types/document';
 
 interface ContentProps {
+  title?: string;
   pathname?: string;
   documents?: MarkdownDocument[];
   selectedDocument?: string | null;
 }
 
-const Content = ({ documents, selectedDocument, pathname }: ContentProps) => {
+const Content = ({
+  title,
+  documents,
+  selectedDocument,
+  pathname,
+}: ContentProps) => {
   if (typeof document === 'undefined') return <></>;
-
-  console.log(documents);
 
   return (
     <Wrapper>
-      <Typography variant="h1">
-        프론트엔드 개발 및 관심사를 기록하는 블로그
-      </Typography>
       {selectedDocument && pathname ? (
         <>
+          <Typography variant="h1">{title}</Typography>
           <ViewCounter pathname={pathname} />
           <MarkdownRenderer
             dangerouslySetInnerHTML={{ __html: selectedDocument }}
           />
         </>
       ) : (
-        <DocumentList>
-          {documents?.map(({ html, title, date, slug }: MarkdownDocument) => (
-            <DocumentItem key={slug}>
-              <Button to={slug}>
-                <Typography variant="h2">{title}</Typography>
-                <PostDate dateTime={date.toString()}>
-                  {formatDate(date)}
-                </PostDate>
-                <Typography as={Description}>
-                  {changeMarkdownToTextContent(html)}
-                </Typography>
-              </Button>
-            </DocumentItem>
-          ))}
-        </DocumentList>
+        <>
+          <Typography variant="h1">
+            프론트엔드 개발 및 관심사를 기록하는 블로그
+          </Typography>
+          <DocumentList>
+            {documents?.map(({ html, title, date, slug }: MarkdownDocument) => (
+              <DocumentItem key={slug}>
+                <Button to={slug}>
+                  <Typography variant="h2">{title}</Typography>
+                  <PostDate dateTime={date.toString()}>
+                    {formatDate(date)}
+                  </PostDate>
+                  <Typography as={Description}>
+                    {changeMarkdownToTextContent(html)}
+                  </Typography>
+                </Button>
+              </DocumentItem>
+            ))}
+          </DocumentList>
+        </>
       )}
     </Wrapper>
   );

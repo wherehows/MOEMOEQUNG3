@@ -10,28 +10,31 @@ export interface FolderInformation {
   documents: DocumentInformation[];
 }
 
-export interface DocumentInformation {
+interface DocumentInformation {
   date: Date;
   folder: string;
   title: string;
   subTitle: string;
-  index: number;
   slug: string;
   html: string;
   id: string;
 }
 
+interface Frontmatter {
+  date: Date;
+  title: string;
+  subTitle: string;
+  folder: string;
+  slug: string;
+  index: number;
+}
+
 export interface Edge {
   node: {
-    frontmatter: {
-      date: Date;
-      title: string;
-      subTitle: string;
-      folder: string;
-      slug: string;
-      index: number;
-    };
+    frontmatter: Frontmatter;
     html: string;
     id: string;
   };
 }
+
+export type MarkdownDocument = DocumentInformation & Frontmatter;

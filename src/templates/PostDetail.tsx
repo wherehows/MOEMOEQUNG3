@@ -1,10 +1,10 @@
-import Content from '@/components/Content';
 import Sidebar from '@/components/Sidebar';
 import GlobalCss from '@/components/GlobalCss';
 import { graphql, PageProps } from 'gatsby';
 import { Edge } from '@/types/document';
 import { ThemeProvider } from '@emotion/react';
 import { theme } from '@/utils/const';
+import PostDetailContent from '@/components/PostDetailContent';
 
 interface QueryResultType {
   allMarkdownRemark: { edges: Edge[] };
@@ -30,7 +30,7 @@ export default function PostDetail({
       <GlobalCss />
       <ThemeProvider theme={theme}>
         <Sidebar edges={edges} />
-        <Content
+        <PostDetailContent
           title={title}
           selectedDocument={selectedDocument}
           pathname={path}

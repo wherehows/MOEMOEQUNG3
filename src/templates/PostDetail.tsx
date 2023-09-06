@@ -1,10 +1,10 @@
-import Content from '@/components/Content';
 import Sidebar from '@/components/Sidebar';
 import GlobalCss from '@/components/GlobalCss';
 import { graphql, PageProps } from 'gatsby';
 import { Edge } from '@/types/document';
 import { ThemeProvider } from '@emotion/react';
 import { theme } from '@/utils/const';
+import PostDetailContent from '@/components/PostDetailContent';
 
 interface QueryResultType {
   allMarkdownRemark: { edges: Edge[] };
@@ -16,14 +16,25 @@ export default function PostDetail({
   },
   path,
 }: PageProps<QueryResultType>) {
-  const selectedDocument = getSelectedDocument(edges, path);
+  const res = getSelectedDocument(edges, path);
+
+  // TODO: 게시글이 존재하지 않는 경우에 대한 에러 핸들링 필요
+  if (!res) {
+    return <></>;
+  }
+
+  const { html: selectedDocument, title } = res;
 
   return (
     <>
       <GlobalCss />
       <ThemeProvider theme={theme}>
         <Sidebar edges={edges} />
-        <Content selectedDocument={selectedDocument} pathname={path} />
+        <PostDetailContent
+          title={title}
+          selectedDocument={selectedDocument}
+          pathname={path}
+        />
       </ThemeProvider>
     </>
   );
@@ -36,7 +47,14 @@ const getSelectedDocument = (edges: Edge[], targetDocumentPath: string) => {
     }
   });
 
-  return edge && edge.node.html;
+  let res = null;
+
+  if (edge) {
+    const { frontmatter, html } = edge.node;
+    res = { title: frontmatter.title, html };
+  }
+
+  return res;
 };
 
 export const getPosts = graphql`

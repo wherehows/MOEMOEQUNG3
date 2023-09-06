@@ -1,53 +1,37 @@
 import styled from '@emotion/styled';
 import { CONTENT_LEFT_MARGIN_WIDTH, CONTENT_WIDTH } from '@/utils/const';
 import CustomLink from './CustomLink';
-import ViewCounter from './ViewCounter';
 import Typography from './Typography';
 import { MarkdownDocument } from '@/types/document';
 
 interface ContentProps {
-  pathname?: string;
-  documents?: MarkdownDocument[];
-  selectedDocument?: string | null;
+  documents: MarkdownDocument[];
 }
 
-const Content = ({ documents, selectedDocument, pathname }: ContentProps) => {
-  if (typeof document === 'undefined') return <></>;
-
+const MainContent = ({ documents }: ContentProps) => {
   return (
     <Wrapper>
       <Typography variant="h1">
         프론트엔드 개발 및 관심사를 기록하는 블로그
       </Typography>
-      {selectedDocument && pathname ? (
-        <>
-          <ViewCounter pathname={pathname} />
-          <MarkdownRenderer
-            dangerouslySetInnerHTML={{ __html: selectedDocument }}
-          />
-        </>
-      ) : (
-        <DocumentList>
-          {documents?.map(({ html, title, date, slug }: MarkdownDocument) => (
-            <DocumentItem key={slug}>
-              <Button to={slug}>
-                <Typography variant="h2">{title}</Typography>
-                <PostDate dateTime={date.toString()}>
-                  {formatDate(date)}
-                </PostDate>
-                <Typography as={Description}>
-                  {changeMarkdownToTextContent(html)}
-                </Typography>
-              </Button>
-            </DocumentItem>
-          ))}
-        </DocumentList>
-      )}
+      <DocumentList>
+        {documents?.map(({ html, title, date, slug }: MarkdownDocument) => (
+          <DocumentItem key={slug}>
+            <Button to={slug}>
+              <Typography variant="h2">{title}</Typography>
+              <PostDate dateTime={date.toString()}>{formatDate(date)}</PostDate>
+              <Typography as={Description}>
+                {changeMarkdownToTextContent(html)}
+              </Typography>
+            </Button>
+          </DocumentItem>
+        ))}
+      </DocumentList>
     </Wrapper>
   );
 };
 
-export default Content;
+export default MainContent;
 
 const Wrapper = styled('div')(() => ({
   diplay: 'flex',
@@ -59,21 +43,6 @@ const Wrapper = styled('div')(() => ({
 const DocumentItem = styled('li')(() => ({
   listStyleType: 'none',
   marginBottom: '2rem',
-}));
-
-const MarkdownRenderer = styled('div')(() => ({
-  width: '100%',
-  fontSize: '1rem',
-  a: {
-    color: 'var(--colors-primary)',
-    textDecoration: 'none',
-    fontWeight: 'bold',
-  },
-
-  'a:visited': {
-    color: 'var(--colors-primary)',
-    fontWieght: 'bold',
-  },
 }));
 
 const Button = styled(CustomLink)(() => ({

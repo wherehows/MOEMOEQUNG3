@@ -1,5 +1,5 @@
 import '@emotion/react';
-import { theme } from '@utils/const';
+import { theme } from '@/utils/const';
 
 type DeclaredTheme = typeof theme;
 

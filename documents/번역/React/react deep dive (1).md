@@ -1,9 +1,9 @@
 ---
 date: '2022-09-30'
-title: '리액트 deep dive (1)'
-subTitle: '리액트 deep dive (1)'
+title: 'React에 대해 알아보자'
+subTitle: 'React'
 folder: 'React'
-slug: '/react/react-deep-dive-1'
+slug: '/react/react-1'
 ---
 
 ## 📌 객체 지향의 UI 프로그래밍 (object-oriented UI programming)
@@ -79,20 +79,20 @@ React Element는 instance가 아닙니다. 그렇기 때문에 this.button.rende
 React Element는 createElement를 통해서 생성되며, createElement로 전달되는 인자는 다음과 같습니다.
 
 ```javascript
-createElement(type, { props }, ...children)
+createElement(type, { props }, ...children);
 ```
 
 ~~createElement를 호출하지않고 일반 자바스크립트 객체를 직접 작성하는 것도 가능합니다. 아래 reactElementA와 reactElementB는 동일합니다.~~
 
 ```javascript
-const reactElementA = createElement('div', { id: 'div-id' }, 'div-text')
+const reactElementA = createElement('div', { id: 'div-id' }, 'div-text');
 const reactElementB = {
   type: 'div',
   props: {
     id: 'div-id',
     children: 'div-text',
   },
-}
+};
 ```
 
 [공식 문서](https://reactjs.org/blog/2015/12/18/react-components-elements-and-instances.html#dom-elements)에서도 그렇고 다른 가이드 문서에서도 본것 같아서 위와 같이 적어놨는데, [여기](https://frontarm.com/courses/react-fundamentals/basics/elements-are-objects/)서 React Element에는 $$typeof와 \_owner 필드도 존재하기 때문에, React Element 객체를 직접 작성하여 생성하는 것은 불가능하다고 합니다. createElement를 사용하거나 이후에 이야기할 JSX를 사용해야만 생성이 가능한 것 같습니다.
@@ -145,7 +145,7 @@ const reactElement = {
     color: 'blue',
     children: 'OK',
   },
-}
+};
 ```
 
 그리고 하나의 React Element Tree 안에 DOM node를 묘사하는 React Element와 Component를 묘사하는 React Element가 섞여 존재할 수 있습니다.
@@ -183,7 +183,7 @@ const DeleteAccount = () => (
     <DangerButton>Yep</DangerButton>
     <Button color="blue">Cancel</Button>
   </div>
-)
+);
 ```
 
 리액트는 이러한 React Element 구조를 통해서(JSX문으로 작성됐지만 결국에는 React Element 객체로 표현될테니까요) is-a 관계와 has-a 관계를 모두 표현함으로써 컴포넌트간 결속력을 떨어뜨립니다.
@@ -214,17 +214,17 @@ React Node는 React Element를 포함하며, React가 렌더링할수 있는 무
 /**
  * @deprecated - This type is not relevant when using React. Inline the type instead to make the intent clear.
  */
-type ReactText = string | number
+type ReactText = string | number;
 /**
  * @deprecated - This type is not relevant when using React. Inline the type instead to make the intent clear.
  */
-type ReactChild = ReactElement | string | number
+type ReactChild = ReactElement | string | number;
 
 /**
  * @deprecated Use either `ReactNode[]` if you need an array or `Iterable<ReactNode>` if its passed to a host component.
  */
 interface ReactNodeArray extends ReadonlyArray<ReactNode> {}
-type ReactFragment = Iterable<ReactNode>
+type ReactFragment = Iterable<ReactNode>;
 type ReactNode =
   | ReactElement
   | string
@@ -233,7 +233,7 @@ type ReactNode =
   | ReactPortal
   | boolean
   | null
-  | undefined
+  | undefined;
 ```
 
 참고로 React Node는 클래스 컴포넌트의 return 메서드 반환 타입이기도 합니다. 반면에 함수형 컴포넌트의 return 메서드 반환 타입은 React Element입니다. [히스토리](https://github.com/microsoft/TypeScript/issues/21699)가 있는데, 커멘트가 너무 길어서 패스했습니다.
@@ -262,7 +262,7 @@ const Form = ({ isSubmitted, buttonText }) => {
       props: {
         text: 'Success!',
       },
-    }
+    };
   }
 
   return {
@@ -271,8 +271,8 @@ const Form = ({ isSubmitted, buttonText }) => {
       children: buttonText,
       color: 'blue',
     },
-  }
-}
+  };
+};
 ```
 
 위 Form 컴포넌트 함수를 보듯이, 컴포넌트는 기본적으로 React Element Tree를 리턴합니다. 개발자는 Form 컴포넌트를 사용할 때 내부 DOM이 어떤식으로 구성되어 있는지 알 필요가 없습니다.
@@ -342,7 +342,7 @@ React 0.13 버전까지만 해도 이러한 XSS 공격에 취약했는데, React
 다음과 같은 코드가 있습니다.
 
 ```javascript
-const MyContainer = props => <MyChild value={props.value} />
+const MyContainer = props => <MyChild value={props.value} />;
 ```
 
 이를 통해서 다음을 알수 있습니다.
@@ -359,7 +359,7 @@ const MyContainer = props => (
   <div>
     <MyChild value={props.value} />
   </div>
-)
+);
 ```
 
 MyContainer는 MyChild의 부모가 아니라 owner입니다. React Chrome Developer Tools를 이용해서 본다면, 다음과 같이 보여집니다.
@@ -395,4 +395,3 @@ owner에 대해서 정리해보면, 다음과 같습니다.
 [Why Do React Elements Have a $$typeof Property?](https://overreacted.io/why-do-react-elements-have-typeof-property/)
 
 [The difference between Virtual DOM and DOM](https://reactkungfu.com/2015/10/the-difference-between-virtual-dom-and-dom/)
-

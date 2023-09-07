@@ -1,7 +1,7 @@
 ---
 date: '2023-02-09'
-title: 'nextjs 스크롤 복원'
-subTitle: 'nextjs에서 뒤로가기시 스크롤 복원하는 방법'
+title: 'nextjs의 dynamic route 페이지에서의 스크롤 복원'
+subTitle: 'nextjs에서 뒤로가기시 스크롤 복원'
 folder: 'Share'
 slug: '/share/nextjs-scroll-restore'
 ---
@@ -61,20 +61,20 @@ item/1에서 머무르다가 item/2에 도달했을 때 값을 useState 내부 �
 만약 이러한 특성을 원하지 않는다면, Component에 다음과 같이 key를 할당하여 remount 시켜 상태를 초기화할수 있습니다.
 
 ```javascript
-import { useRouter } from 'next/router'
-import { getItem } from 'apis'
+import { useRouter } from 'next/router';
+import { getItem } from 'apis';
 
 const ItemPage = () => {
-  const { query } = useRouter()
-  const id = +query.id
-  const { data, isLoading, error } = useQuery(['item', id], getItem)
+  const { query } = useRouter();
+  const id = +query.id;
+  const { data, isLoading, error } = useQuery(['item', id], getItem);
 
   if (isLoading || error) {
-    return <></>
+    return <></>;
   }
 
-  return <Item key={id} />
-}
+  return <Item key={id} />;
+};
 ```
 
 ---
@@ -134,10 +134,10 @@ beforePopState 이벤트 핸들러가 실행된 후 routeChangeStart 이벤트 �
 뒤로가기로직은 많은 페이지에서 사용될 것으로 예상됩니다. 그렇기 때문에 앱이 꺼지기 전까지 unmount되지 않는 \_app 컴포넌트 내에 useBackSpace훅 내에서 이벤트 리스너를 등록합니다. 뒤에서 설명하겠지만 실제 사용하는 페이지에서(예를들면 스크롤 복원이 필요한 페이지) isBeforePopStateTriggered 변수가 필요하기 때문에 export 해주었습니다.
 
 ```javascript
-export let isBeforePopStateTriggered = false
+export let isBeforePopStateTriggered = false;
 
 export let updateIsBeforePopStateTriggered = (newValue: Boolean) =>
-  (isBeforePopStateTriggered = newValue)
+  (isBeforePopStateTriggered = newValue);
 ```
 
 또한 단순히 flag의 역할을 위해서 사용되어 굳이 리렌더링을 유발하는 상태로 관리할 필요가 없어서 일반 변수로 선언해주었으며, react가 관리하는 상태와 햇갈릴 수 있을 것 같아서 set이라는 prefix 대신 update prefix를 붙여주었습니다.
@@ -163,7 +163,7 @@ const handleChangeRouteStart = () => {
 
   // (1)만 처리
   if (isBeforePopStateEventTriggered) {
-    return
+    return;
   }
 
   if (scrollElementRef.current) {
@@ -173,11 +173,11 @@ const handleChangeRouteStart = () => {
         id,
         scroll: scrollElementRef.current.scrollTop,
       },
-    ])
+    ]);
   }
-}
+};
 
-events.on('routeChangeStart', handleChangeRouteStart)
+events.on('routeChangeStart', handleChangeRouteStart);
 ```
 
 보시다시피 스크롤 저장은 routeChangeStart 이벤트 핸들러 내에서 발생하게 되는데, isBeforePopStateEventTriggered가 true인 경우 뒤로가기 상황이고, false인 경우 push 상황이라고 생각할 수 있습니다.
@@ -191,11 +191,11 @@ events.on('routeChangeStart', handleChangeRouteStart)
 ```javascript
 useEffect(() => {
   if (isCurrentPageVisitedByBackspace) {
-    const { scroll } = scrollPositions.pop()
-    setScrollPositions(scrollPositions)
-    scrollElementRef.current.scrollTo(scroll)
+    const { scroll } = scrollPositions.pop();
+    setScrollPositions(scrollPositions);
+    scrollElementRef.current.scrollTo(scroll);
   }
-}, [isCurrentPageVisitedByBackspace])
+}, [isCurrentPageVisitedByBackspace]);
 ```
 
 #### 3. 어떤 글을 작성을 완료하고 뒤로가기 했을 때 글 작성 페이지로 돌아가지 않게 하는 방법
@@ -212,9 +212,9 @@ useEffect(() => {
 
 ```javascript
 onSuccess: ({ createdItemId }) => {
-  setCreatedItemId(createdItemId)
-  window.history.go(-2)
-}
+  setCreatedItemId(createdItemId);
+  window.history.go(-2);
+};
 ```
 
 우선 작성하여 생성된 게시글의 id를 전역상태로 두고, history.go(-2)해줍니다. 그리고 \_app 아래의 useBackSpace 훅 안에 다음과 같은 로직을 작성해줍니다.
@@ -225,9 +225,9 @@ useEffect(() => {
     !isCurrentPageWritePage(router) &&
     isNewlyCreatedItemExist(createdItemId)
   ) {
-    router.push(`/item/${createdItemId}`)
+    router.push(`/item/${createdItemId}`);
   }
-}, [])
+}, []);
 ```
 
 현재 페이지가 글 작성 페이지가 아니고 새로 작성된 게시글이 있는 경우에만, 새로 작성된 게시글의 페이지로 이동시킵니다. 이 로직이 실행되는 것은 오로지 (1) 글이 새로 작성되고, (2) history.go(-2)가 발생했을 때 뿐일 것 입니다.
@@ -238,9 +238,9 @@ const handleRouteChangeComplete = () => {
     isCurrentPageNewlyCreatedPage(router) &&
     isNewlyCreatedItemExist(createdItemId)
   ) {
-    setCreatedItemId(null)
+    setCreatedItemId(null);
   }
-}
+};
 ```
 
 그리고 페이지 이동이 끝나게 되면 createdItemId를 다시 null로 초기화하기 위해 routeChangeComplete 이벤트 핸들러에 위와 같이 로직을 작성합니다.
@@ -248,7 +248,7 @@ const handleRouteChangeComplete = () => {
 이렇게 작성하면 글 작성을 하고 뒤로가기를 했을 때 다시 작성 페이지로 돌아가지 않게됩니다. history stack이 원하던 상태로 된것 입니다. 다만 여기에는 한가지 문제점이 있습니다. go(-2)를 하여 어떤 페이지로 이동했을 때, 이 페이지가 잠깐동안 보여진다는 것 입니다. 이를 해결하기 위해서,
 
 ```javascript
-return <>{!isNewlyCreatedItemExist(createdItemId) && <Component />}</>
+return <>{!isNewlyCreatedItemExist(createdItemId) && <Component />}</>;
 ```
 
 글이 생성됐으면 해당 페이지로 이동하기 전까지는 잠깐동안 페이지를 보여주지 않도록하여 마무리합니다.
@@ -272,4 +272,3 @@ return <>{!isNewlyCreatedItemExist(createdItemId) && <Component />}</>
 페이지 3에서 beforePopState가 발생하면 앞으로 가기를 해서 페이지2에 방문하거나 뒤로가기를 해서 페이지2에 방문하거나 두 가지중 하나일 것 입니다. 그러므로 뒤로가기와 앞으로가기를 구분해서 적절하게 스크롤 위치를 복원해야 한다고 생각했는데요.
 
 네이버 책방은 스크롤을 저장할 때 페이지 URL을 남기는데, URL에는 NaPm이라는 파라미터가 남게됩니다. 이 파라미터는 동일한 페이지를 방문해도 값이 달라집니다. 아마 이 값을 고유한 id값처럼 사용하여 굳이 뒤로가기와 앞으로가기를 구분하지 않고도 페이지 복원이 가능한 것 같습니다.
-

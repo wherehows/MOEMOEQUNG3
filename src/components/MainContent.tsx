@@ -8,28 +8,26 @@ interface ContentProps {
   documents: MarkdownDocument[];
 }
 
-const MainContent = ({ documents }: ContentProps) => {
-  return (
-    <Wrapper>
-      <Typography variant="h1">
-        프론트엔드 개발 및 관심사를 기록하는 블로그
-      </Typography>
-      <DocumentList>
-        {documents?.map(({ html, title, date, slug }: MarkdownDocument) => (
-          <DocumentItem key={slug}>
-            <Button to={slug}>
-              <Typography variant="h2">{title}</Typography>
-              <PostDate dateTime={date.toString()}>{formatDate(date)}</PostDate>
-              <Typography as={Description}>
-                {changeMarkdownToTextContent(html)}
-              </Typography>
-            </Button>
-          </DocumentItem>
-        ))}
-      </DocumentList>
-    </Wrapper>
-  );
-};
+const MainContent = ({ documents }: ContentProps) => (
+  <Wrapper>
+    <Typography variant="h1">
+      프론트엔드 개발 및 관심사를 기록하는 블로그
+    </Typography>
+    <DocumentList>
+      {documents?.map(({ html, title, date, slug }: MarkdownDocument) => (
+        <DocumentItem key={slug}>
+          <Button to={slug}>
+            <Typography variant="h2">{title}</Typography>
+            <PostDate dateTime={date.toString()}>{formatDate(date)}</PostDate>
+            <Typography as={Description}>
+              {changeMarkdownToTextContent(html)}
+            </Typography>
+          </Button>
+        </DocumentItem>
+      ))}
+    </DocumentList>
+  </Wrapper>
+);
 
 export default MainContent;
 
@@ -77,11 +75,8 @@ const DocumentList = styled('ul')(() => ({
   margin: 0,
 }));
 
-const changeMarkdownToTextContent = (html: MarkdownDocument['html']) => {
-  const dummyTag = document.createElement('span');
-  dummyTag.innerHTML = html;
-  return dummyTag.textContent || dummyTag.innerText;
-};
+const changeMarkdownToTextContent = (html: MarkdownDocument['html']) =>
+  html.replace(/<[^>]+>/g, '');
 
 const formatDate = (date: MarkdownDocument['date']) => {
   const sArray = date.toString().split('-');

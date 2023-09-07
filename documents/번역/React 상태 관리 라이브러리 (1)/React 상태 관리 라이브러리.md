@@ -1,9 +1,9 @@
 ---
 date: '2022-09-03'
-title: 'React 상태 관리 라이브러리 (1)'
-subTitle: 'React 상태 관리 라이브러리 (1)'
+title: 'React와 상태 관리 라이브러리'
+subTitle: 'React와 상태 관리 라이브러리'
 folder: 'React'
-slug: '/react/react-state-management-1'
+slug: '/react/react-state-management'
 ---
 
 본 글은 [React State Management Libraries and How to Choose](https://daveceddia.com/react-state-management/)의 일부를 번역해놓은 글 입니다.
@@ -38,21 +38,21 @@ slug: '/react/react-state-management-1'
 
 ```javascript
 function App() {
-  let count = 0
+  let count = 0;
 
   return (
     <>
       <button
         onClick={() => {
-          count += 1
-          console.log(count)
+          count += 1;
+          console.log(count);
         }}
       >
         CountUp
       </button>
       <div>{count}</div>
     </>
-  )
+  );
 }
 ```
 
@@ -98,20 +98,20 @@ useReducer 용례와 관련한 구체적인 내용은 [여기](<[https://jsrambl
 
 ```javascript
 // 1. Context를 생성하여 export 합니다.
-export const MyDataContext = React.createContext()
+export const MyDataContext = React.createContext();
 ```
 
 ```javascript
 // 2. 컴포넌트 내에서 drill down할 data를 다음과 같이 넘겨줄 수 있습니다.
 const TheComponentsWithState = () => {
-  const [state, setState] = useState('whatever')
+  const [state, setState] = useState('whatever');
 
   return (
     <MyDataContext.Provider value={state}>
       <ComponentThatNeedsData />
     </MyDataContext.Provider>
-  )
-}
+  );
+};
 ```
 
 ```javascript
@@ -130,7 +130,7 @@ ContextAPI를 사용하면서 놓칠 수 있는 또 다른 문제점은, 아래 
 
 ```javascript
 const TheComponentsWithState = () => {
-  const [state, setState] = useState('whatever')
+  const [state, setState] = useState('whatever');
 
   return (
     <MyDataContext.Provider
@@ -141,8 +141,8 @@ const TheComponentsWithState = () => {
     >
       <ComponentThatNeedsData />
     </MyDataContext.Provider>
-  )
-}
+  );
+};
 ```
 
 문제는 TheComponentsWith가 리렌더링 될때마다 state와 state setter를 감싸주는 객체가 새로 생성된다는 것 입니다.
@@ -154,4 +154,3 @@ const TheComponentsWithState = () => {
 ## 📚 참고 문헌
 
 [Difference Between One-way and Two-way Databinding in Angular](https://reactgo.com/angular-oneway-vs-twoway-binding/)
-

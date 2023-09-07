@@ -1,7 +1,7 @@
 ---
 date: '2022-10-13'
-title: 'Mastering mapped types in TypeScript'
-subTitle: 'mapped type 마스터하기'
+title: 'mapped type 마스터하기'
+subTitle: 'mapped type'
 folder: 'Typescript'
 slug: '/typescript/mapped-type'
 ---
@@ -15,13 +15,13 @@ mapped type은 어떤 타입을 기반으로 타입을 선언해야 할때 유�
 type AppConfig = {
   username: string,
   layout: string,
-}
+};
 
 // 현재 유저가 설정 값 변경을 허용 했는지 여부
 type AppPermissions = {
   changeUsername: boolean,
   changeLayout: boolean,
-}
+};
 ```
 
 위 예제의 문제는 AppConfig와 AppPermissions간에는 AppConfig에 새로운 필드가 추가되면, AppPermissions에도 새로운 필드가 추가돼야하는 암묵적인 관계가 형성되어 있습니다. 이 둘의 관계를 프로그래머가 숙지하고 있으면서 필드가 추가될 때 양쪽을 직접 업데이트 하는 것 보다, 타입 시스템이 이 관계를 알고 있어서 알아서 업데이트 해주는 방향이 더 낫습니다.
@@ -61,7 +61,7 @@ mapped type의 코어 개념에는, map, indexed access type, index signature, u
 type Device = {
   manufacturer: string,
   price: string,
-}
+};
 ```
 
 그리고 각 Device의 프로퍼티는 인간이 읽을 수 있는 데이터의 형태로 변환돼야 한다고 가정해봅시다. 그리고 당연히 그에 따른 타입 역시도 필요하게 되는데, 이때 mapped type을 이용할 수 있습니다.
@@ -75,7 +75,7 @@ type DeviceFormatter = {
 참고로, 문서에 설명은 안되어 있지만 `Capitalize<Key>`의 타입 정의는 다음과 같지 않을까 싶습니다.
 
 ```javascript
-type Capitalize<Key> = (word: Key) => string
+type Capitalize<Key> = (word: Key) => string;
 ```
 
 어찌됐건 앞선 DeviceFormatter의 코드를 쪼개어 해석해 봅시다.
@@ -90,12 +90,12 @@ Key in keyof Device는 keyof 타입 연산자를 이용해서 Device 타입의 �
 type Device = {
   manufacturer: string,
   price: string,
-}
+};
 
 type DeviceFormatter = {
   formatManufacturer: (value: string) => string,
   formatPrice: (value: number) => string,
-}
+};
 ```
 
 만약 Device에 releaseYear 필드를 개발자가 추가한다면, DeviceFormatter 필드는 타입 시스템이 추가할 것입니다.
@@ -105,13 +105,13 @@ type Device = {
   manufacturer: string,
   price: number,
   releaseYear: number,
-}
+};
 
 type DeviceFormatter = {
   formatManufacturer: (value: string) => string,
   formatPrice: (value: number) => string,
   formatReleaseYear: (value: number) => string,
-}
+};
 ```
 
 ## 📌 제네릭 타입을 이용해서 재사용 가능한 mapped type 만들기
@@ -122,7 +122,7 @@ type DeviceFormatter = {
 type Accessory = {
   color: string,
   size: number,
-}
+};
 ```
 
 그리고 앞선 Device처럼 Accessory의 프로퍼티를 기반으로 한 새로운 객체를 만들어야 한다고하면, 다음과 같이 구현할 수 있을 것 입니다.
@@ -144,8 +144,8 @@ type Formatter<T> = {
 그리고 DeviceFormatter와 AccessoryFormater는 다음과 같이 정의할 수 있습니다.
 
 ```javascript
-type DeviceFormatter = Formatter<Device>
-type AccessoryFormatter = Formatter<Accessory>
+type DeviceFormatter = Formatter<Device>;
+type AccessoryFormatter = Formatter<Accessory>;
 ```
 
 ---
@@ -155,4 +155,3 @@ type AccessoryFormatter = Formatter<Accessory>
 **[Mastering mapped types in TypeScript](https://blog.logrocket.com/mastering-mapped-types-typescript/)**
 
 **[mapped types in TypeScript](https://mariusschulz.com/blog/mapped-types-in-typescript)**
-

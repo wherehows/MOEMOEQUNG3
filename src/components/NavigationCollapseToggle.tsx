@@ -24,7 +24,7 @@ const NavigationCollapseToggle = ({
           checked={isSidebarShown}
           onChange={handleClickCheckBox}
         />
-        <Hamburger width="24px" height="24px" color="#ffffff" />
+        <Hamburger width="24px" height="24px" color="var(--dark-font)" />
       </Wrapper>
     </>
   );

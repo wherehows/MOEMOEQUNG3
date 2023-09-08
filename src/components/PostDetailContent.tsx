@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { CONTENT_LEFT_MARGIN_WIDTH, CONTENT_WIDTH } from '@/utils/const';
+import { MAIN_LEFT_MARGIN_WIDTH, MAIN_WIDTH } from '@/utils/const';
 import ViewCounter from './ViewCounter';
 import Typography from './Typography';
 
@@ -29,8 +29,8 @@ export default PostDetailContent;
 
 const Wrapper = styled('div')(() => ({
   diplay: 'flex',
-  marginLeft: CONTENT_LEFT_MARGIN_WIDTH,
-  width: CONTENT_WIDTH,
+  marginLeft: MAIN_LEFT_MARGIN_WIDTH,
+  width: MAIN_WIDTH,
   height: '100%',
 }));
 

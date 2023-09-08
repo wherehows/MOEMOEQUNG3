@@ -1,5 +1,9 @@
 import styled from '@emotion/styled';
-import { SIDEBAR_PURE_WIDTH, SIDEBAR_WIDTH } from '@/utils/const';
+import {
+  PADDING_BETWEEN_SIDEBAR_AND_SCROLL,
+  SIDEBAR_PURE_WIDTH,
+  SIDEBAR_WIDTH,
+} from '@/utils/const';
 import FolderItem from './FolderItem';
 import SidebarHeader from './SidebarHeader';
 import { getFolders } from '@/utils/helpers';
@@ -30,6 +34,7 @@ export default Sidebar;
 
 const Wrapper = styled('div')(() => ({
   width: SIDEBAR_WIDTH,
+  paddingRight: PADDING_BETWEEN_SIDEBAR_AND_SCROLL,
   height: '100vh',
   display: 'flex',
   flexDirection: 'column',

@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 import Sun from '@/assets/sun.svg';
 import Moon from '@/assets/moon.svg';
 import { ChangeEvent, useState } from 'react';
-import { css } from '@emotion/react';
 
 const DarkModeToggle = () => {
   if (typeof window === 'undefined') {
@@ -32,7 +31,6 @@ const DarkModeToggle = () => {
 };
 
 const Wrapper = styled('label')(() => ({
-  marginRight: '0.5rem',
   cursor: 'pointer',
 }));
 
@@ -41,18 +39,12 @@ const ToggleBody = styled('input')(() => ({
   display: 'none',
 }));
 
-const marginRightOfIcon = css`
-  marginright: 4px;
-`;
-
 const SunIcon = styled(Sun)(() => ({
-  marginRightOfIcon,
   width: '24px',
   height: '24px',
 }));
 
 const MoonIcon = styled(Moon)(() => ({
-  marginRightOfIcon,
   width: '24px',
   height: '24px',
   color: '#ffffff',

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { CONTENT_LEFT_MARGIN_WIDTH, CONTENT_WIDTH } from '@/utils/const';
+import { MAIN_LEFT_MARGIN_WIDTH, MAIN_WIDTH } from '@/utils/const';
 import CustomLink from './CustomLink';
 import Typography from './Typography';
 import { MarkdownDocument } from '@/types/document';
@@ -33,8 +33,8 @@ export default MainContent;
 
 const Wrapper = styled('div')(() => ({
   diplay: 'flex',
-  marginLeft: CONTENT_LEFT_MARGIN_WIDTH,
-  width: CONTENT_WIDTH,
+  marginLeft: MAIN_LEFT_MARGIN_WIDTH,
+  width: MAIN_WIDTH,
   height: '100%',
 }));
 

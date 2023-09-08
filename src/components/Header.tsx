@@ -3,18 +3,28 @@ import Typography from './Typography';
 import DarkModeToggle from './DarkModeToggle';
 import NavigationToggle from './NavigationToggle';
 import { Dispatch } from 'react';
+import Logo from './Logo';
 
 interface HeaderProps {
+  isDetailPage?: boolean;
   isSidebarShown: boolean;
   setIsSidebarShown: Dispatch<boolean>;
 }
 
-const Header = ({ isSidebarShown, setIsSidebarShown }: HeaderProps) => {
+const Header = ({
+  isDetailPage,
+  isSidebarShown,
+  setIsSidebarShown,
+}: HeaderProps) => {
   return (
     <Wrapper>
-      <Typography variant="h1">
-        녕후킴의 프론트 엔드 개발 및 관심사 기록 블로그
-      </Typography>
+      {isDetailPage ? (
+        <Logo />
+      ) : (
+        <Typography variant="h1">
+          녕후킴의 프론트 엔드 개발 및 관심사 기록 블로그
+        </Typography>
+      )}
       <ListWrapper>
         <List>
           <DarkModeToggle />

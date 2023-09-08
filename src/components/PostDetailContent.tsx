@@ -9,29 +9,46 @@ interface ContentProps {
   selectedDocument: string;
 }
 
-const PostDetailContent = ({
-  title,
-  selectedDocument,
-  pathname,
-}: ContentProps) => {
+const Common = ({ title, pathname, selectedDocument }: ContentProps) => {
   return (
-    <Wrapper>
+    <>
       <Typography variant="h1">{title}</Typography>
       <ViewCounter pathname={pathname} />
       <MarkdownRenderer
         dangerouslySetInnerHTML={{ __html: selectedDocument }}
       />
-    </Wrapper>
+    </>
   );
 };
 
-export default PostDetailContent;
+export const PostDetailContentWithoutSidebar = (props: ContentProps) => {
+  return (
+    <PostDetailContentWithoutSidebarWrapper>
+      <Common {...props} />
+    </PostDetailContentWithoutSidebarWrapper>
+  );
+};
 
-const Wrapper = styled('main')(() => ({
+export const PostDetailContentWithSidebar = (props: ContentProps) => {
+  return (
+    <PostDetailContentWithSidebarWrapper>
+      <Common {...props} />
+    </PostDetailContentWithSidebarWrapper>
+  );
+};
+
+const BaseWrapper = styled('main')(() => ({
   diplay: 'flex',
-  marginLeft: MAIN_LEFT_MARGIN_WIDTH,
   width: MAIN_WIDTH,
   height: '100%',
+}));
+
+const PostDetailContentWithoutSidebarWrapper = styled(BaseWrapper)(() => ({
+  margin: '0 auto',
+}));
+
+const PostDetailContentWithSidebarWrapper = styled(BaseWrapper)(() => ({
+  marginLeft: MAIN_LEFT_MARGIN_WIDTH,
 }));
 
 const MarkdownRenderer = styled('div')(() => ({

@@ -1,10 +1,17 @@
-import Sidebar from '@/components/Sidebar';
+import { CollapsibleSidebar, FixedSidebar } from '@/components/Sidebar';
 import GlobalCss from '@/components/GlobalCss';
 import { graphql, PageProps } from 'gatsby';
 import { Edge } from '@/types/document';
 import { ThemeProvider } from '@emotion/react';
 import { theme } from '@/utils/const';
-import PostDetailContent from '@/components/PostDetailContent';
+import useResponsiveWeb from '@/hooks/useResponsiveWeb';
+import Header from '@/components/Header';
+import { useState } from 'react';
+import { getFolders } from '@/utils/helpers';
+import {
+  PostDetailContentWithSidebar,
+  PostDetailContentWithoutSidebar,
+} from '@/components/PostDetailContent';
 
 interface QueryResultType {
   allMarkdownRemark: { edges: Edge[] };
@@ -16,7 +23,10 @@ export default function PostDetail({
   },
   path,
 }: PageProps<QueryResultType>) {
+  const [isSidebarShown, setIsSidebarShown] = useState(false);
+  const folderInformations = getFolders(edges);
   const res = getSelectedDocument(edges, path);
+  const { isUnder960px } = useResponsiveWeb();
 
   // TODO: 게시글이 존재하지 않는 경우에 대한 에러 핸들링 필요
   if (!res) {
@@ -29,12 +39,33 @@ export default function PostDetail({
     <>
       <GlobalCss />
       <ThemeProvider theme={theme}>
-        <Sidebar edges={edges} />
-        <PostDetailContent
-          title={title}
-          selectedDocument={selectedDocument}
-          pathname={path}
-        />
+        {isUnder960px ? (
+          <>
+            <Header
+              isDetailPage
+              isSidebarShown={isSidebarShown}
+              setIsSidebarShown={setIsSidebarShown}
+            />
+            {isSidebarShown && (
+              <CollapsibleSidebar folderInformations={folderInformations} />
+            )}
+          </>
+        ) : (
+          <FixedSidebar folderInformations={folderInformations} />
+        )}
+        {isUnder960px ? (
+          <PostDetailContentWithoutSidebar
+            title={title}
+            selectedDocument={selectedDocument}
+            pathname={path}
+          />
+        ) : (
+          <PostDetailContentWithSidebar
+            title={title}
+            selectedDocument={selectedDocument}
+            pathname={path}
+          />
+        )}
       </ThemeProvider>
     </>
   );

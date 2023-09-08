@@ -31,7 +31,7 @@ const MainContent = ({ documents }: ContentProps) => (
 
 export default MainContent;
 
-const Wrapper = styled('div')(() => ({
+const Wrapper = styled('main')(() => ({
   diplay: 'flex',
   marginLeft: MAIN_LEFT_MARGIN_WIDTH,
   width: MAIN_WIDTH,

@@ -27,7 +27,7 @@ const PostDetailContent = ({
 
 export default PostDetailContent;
 
-const Wrapper = styled('div')(() => ({
+const Wrapper = styled('main')(() => ({
   diplay: 'flex',
   marginLeft: MAIN_LEFT_MARGIN_WIDTH,
   width: MAIN_WIDTH,

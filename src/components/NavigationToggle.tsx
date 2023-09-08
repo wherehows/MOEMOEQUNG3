@@ -1,0 +1,41 @@
+import Hamburger from '@/assets/hamburger.svg';
+import styled from '@emotion/styled';
+import { ChangeEvent, Dispatch } from 'react';
+
+interface NavigationMenuButtonProps {
+  isSidebarShown: boolean;
+  setIsSidebarShown: Dispatch<boolean>;
+}
+
+const NavigationToggle = ({
+  isSidebarShown,
+  setIsSidebarShown,
+}: NavigationMenuButtonProps) => {
+  const handleClickCheckBox = (e: ChangeEvent<HTMLInputElement>) => {
+    setIsSidebarShown(e.target.checked);
+  };
+
+  return (
+    <>
+      <Wrapper>
+        <ToggleBody
+          id="navbar-toggle-input"
+          type="checkbox"
+          checked={isSidebarShown}
+          onChange={handleClickCheckBox}
+        />
+        <Hamburger width="24px" height="24px" color="#ffffff" />
+      </Wrapper>
+    </>
+  );
+};
+
+export default NavigationToggle;
+
+const Wrapper = styled('label')(() => ({
+  cursor: 'pointer',
+}));
+
+const ToggleBody = styled('input')(() => ({
+  display: 'none',
+}));

@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import Typography from './Typography';
 import DarkModeToggle from './DarkModeToggle';
-import NavigationToggle from './NavigationToggle';
+import NavigationCollapseToggle from './NavigationCollapseToggle';
 import { Dispatch } from 'react';
 import Logo from './Logo';
 
@@ -30,7 +30,7 @@ const Header = ({
           <DarkModeToggle />
         </List>
         <List>
-          <NavigationToggle
+          <NavigationCollapseToggle
             isSidebarShown={isSidebarShown}
             setIsSidebarShown={setIsSidebarShown}
           />

@@ -7,7 +7,7 @@ interface NavigationMenuButtonProps {
   setIsSidebarShown: Dispatch<boolean>;
 }
 
-const NavigationToggle = ({
+const NavigationCollapseToggle = ({
   isSidebarShown,
   setIsSidebarShown,
 }: NavigationMenuButtonProps) => {
@@ -30,7 +30,7 @@ const NavigationToggle = ({
   );
 };
 
-export default NavigationToggle;
+export default NavigationCollapseToggle;
 
 const Wrapper = styled('label')(() => ({
   cursor: 'pointer',

@@ -49,6 +49,7 @@ const BaseWrapper = styled('div')(() => ({
 }));
 
 const CollapsibleSidebarWrapper = styled(BaseWrapper)(() => ({
+  zIndex: 1,
   paddingRight: PADDING_BETWEEN_SIDEBAR_AND_SCROLL,
   top: 0,
   padding: '0 12px',

@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 import Sun from '@/assets/sun.svg';
 import Moon from '@/assets/moon.svg';
 import { ChangeEvent, useState } from 'react';
-import { css } from '@emotion/react';
 
 const DarkModeToggle = () => {
   if (typeof window === 'undefined') {

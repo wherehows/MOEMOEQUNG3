@@ -32,7 +32,6 @@ const DarkModeToggle = () => {
 };
 
 const Wrapper = styled('label')(() => ({
-  marginRight: '0.5rem',
   cursor: 'pointer',
 }));
 
@@ -41,18 +40,12 @@ const ToggleBody = styled('input')(() => ({
   display: 'none',
 }));
 
-const marginRightOfIcon = css`
-  marginright: 4px;
-`;
-
 const SunIcon = styled(Sun)(() => ({
-  marginRightOfIcon,
   width: '24px',
   height: '24px',
 }));
 
 const MoonIcon = styled(Moon)(() => ({
-  marginRightOfIcon,
   width: '24px',
   height: '24px',
   color: '#ffffff',

@@ -8,11 +8,8 @@ interface ContentProps {
   documents: MarkdownDocument[];
 }
 
-const MainContent = ({ documents }: ContentProps) => (
-  <Wrapper>
-    <Typography variant="h1">
-      프론트엔드 개발 및 관심사를 기록하는 블로그
-    </Typography>
+const Common = ({ documents }: ContentProps) => {
+  return (
     <DocumentList>
       {documents?.map(({ html, title, date, slug }: MarkdownDocument) => (
         <DocumentItem key={slug}>
@@ -26,16 +23,40 @@ const MainContent = ({ documents }: ContentProps) => (
         </DocumentItem>
       ))}
     </DocumentList>
-  </Wrapper>
-);
+  );
+};
 
-export default MainContent;
+export const MainWithoutSidebar = ({ documents }: ContentProps) => {
+  return (
+    <MainContentWithoutSidebarWrapper>
+      <Common documents={documents} />
+    </MainContentWithoutSidebarWrapper>
+  );
+};
 
-const Wrapper = styled('main')(() => ({
+export const MainWithSidebar = ({ documents }: ContentProps) => {
+  return (
+    <MainContentWithSidebarWrapper>
+      <Typography variant="h1">
+        프론트엔드 개발 및 관심사를 기록하는 블로그
+      </Typography>
+      <Common documents={documents} />
+    </MainContentWithSidebarWrapper>
+  );
+};
+
+const BaseWrapper = styled('main')(() => ({
   diplay: 'flex',
-  marginLeft: MAIN_LEFT_MARGIN_WIDTH,
   width: MAIN_WIDTH,
   height: '100%',
+}));
+
+const MainContentWithoutSidebarWrapper = styled(BaseWrapper)(() => ({
+  margin: '0 auto',
+}));
+
+const MainContentWithSidebarWrapper = styled(BaseWrapper)(() => ({
+  marginLeft: MAIN_LEFT_MARGIN_WIDTH,
 }));
 
 const DocumentItem = styled('li')(() => ({

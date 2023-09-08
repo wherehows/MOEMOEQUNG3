@@ -1,15 +1,15 @@
 import styled from '@emotion/styled';
-import { SIDEBAR_PURE_WIDTH } from '@/utils/const';
-import CustomLink from './CustomLink';
 import DarkModeToggle from './DarkModeToggle';
+import useResponsiveWeb from '@/hooks/useResponsiveWeb';
+import Logo from './Logo';
 
 const SidebarHeader = () => {
+  const { isUnder960px } = useResponsiveWeb();
+
   return (
     <Wrapper>
-      <NameWrapper>
-        <Name to="/">녕후킴</Name>
-      </NameWrapper>
-      <DarkModeToggle />
+      <Logo />
+      {!isUnder960px && <DarkModeToggle />}
     </Wrapper>
   );
 };
@@ -21,13 +21,5 @@ const Wrapper = styled('div')(() => ({
   justifyContent: 'space-between',
   alignItems: 'center',
   fontSize: '1.6rem',
-  width: SIDEBAR_PURE_WIDTH,
-}));
-
-const Name = styled(CustomLink)(() => ({
-  fontWeight: 'bold',
-}));
-
-const NameWrapper = styled('div')(() => ({
-  fontSize: '1.8rem',
+  width: '100%',
 }));

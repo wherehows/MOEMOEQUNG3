@@ -30,18 +30,20 @@ const globalCss = css`
     --colors-secondary: #cf9a12;
   }
 
-  :root .dark {
+  :root.dark {
     --dark-background: #111314;
     --dark-font: #fff;
   }
 
-  :root .light {
+  :root.light {
     --dark-background: #fff;
     --dark-font: #111314;
   }
 
   body {
     font-family: 'Pretendard', sans-serif;
+    background: var(--dark-background);
+    color: var(--dark-font);
   }
 `;
 
@@ -61,8 +63,6 @@ const resetCss = css`
     margin: 0;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
-    background: var(--dark-background);
-    color: var(--dark-font);
   }
 
   img,

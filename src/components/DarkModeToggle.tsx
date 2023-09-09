@@ -1,14 +1,18 @@
 import styled from '@emotion/styled';
 import Sun from '@/assets/sun.svg';
 import Moon from '@/assets/moon.svg';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useLayoutEffect, useState } from 'react';
 
 const DarkModeToggle = () => {
-  if (typeof window === 'undefined') {
-    return <></>;
-  }
+  const [isOn, setIsOn] = useState(() => {
+    if (typeof window === 'undefined') {
+      return false;
+    }
 
-  const [isOn, setIsOn] = useState(window.__theme === 'dark');
+    return window.__theme === 'dark' ? true : false;
+  });
+
+  const [isMounted, setIsMounted] = useState(false);
 
   const handleClickCheckBox = (e: ChangeEvent<HTMLInputElement>) => {
     const isChecked = e.target.checked;
@@ -16,6 +20,10 @@ const DarkModeToggle = () => {
 
     window.__setPreferredTheme(isChecked ? 'dark' : 'light');
   };
+
+  useLayoutEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   return (
     <Wrapper htmlFor="toggle-input">
@@ -25,7 +33,7 @@ const DarkModeToggle = () => {
         checked={isOn}
         onChange={handleClickCheckBox}
       />
-      {isOn ? <MoonIcon /> : <SunIcon />}
+      {isMounted ? isOn ? <MoonIcon /> : <SunIcon /> : <></>}
     </Wrapper>
   );
 };

@@ -46,11 +46,11 @@ const BaseWrapper = styled('div')(() => ({
   left: 0,
   overflowY: 'auto',
   position: 'fixed',
+  paddingRight: PADDING_BETWEEN_SIDEBAR_AND_SCROLL,
 }));
 
 const CollapsibleSidebarWrapper = styled(BaseWrapper)(() => ({
   zIndex: 1,
-  paddingRight: PADDING_BETWEEN_SIDEBAR_AND_SCROLL,
   top: 0,
   padding: '0 12px',
   backgroundColor: 'var(--dark-background)',
@@ -58,7 +58,6 @@ const CollapsibleSidebarWrapper = styled(BaseWrapper)(() => ({
 
 const FixedSidebarWrapper = styled(BaseWrapper)(() => ({
   width: SIDEBAR_WIDTH,
-  paddingRight: PADDING_BETWEEN_SIDEBAR_AND_SCROLL,
   alignItems: 'flex-end',
 }));
 

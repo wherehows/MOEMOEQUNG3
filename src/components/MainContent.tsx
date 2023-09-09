@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { MAIN_LEFT_MARGIN_WIDTH, MAIN_WIDTH } from '@/utils/const';
+import { MAIN_LEFT_MARGIN_WIDTH, MAIN_PURE_WIDTH } from '@/utils/const';
 import CustomLink from './CustomLink';
 import Typography from './Typography';
 import { MarkdownDocument } from '@/types/document';
@@ -47,7 +47,7 @@ export const MainWithSidebar = ({ documents }: ContentProps) => {
 
 const BaseWrapper = styled('main')(() => ({
   diplay: 'flex',
-  width: MAIN_WIDTH,
+  width: MAIN_PURE_WIDTH,
   height: '100%',
 }));
 

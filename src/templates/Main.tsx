@@ -20,6 +20,10 @@ const Main = ({
   const folderInformations = getFolders(edges);
   const { isUnder960px } = useResponsiveWeb();
 
+  if (typeof window === 'undefined') {
+    return null;
+  }
+
   return (
     <>
       <GlobalCss />

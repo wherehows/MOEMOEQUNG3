@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { MAIN_LEFT_MARGIN_WIDTH, MAIN_WIDTH } from '@/utils/const';
+import { MAIN_LEFT_MARGIN_WIDTH, MAIN_PURE_WIDTH } from '@/utils/const';
 import ViewCounter from './ViewCounter';
 import Typography from './Typography';
 
@@ -39,7 +39,7 @@ export const PostDetailContentWithSidebar = (props: ContentProps) => {
 
 const BaseWrapper = styled('main')(() => ({
   diplay: 'flex',
-  width: MAIN_WIDTH,
+  width: MAIN_PURE_WIDTH,
   height: '100%',
 }));
 

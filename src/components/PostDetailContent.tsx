@@ -38,7 +38,7 @@ export const PostDetailContentWithSidebar = (props: ContentProps) => {
 };
 
 const BaseWrapper = styled('main')(() => ({
-  diplay: 'flex',
+  display: 'flex',
   width: MAIN_PURE_WIDTH,
   height: '100%',
 }));

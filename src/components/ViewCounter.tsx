@@ -4,10 +4,10 @@ import styled from '@emotion/styled';
 import { isOnDevelopment } from '@/utils/helpers';
 
 interface ViewCounter {
-  pathname: string;
+  slug: string;
 }
 
-const ViewCounter = ({ pathname }: ViewCounter) => {
+const ViewCounter = ({ slug }: ViewCounter) => {
   const [viewCount, setViewCount] = useState(0);
 
   useEffect(() => {
@@ -19,24 +19,24 @@ const ViewCounter = ({ pathname }: ViewCounter) => {
       setViewCount(newViews.val());
     };
 
-    incrementViews(pathname);
+    incrementViews(slug);
 
-    firebase.database().ref(`/views`).child(pathname).on(`value`, onViews);
+    firebase.database().ref(`/views`).child(slug).on(`value`, onViews);
 
     return () => {
       if (firebase.database()) {
-        firebase.database().ref(`/views`).child(pathname).off(`value`, onViews);
+        firebase.database().ref(`/views`).child(slug).off(`value`, onViews);
       }
     };
-  }, [pathname]);
+  }, [slug]);
 
   return <View>{viewCount} views</View>;
 };
 
 export default ViewCounter;
 
-const incrementViews = async (pathname: ViewCounter['pathname']) => {
-  const ref = firebase.database().ref(`/views`).child(pathname);
+const incrementViews = async (slug: ViewCounter['slug']) => {
+  const ref = firebase.database().ref(`/views`).child(slug);
 
   ref.transaction(currentViews => {
     return currentViews + 1;

@@ -31,7 +31,6 @@ export default function PostDetail({
 }: PageProps<QueryResultType, PageContextType>) {
   const [isSidebarShown, setIsSidebarShown] = useState(false);
   const { isUnder960px } = useResponsiveWeb();
-  const path = slug;
 
   const folderInformations = getFolders(edges);
   const selectedDocument = selectedPost.html;
@@ -59,13 +58,13 @@ export default function PostDetail({
           <PostDetailContentWithoutSidebar
             title={title}
             selectedDocument={selectedDocument}
-            pathname={path}
+            slug={slug}
           />
         ) : (
           <PostDetailContentWithSidebar
             title={title}
             selectedDocument={selectedDocument}
-            pathname={path}
+            slug={slug}
           />
         )}
       </ThemeProvider>

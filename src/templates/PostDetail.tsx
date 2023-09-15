@@ -70,7 +70,7 @@ export default function PostDetail({
   );
 }
 
-export const getPosts = graphql`
+export const getPageProps = graphql`
   query ($slug: String!) {
     allPosts: allMarkdownRemark(
       sort: { fields: frontmatter___date, order: DESC }

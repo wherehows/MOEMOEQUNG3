@@ -5,13 +5,13 @@ import Typography from './Typography';
 import { MarkdownDocument } from '@/types/document';
 
 interface ContentProps {
-  documents: MarkdownDocument[];
+  posts: MarkdownDocument[];
 }
 
-const Common = ({ documents }: ContentProps) => {
+const Common = ({ posts }: ContentProps) => {
   return (
     <DocumentList>
-      {documents.map(({ html, title, date, slug }: MarkdownDocument) => (
+      {posts.map(({ html, title, date, slug }: MarkdownDocument) => (
         <DocumentItem key={slug}>
           <Button to={slug}>
             <Typography variant="h2">{title}</Typography>
@@ -26,21 +26,21 @@ const Common = ({ documents }: ContentProps) => {
   );
 };
 
-export const MainWithoutSidebar = ({ documents }: ContentProps) => {
+export const MainWithoutSidebar = ({ posts }: ContentProps) => {
   return (
     <MainContentWithoutSidebarWrapper>
-      <Common documents={documents} />
+      <Common posts={posts} />
     </MainContentWithoutSidebarWrapper>
   );
 };
 
-export const MainWithSidebar = ({ documents }: ContentProps) => {
+export const MainWithSidebar = ({ posts }: ContentProps) => {
   return (
     <MainContentWithSidebarWrapper>
       <Typography variant="h1">
         프론트엔드 개발 및 관심사를 기록하는 블로그
       </Typography>
-      <Common documents={documents} />
+      <Common posts={posts} />
     </MainContentWithSidebarWrapper>
   );
 };

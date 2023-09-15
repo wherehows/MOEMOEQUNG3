@@ -8,13 +8,13 @@ interface FolderItemProps {
 }
 
 const FolderItem = ({ folderInformation }: FolderItemProps) => {
-  const { folder, documents } = folderInformation;
+  const { folder, posts } = folderInformation;
 
   return (
     <Wrapper>
       <Typography variant="subtitle">{folder}</Typography>
       <DocumentList>
-        {documents.map(({ slug, subTitle }) => (
+        {posts.map(({ slug, subTitle }) => (
           <DocumentItem key={slug}>
             <LinkButton to={slug}>{subTitle}</LinkButton>
           </DocumentItem>

@@ -10,9 +10,9 @@ interface ContentProps {
 
 const Common = ({ posts }: ContentProps) => {
   return (
-    <DocumentList>
+    <PostList>
       {posts.map(({ html, title, date, slug }: MarkdownDocument) => (
-        <DocumentItem key={slug}>
+        <PostItem key={slug}>
           <Button to={slug}>
             <Typography variant="h2">{title}</Typography>
             <PostDate dateTime={date.toString()}>{formatDate(date)}</PostDate>
@@ -20,9 +20,9 @@ const Common = ({ posts }: ContentProps) => {
               {changeMarkdownToTextContent(html)}
             </Typography>
           </Button>
-        </DocumentItem>
+        </PostItem>
       ))}
-    </DocumentList>
+    </PostList>
   );
 };
 
@@ -59,7 +59,7 @@ const MainContentWithSidebarWrapper = styled(BaseWrapper)(() => ({
   marginLeft: MAIN_LEFT_MARGIN_WIDTH,
 }));
 
-const DocumentItem = styled('li')(() => ({
+const PostItem = styled('li')(() => ({
   listStyleType: 'none',
   marginBottom: '2rem',
 }));
@@ -91,7 +91,7 @@ const Description = styled('div')(() => ({
   WebkitBoxOrient: 'vertical',
 }));
 
-const DocumentList = styled('ul')(() => ({
+const PostList = styled('ul')(() => ({
   padding: 0,
   margin: 0,
 }));

@@ -53,9 +53,14 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   });
 
   result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+    const { slug } = node.frontmatter;
+
     createPage({
-      path: node.frontmatter.slug,
+      path: slug,
       component: PostDetail,
+      context: {
+        slug,
+      },
     });
   });
 };

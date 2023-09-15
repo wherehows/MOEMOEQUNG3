@@ -29,12 +29,13 @@ interface Frontmatter {
   index: number;
 }
 
+export interface Node {
+  frontmatter: Frontmatter;
+  html: string;
+}
+
 export interface Edge {
-  node: {
-    frontmatter: Frontmatter;
-    html: string;
-    id: string;
-  };
+  node: Node;
 }
 
 export type MarkdownDocument = DocumentInformation & Frontmatter;

@@ -32,7 +32,7 @@ export default function PostDetail({
   const [isSidebarShown, setIsSidebarShown] = useState(false);
   const { isUnder960px } = useResponsiveWeb();
 
-  const folderInformations = getFolders(edges);
+  const folders = getFolders(edges);
   const selectedDocument = selectedPost.html;
   const { title } = selectedPost.frontmatter;
 
@@ -47,12 +47,10 @@ export default function PostDetail({
               isSidebarShown={isSidebarShown}
               setIsSidebarShown={setIsSidebarShown}
             />
-            {isSidebarShown && (
-              <CollapsibleSidebar folderInformations={folderInformations} />
-            )}
+            {isSidebarShown && <CollapsibleSidebar folders={folders} />}
           </>
         ) : (
-          <FixedSidebar folderInformations={folderInformations} />
+          <FixedSidebar folders={folders} />
         )}
         {isUnder960px ? (
           <PostDetailContentWithoutSidebar

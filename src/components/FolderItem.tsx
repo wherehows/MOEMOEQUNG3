@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
 import CustomLink from './CustomLink';
-import { FolderInformation } from '@/types/document';
+import { Folder } from '@/types/document';
 import Typography from './Typography';
 
 interface FolderItemProps {
-  folderInformation: FolderInformation;
+  folderInformation: Folder;
 }
 
 const FolderItem = ({ folderInformation }: FolderItemProps) => {

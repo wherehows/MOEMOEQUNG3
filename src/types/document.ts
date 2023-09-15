@@ -5,7 +5,7 @@ export interface IndexPageProps {
     };
   };
 }
-export interface FolderInformation {
+export interface Folder {
   folder: string;
   documents: DocumentInformation[];
 }

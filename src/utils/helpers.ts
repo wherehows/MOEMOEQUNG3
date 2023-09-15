@@ -9,7 +9,7 @@ interface FolderNameToFolderInformationMap {
 export const getFolders = (edges: Edge[]) => {
   const folderNameToFolderInformationMap = edges.reduce(
     (acc: FolderNameToFolderInformationMap, { node }: Edge) => {
-      const { frontmatter, html, id } = node;
+      const { frontmatter, html } = node;
       const { date, title, subTitle, folder, slug } = frontmatter;
       const documentInformation = {
         date,
@@ -18,7 +18,6 @@ export const getFolders = (edges: Edge[]) => {
         subTitle,
         slug,
         html,
-        id,
       };
 
       if (!Reflect.has(acc, folder)) {

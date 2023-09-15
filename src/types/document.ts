@@ -17,7 +17,6 @@ interface DocumentInformation {
   subTitle: string;
   slug: string;
   html: string;
-  id: string;
 }
 
 interface Frontmatter {

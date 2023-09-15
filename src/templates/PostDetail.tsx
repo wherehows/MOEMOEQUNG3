@@ -33,7 +33,7 @@ export default function PostDetail({
   const { isUnder960px } = useResponsiveWeb();
 
   const folders = getFolders(edges);
-  const selectedDocument = selectedPost.html;
+  const html = selectedPost.html;
   const { title } = selectedPost.frontmatter;
 
   return (
@@ -55,15 +55,11 @@ export default function PostDetail({
         {isUnder960px ? (
           <PostDetailContentWithoutSidebar
             title={title}
-            selectedDocument={selectedDocument}
+            html={html}
             slug={slug}
           />
         ) : (
-          <PostDetailContentWithSidebar
-            title={title}
-            selectedDocument={selectedDocument}
-            slug={slug}
-          />
+          <PostDetailContentWithSidebar title={title} html={html} slug={slug} />
         )}
       </ThemeProvider>
     </>

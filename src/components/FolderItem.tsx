@@ -14,8 +14,8 @@ const FolderItem = ({ folderInformation }: FolderItemProps) => {
     <Wrapper>
       <Typography variant="subtitle">{folder}</Typography>
       <DocumentList>
-        {documents.map(({ slug, subTitle, id }) => (
-          <DocumentItem key={id}>
+        {documents.map(({ slug, subTitle }) => (
+          <DocumentItem key={slug}>
             <LinkButton to={slug}>{subTitle}</LinkButton>
           </DocumentItem>
         ))}

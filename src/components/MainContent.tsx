@@ -11,7 +11,7 @@ interface ContentProps {
 const Common = ({ documents }: ContentProps) => {
   return (
     <DocumentList>
-      {documents?.map(({ html, title, date, slug }: MarkdownDocument) => (
+      {documents.map(({ html, title, date, slug }: MarkdownDocument) => (
         <DocumentItem key={slug}>
           <Button to={slug}>
             <Typography variant="h2">{title}</Typography>

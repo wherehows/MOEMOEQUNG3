@@ -6,17 +6,15 @@ import Typography from './Typography';
 interface ContentProps {
   title: string;
   slug: string;
-  selectedDocument: string;
+  html: string;
 }
 
-const Common = ({ title, slug, selectedDocument }: ContentProps) => {
+const Common = ({ title, slug, html }: ContentProps) => {
   return (
     <>
       <Typography variant="h1">{title}</Typography>
       <ViewCounter slug={slug} />
-      <MarkdownRenderer
-        dangerouslySetInnerHTML={{ __html: selectedDocument }}
-      />
+      <MarkdownRenderer dangerouslySetInnerHTML={{ __html: html }} />
     </>
   );
 };

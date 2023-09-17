@@ -16,8 +16,8 @@ const Main = ({
   },
 }: IndexPageProps) => {
   const [isSidebarShown, setIsSidebarShown] = useState(false);
-  const documents = getDocuments(edges);
-  const folderInformations = getFolders(edges);
+  const posts = getPosts(edges);
+  const folders = getFolders(edges);
   const { isUnder960px } = useResponsiveWeb();
 
   return (
@@ -30,17 +30,15 @@ const Main = ({
               isSidebarShown={isSidebarShown}
               setIsSidebarShown={setIsSidebarShown}
             />
-            {isSidebarShown && (
-              <CollapsibleSidebar folderInformations={folderInformations} />
-            )}
+            {isSidebarShown && <CollapsibleSidebar folders={folders} />}
           </>
         ) : (
-          <FixedSidebar folderInformations={folderInformations} />
+          <FixedSidebar folders={folders} />
         )}
         {isUnder960px ? (
-          <MainWithoutSidebar documents={documents} />
+          <MainWithoutSidebar posts={posts} />
         ) : (
-          <MainWithSidebar documents={documents} />
+          <MainWithSidebar posts={posts} />
         )}
       </ThemeProvider>
     </>
@@ -49,7 +47,7 @@ const Main = ({
 
 export default Main;
 
-export const getPosts = graphql`
+export const getPageProps = graphql`
   query {
     allMarkdownRemark(sort: { fields: frontmatter___date, order: DESC }) {
       ...MarkdownRemarkFields
@@ -57,7 +55,7 @@ export const getPosts = graphql`
   }
 `;
 
-const getDocuments = (edges: Edge[]) =>
+const getPosts = (edges: Edge[]) =>
   edges.map(({ node }: Edge) => ({
     ...node,
     ...node.frontmatter,

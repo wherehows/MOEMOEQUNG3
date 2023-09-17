@@ -32,8 +32,8 @@ export default function PostDetail({
   const [isSidebarShown, setIsSidebarShown] = useState(false);
   const { isUnder960px } = useResponsiveWeb();
 
-  const folderInformations = getFolders(edges);
-  const selectedDocument = selectedPost.html;
+  const folders = getFolders(edges);
+  const html = selectedPost.html;
   const { title } = selectedPost.frontmatter;
 
   return (
@@ -47,32 +47,26 @@ export default function PostDetail({
               isSidebarShown={isSidebarShown}
               setIsSidebarShown={setIsSidebarShown}
             />
-            {isSidebarShown && (
-              <CollapsibleSidebar folderInformations={folderInformations} />
-            )}
+            {isSidebarShown && <CollapsibleSidebar folders={folders} />}
           </>
         ) : (
-          <FixedSidebar folderInformations={folderInformations} />
+          <FixedSidebar folders={folders} />
         )}
         {isUnder960px ? (
           <PostDetailContentWithoutSidebar
             title={title}
-            selectedDocument={selectedDocument}
+            html={html}
             slug={slug}
           />
         ) : (
-          <PostDetailContentWithSidebar
-            title={title}
-            selectedDocument={selectedDocument}
-            slug={slug}
-          />
+          <PostDetailContentWithSidebar title={title} html={html} slug={slug} />
         )}
       </ThemeProvider>
     </>
   );
 }
 
-export const getPosts = graphql`
+export const getPageProps = graphql`
   query ($slug: String!) {
     allPosts: allMarkdownRemark(
       sort: { fields: frontmatter___date, order: DESC }

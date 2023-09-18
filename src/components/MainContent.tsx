@@ -5,14 +5,14 @@ import Typography from './Typography';
 import { MarkdownDocument } from '@/types/document';
 
 interface ContentProps {
-  posts: MarkdownDocument[];
+  documents: MarkdownDocument[];
 }
 
-const Common = ({ posts }: ContentProps) => {
+const Common = ({ documents }: ContentProps) => {
   return (
-    <PostList>
-      {posts.map(({ html, title, date, slug }: MarkdownDocument) => (
-        <PostItem key={slug}>
+    <DocumentList>
+      {documents?.map(({ html, title, date, slug }: MarkdownDocument) => (
+        <DocumentItem key={slug}>
           <Button to={slug}>
             <Typography variant="h2">{title}</Typography>
             <PostDate dateTime={date.toString()}>{formatDate(date)}</PostDate>
@@ -20,27 +20,27 @@ const Common = ({ posts }: ContentProps) => {
               {changeMarkdownToTextContent(html)}
             </Typography>
           </Button>
-        </PostItem>
+        </DocumentItem>
       ))}
-    </PostList>
+    </DocumentList>
   );
 };
 
-export const MainWithoutSidebar = ({ posts }: ContentProps) => {
+export const MainWithoutSidebar = ({ documents }: ContentProps) => {
   return (
     <MainContentWithoutSidebarWrapper>
-      <Common posts={posts} />
+      <Common documents={documents} />
     </MainContentWithoutSidebarWrapper>
   );
 };
 
-export const MainWithSidebar = ({ posts }: ContentProps) => {
+export const MainWithSidebar = ({ documents }: ContentProps) => {
   return (
     <MainContentWithSidebarWrapper>
       <Typography variant="h1">
         프론트엔드 개발 및 관심사를 기록하는 블로그
       </Typography>
-      <Common posts={posts} />
+      <Common documents={documents} />
     </MainContentWithSidebarWrapper>
   );
 };
@@ -59,7 +59,7 @@ const MainContentWithSidebarWrapper = styled(BaseWrapper)(() => ({
   marginLeft: MAIN_LEFT_MARGIN_WIDTH,
 }));
 
-const PostItem = styled('li')(() => ({
+const DocumentItem = styled('li')(() => ({
   listStyleType: 'none',
   marginBottom: '2rem',
 }));
@@ -91,7 +91,7 @@ const Description = styled('div')(() => ({
   WebkitBoxOrient: 'vertical',
 }));
 
-const PostList = styled('ul')(() => ({
+const DocumentList = styled('ul')(() => ({
   padding: 0,
   margin: 0,
 }));

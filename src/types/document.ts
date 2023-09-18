@@ -5,12 +5,12 @@ export interface IndexPageProps {
     };
   };
 }
-export interface Folder {
+export interface FolderInformation {
   folder: string;
-  posts: Post[];
+  documents: DocumentInformation[];
 }
 
-interface Post {
+interface DocumentInformation {
   date: Date;
   folder: string;
   title: string;
@@ -37,4 +37,4 @@ export interface Edge {
   node: Node;
 }
 
-export type MarkdownDocument = Post & Frontmatter;
+export type MarkdownDocument = DocumentInformation & Frontmatter;

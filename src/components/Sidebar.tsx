@@ -6,19 +6,19 @@ import {
 } from '@/utils/const';
 import FolderItem from './FolderItem';
 import SidebarHeader from './SidebarHeader';
-import { Folder } from '@/types/document';
+import { FolderInformation } from '@/types/document';
 
 interface SidebarProps {
-  folders: Folder[];
+  folderInformations: FolderInformation[];
 }
 
-const Common = ({ folders }: SidebarProps) => {
+const Common = ({ folderInformations }: SidebarProps) => {
   return (
     <SubWrapper>
       <SidebarHeader />
       <FolderListWrapper>
         <FolderList>
-          {folders.map((folderInformation, index) => (
+          {folderInformations.map((folderInformation, index) => (
             <FolderItem key={index} folderInformation={folderInformation} />
           ))}
         </FolderList>
@@ -27,15 +27,15 @@ const Common = ({ folders }: SidebarProps) => {
   );
 };
 
-export const CollapsibleSidebar = ({ folders }: SidebarProps) => (
+export const CollapsibleSidebar = ({ folderInformations }: SidebarProps) => (
   <CollapsibleSidebarWrapper>
-    <Common folders={folders} />
+    <Common folderInformations={folderInformations} />
   </CollapsibleSidebarWrapper>
 );
 
-export const FixedSidebar = ({ folders }: SidebarProps) => (
+export const FixedSidebar = ({ folderInformations }: SidebarProps) => (
   <FixedSidebarWrapper>
-    <Common folders={folders} />
+    <Common folderInformations={folderInformations} />
   </FixedSidebarWrapper>
 );
 

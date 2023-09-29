@@ -44,6 +44,12 @@ const globalCss = css`
     font-family: 'Pretendard', sans-serif;
     background: var(--dark-background);
     color: var(--dark-font);
+    -webkit-transition: color 1000ms ease-in-out;
+    -ms-transition: color 1000ms ease-in-out;
+    transition: color 1000ms ease-in-out;
+    -webkit-transition: background-color 1000ms linear;
+    -ms-transition: background-color 1000ms linear;
+    transition: background-color 1000ms linear;
   }
 `;
 

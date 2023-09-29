@@ -10,55 +10,51 @@ import { FolderInformation } from '@/types/document';
 
 interface SidebarProps {
   folderInformations: FolderInformation[];
+  isSidebarShown: boolean;
 }
 
-const Common = ({ folderInformations }: SidebarProps) => {
-  return (
-    <SubWrapper>
-      <SidebarHeader />
-      <FolderListWrapper>
-        <FolderList>
-          {folderInformations.map((folderInformation, index) => (
-            <FolderItem key={index} folderInformation={folderInformation} />
-          ))}
-        </FolderList>
-      </FolderListWrapper>
-    </SubWrapper>
-  );
-};
-
-export const CollapsibleSidebar = ({ folderInformations }: SidebarProps) => (
-  <CollapsibleSidebarWrapper>
-    <Common folderInformations={folderInformations} />
-  </CollapsibleSidebarWrapper>
+export const Sidebar = ({
+  folderInformations,
+  isSidebarShown,
+}: SidebarProps) => (
+  <>
+    {isSidebarShown && (
+      <Wrapper>
+        <SubWrapper>
+          <SidebarHeader />
+          <FolderListWrapper>
+            <FolderList>
+              {folderInformations.map((folderInformation, index) => (
+                <FolderItem key={index} folderInformation={folderInformation} />
+              ))}
+            </FolderList>
+          </FolderListWrapper>
+        </SubWrapper>
+      </Wrapper>
+    )}
+  </>
 );
 
-export const FixedSidebar = ({ folderInformations }: SidebarProps) => (
-  <FixedSidebarWrapper>
-    <Common folderInformations={folderInformations} />
-  </FixedSidebarWrapper>
-);
-
-const BaseWrapper = styled('div')(() => ({
+const Wrapper = styled('div')(() => ({
   height: '100vh',
-  display: 'flex',
+  display: 'none',
   flexDirection: 'column',
   left: 0,
   overflowY: 'auto',
   position: 'fixed',
   paddingRight: PADDING_BETWEEN_SIDEBAR_AND_SCROLL,
-}));
-
-const CollapsibleSidebarWrapper = styled(BaseWrapper)(() => ({
-  zIndex: 1,
-  top: 0,
-  padding: '0 12px',
-  backgroundColor: 'var(--dark-background)',
-}));
-
-const FixedSidebarWrapper = styled(BaseWrapper)(() => ({
-  width: SIDEBAR_WIDTH,
-  alignItems: 'flex-end',
+  '@media only screen and (max-width: 960px)': {
+    zIndex: 1,
+    top: 0,
+    padding: '0 12px',
+    backgroundColor: 'var(--dark-background)',
+    display: 'flex',
+  },
+  '@media only screen and (min-width: 961px)': {
+    width: SIDEBAR_WIDTH,
+    alignItems: 'flex-end',
+    display: 'flex',
+  },
 }));
 
 const SubWrapper = styled('div')(() => ({

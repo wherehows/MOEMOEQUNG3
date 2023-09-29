@@ -8,13 +8,28 @@ import { MainContent } from '@/components/MainContent';
 import { useState } from 'react';
 import Header from '@/components/Header';
 import { getFolders } from '@/utils/helpers';
+import useResponsiveWeb from '@/hooks/useResponsiveWeb';
 
 const Main = ({
   data: {
     allMarkdownRemark: { edges },
   },
 }: IndexPageProps) => {
-  const [isSidebarShown, setIsSidebarShown] = useState(true);
+  const [isSidebarShown, setIsSidebarShown] = useState(false);
+
+  useResponsiveWeb([
+    {
+      bp: 960,
+      onIntersection: isUnderBp => {
+        if (isUnderBp) {
+          setIsSidebarShown(false);
+        } else {
+          setIsSidebarShown(true);
+        }
+      },
+    },
+  ]);
+
   const documents = getDocuments(edges);
   const folderInformations = getFolders(edges);
 

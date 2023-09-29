@@ -8,6 +8,7 @@ import Header from '@/components/Header';
 import { useState } from 'react';
 import { getFolders } from '@/utils/helpers';
 import { PostDetailContent } from '@/components/PostDetailContent';
+import useResponsiveWeb from '@/hooks/useResponsiveWeb';
 
 interface QueryResultType {
   allPosts: { edges: Edge[] };
@@ -26,6 +27,19 @@ export default function PostDetail({
   pageContext: { slug },
 }: PageProps<QueryResultType, PageContextType>) {
   const [isSidebarShown, setIsSidebarShown] = useState(false);
+
+  useResponsiveWeb([
+    {
+      bp: 960,
+      onIntersection: isUnderBp => {
+        if (isUnderBp) {
+          setIsSidebarShown(false);
+        } else {
+          setIsSidebarShown(true);
+        }
+      },
+    },
+  ]);
 
   const folderInformations = getFolders(edges);
   const selectedDocument = selectedPost.html;

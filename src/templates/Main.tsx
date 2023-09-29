@@ -1,6 +1,5 @@
 import { graphql } from 'gatsby';
 import { Sidebar } from '@/components/Sidebar';
-import GlobalCss from '@/components/GlobalCss';
 import { Edge, IndexPageProps } from '@/types/document';
 import { ThemeProvider } from '@emotion/react';
 import { theme } from '@/utils/const';
@@ -34,20 +33,17 @@ const Main = ({
   const folderInformations = getFolders(edges);
 
   return (
-    <>
-      <GlobalCss />
-      <ThemeProvider theme={theme}>
-        <Header
-          isSidebarShown={isSidebarShown}
-          setIsSidebarShown={setIsSidebarShown}
-        />
-        <Sidebar
-          isSidebarShown={isSidebarShown}
-          folderInformations={folderInformations}
-        />
-        <MainContent documents={documents} />
-      </ThemeProvider>
-    </>
+    <ThemeProvider theme={theme}>
+      <Header
+        isSidebarShown={isSidebarShown}
+        setIsSidebarShown={setIsSidebarShown}
+      />
+      <Sidebar
+        isSidebarShown={isSidebarShown}
+        folderInformations={folderInformations}
+      />
+      <MainContent documents={documents} />
+    </ThemeProvider>
   );
 };
 

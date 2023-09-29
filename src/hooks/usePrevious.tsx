@@ -5,7 +5,7 @@ const usePrevious = <T,>(value: T) => {
 
   useEffect(() => {
     priorRef.current = value;
-  }, []);
+  }, [value]);
 
   return priorRef.current;
 };

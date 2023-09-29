@@ -45,9 +45,12 @@ export default Header;
 const Wrapper = styled('header')(() => ({
   width: '100%',
   padding: '0 12px',
-  display: 'flex',
+  display: 'none',
   alignItems: 'center',
   justifyContent: 'space-between',
+  '@media only screen and (max-width: 960px)': {
+    display: 'flex',
+  },
 }));
 
 const ListWrapper = styled('ul')(() => ({

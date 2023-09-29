@@ -8,31 +8,25 @@ interface ContentProps {
   documents: MarkdownDocument[];
 }
 
-const Common = ({ documents }: ContentProps) => {
-  return (
-    <DocumentList>
-      {documents?.map(({ html, title, date, slug }: MarkdownDocument) => (
-        <DocumentItem key={slug}>
-          <Button to={slug}>
-            <Typography variant="h2">{title}</Typography>
-            <PostDate dateTime={date.toString()}>{formatDate(date)}</PostDate>
-            <Typography as={Description}>
-              {changeMarkdownToTextContent(html)}
-            </Typography>
-          </Button>
-        </DocumentItem>
-      ))}
-    </DocumentList>
-  );
-};
-
 export const MainContent = ({ documents }: ContentProps) => {
   return (
     <Wrapper>
       {/* <Typography variant="h1">
         프론트엔드 개발 및 관심사를 기록하는 블로그
       </Typography> */}
-      <Common documents={documents} />
+      <DocumentList>
+        {documents?.map(({ html, title, date, slug }: MarkdownDocument) => (
+          <DocumentItem key={slug}>
+            <Button to={slug}>
+              <Typography variant="h2">{title}</Typography>
+              <PostDate dateTime={date.toString()}>{formatDate(date)}</PostDate>
+              <Typography as={Description}>
+                {changeMarkdownToTextContent(html)}
+              </Typography>
+            </Button>
+          </DocumentItem>
+        ))}
+      </DocumentList>
     </Wrapper>
   );
 };

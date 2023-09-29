@@ -9,22 +9,18 @@ interface ContentProps {
   selectedDocument: string;
 }
 
-const Common = ({ title, slug, selectedDocument }: ContentProps) => {
+export const PostDetailContent = ({
+  title,
+  slug,
+  selectedDocument,
+}: ContentProps) => {
   return (
-    <>
+    <Wrapper>
       <Typography variant="h1">{title}</Typography>
       <ViewCounter slug={slug} />
       <MarkdownRenderer
         dangerouslySetInnerHTML={{ __html: selectedDocument }}
       />
-    </>
-  );
-};
-
-export const PostDetailContent = (props: ContentProps) => {
-  return (
-    <Wrapper>
-      <Common {...props} />
     </Wrapper>
   );
 };

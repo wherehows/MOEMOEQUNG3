@@ -26,37 +26,29 @@ const Common = ({ documents }: ContentProps) => {
   );
 };
 
-export const MainWithoutSidebar = ({ documents }: ContentProps) => {
+export const MainContent = ({ documents }: ContentProps) => {
   return (
-    <MainContentWithoutSidebarWrapper>
-      <Common documents={documents} />
-    </MainContentWithoutSidebarWrapper>
-  );
-};
-
-export const MainWithSidebar = ({ documents }: ContentProps) => {
-  return (
-    <MainContentWithSidebarWrapper>
-      <Typography variant="h1">
+    <Wrapper>
+      {/* <Typography variant="h1">
         프론트엔드 개발 및 관심사를 기록하는 블로그
-      </Typography>
+      </Typography> */}
       <Common documents={documents} />
-    </MainContentWithSidebarWrapper>
+    </Wrapper>
   );
 };
 
-const BaseWrapper = styled('main')(() => ({
-  diplay: 'flex',
+const Wrapper = styled('main')(() => ({
+  display: 'none',
   width: MAIN_PURE_WIDTH,
   height: '100%',
-}));
-
-const MainContentWithoutSidebarWrapper = styled(BaseWrapper)(() => ({
-  margin: '0 auto',
-}));
-
-const MainContentWithSidebarWrapper = styled(BaseWrapper)(() => ({
-  marginLeft: MAIN_LEFT_MARGIN_WIDTH,
+  '@media only screen and (max-width: 960px)': {
+    margin: '0 auto',
+    display: 'flex',
+  },
+  '@media only screen and (min-width: 961px)': {
+    marginLeft: MAIN_LEFT_MARGIN_WIDTH,
+    display: 'flex',
+  },
 }));
 
 const DocumentItem = styled('li')(() => ({

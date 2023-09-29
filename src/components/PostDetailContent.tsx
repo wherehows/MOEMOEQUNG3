@@ -21,33 +21,23 @@ const Common = ({ title, slug, selectedDocument }: ContentProps) => {
   );
 };
 
-export const PostDetailContentWithoutSidebar = (props: ContentProps) => {
+export const PostDetailContent = (props: ContentProps) => {
   return (
-    <PostDetailContentWithoutSidebarWrapper>
+    <Wrapper>
       <Common {...props} />
-    </PostDetailContentWithoutSidebarWrapper>
+    </Wrapper>
   );
 };
 
-export const PostDetailContentWithSidebar = (props: ContentProps) => {
-  return (
-    <PostDetailContentWithSidebarWrapper>
-      <Common {...props} />
-    </PostDetailContentWithSidebarWrapper>
-  );
-};
-
-const BaseWrapper = styled('main')(() => ({
+const Wrapper = styled('main')(() => ({
   width: MAIN_PURE_WIDTH,
   height: '100%',
-}));
-
-const PostDetailContentWithoutSidebarWrapper = styled(BaseWrapper)(() => ({
-  margin: '0 auto',
-}));
-
-const PostDetailContentWithSidebarWrapper = styled(BaseWrapper)(() => ({
-  marginLeft: MAIN_LEFT_MARGIN_WIDTH,
+  '@media only screen and (max-width: 960px)': {
+    margin: '0 auto',
+  },
+  '@media only screen and (min-width: 961px)': {
+    marginLeft: MAIN_LEFT_MARGIN_WIDTH,
+  },
 }));
 
 const MarkdownRenderer = styled('div')(() => ({

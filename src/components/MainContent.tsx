@@ -3,17 +3,21 @@ import { MAIN_LEFT_MARGIN_WIDTH, MAIN_PURE_WIDTH } from '@/utils/const';
 import CustomLink from './CustomLink';
 import Typography from './Typography';
 import { MarkdownDocument } from '@/types/document';
+import useResponsiveWeb from '@/hooks/useResponsiveWeb';
 
 interface ContentProps {
   documents: MarkdownDocument[];
 }
 
 export const MainContent = ({ documents }: ContentProps) => {
+  const { isUnder960px } = useResponsiveWeb();
   return (
     <Wrapper>
-      {/* <Typography variant="h1">
-        프론트엔드 개발 및 관심사를 기록하는 블로그
-      </Typography> */}
+      {!isUnder960px && (
+        <Typography variant="h1">
+          프론트엔드 개발 및 관심사를 기록하는 블로그
+        </Typography>
+      )}
       <DocumentList>
         {documents?.map(({ html, title, date, slug }: MarkdownDocument) => (
           <DocumentItem key={slug}>

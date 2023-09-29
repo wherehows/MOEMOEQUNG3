@@ -4,6 +4,7 @@ import DarkModeToggle from './DarkModeToggle';
 import NavigationCollapseToggle from './NavigationCollapseToggle';
 import { Dispatch } from 'react';
 import Logo from './Logo';
+import useResponsiveWeb from '@/hooks/useResponsiveWeb';
 
 interface HeaderProps {
   isDetailPage?: boolean;
@@ -16,15 +17,27 @@ const Header = ({
   isSidebarShown,
   setIsSidebarShown,
 }: HeaderProps) => {
+  const { isUnder960px } = useResponsiveWeb();
+
+  const getLeftContent = () => {
+    if (!isUnder960px) {
+      return <></>;
+    }
+
+    if (isDetailPage) {
+      return <Logo />;
+    }
+
+    return (
+      <Typography variant="h1">
+        녕후킴의 프론트 엔드 개발 및 관심사 기록 블로그
+      </Typography>
+    );
+  };
+
   return (
     <Wrapper>
-      {isDetailPage ? (
-        <Logo />
-      ) : (
-        <Typography variant="h1">
-          녕후킴의 프론트 엔드 개발 및 관심사 기록 블로그
-        </Typography>
-      )}
+      {getLeftContent()}
       <ListWrapper>
         <List>
           <DarkModeToggle />

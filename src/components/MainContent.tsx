@@ -41,7 +41,7 @@ const Wrapper = styled('main')(() => ({
   },
   '@media only screen and (min-width: 961px)': {
     marginLeft: MAIN_LEFT_MARGIN_WIDTH,
-    display: 'flex',
+    display: 'block',
   },
 }));
 

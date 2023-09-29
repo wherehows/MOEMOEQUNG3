@@ -1,17 +1,14 @@
-import { CollapsibleSidebar, FixedSidebar } from '@/components/Sidebar';
+import { Sidebar } from '@/components/Sidebar';
 import GlobalCss from '@/components/GlobalCss';
 import { graphql, PageProps } from 'gatsby';
 import { Edge, Node } from '@/types/document';
 import { ThemeProvider } from '@emotion/react';
 import { theme } from '@/utils/const';
-import useResponsiveWeb from '@/hooks/useResponsiveWeb';
 import Header from '@/components/Header';
 import { useState } from 'react';
 import { getFolders } from '@/utils/helpers';
-import {
-  PostDetailContentWithSidebar,
-  PostDetailContentWithoutSidebar,
-} from '@/components/PostDetailContent';
+import { PostDetailContent } from '@/components/PostDetailContent';
+import useResponsiveWeb from '@/hooks/useResponsiveWeb';
 
 interface QueryResultType {
   allPosts: { edges: Edge[] };
@@ -30,7 +27,19 @@ export default function PostDetail({
   pageContext: { slug },
 }: PageProps<QueryResultType, PageContextType>) {
   const [isSidebarShown, setIsSidebarShown] = useState(false);
-  const { isUnder960px } = useResponsiveWeb();
+
+  useResponsiveWeb([
+    {
+      bp: 960,
+      onIntersection: isUnderBp => {
+        if (isUnderBp) {
+          setIsSidebarShown(false);
+        } else {
+          setIsSidebarShown(true);
+        }
+      },
+    },
+  ]);
 
   const folderInformations = getFolders(edges);
   const selectedDocument = selectedPost.html;
@@ -40,33 +49,20 @@ export default function PostDetail({
     <>
       <GlobalCss />
       <ThemeProvider theme={theme}>
-        {isUnder960px ? (
-          <>
-            <Header
-              isDetailPage
-              isSidebarShown={isSidebarShown}
-              setIsSidebarShown={setIsSidebarShown}
-            />
-            {isSidebarShown && (
-              <CollapsibleSidebar folderInformations={folderInformations} />
-            )}
-          </>
-        ) : (
-          <FixedSidebar folderInformations={folderInformations} />
-        )}
-        {isUnder960px ? (
-          <PostDetailContentWithoutSidebar
-            title={title}
-            selectedDocument={selectedDocument}
-            slug={slug}
-          />
-        ) : (
-          <PostDetailContentWithSidebar
-            title={title}
-            selectedDocument={selectedDocument}
-            slug={slug}
-          />
-        )}
+        <Header
+          isDetailPage
+          isSidebarShown={isSidebarShown}
+          setIsSidebarShown={setIsSidebarShown}
+        />
+        <Sidebar
+          folderInformations={folderInformations}
+          isSidebarShown={isSidebarShown}
+        />
+        <PostDetailContent
+          title={title}
+          selectedDocument={selectedDocument}
+          slug={slug}
+        />
       </ThemeProvider>
     </>
   );

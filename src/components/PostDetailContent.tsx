@@ -9,45 +9,31 @@ interface ContentProps {
   selectedDocument: string;
 }
 
-const Common = ({ title, slug, selectedDocument }: ContentProps) => {
+export const PostDetailContent = ({
+  title,
+  slug,
+  selectedDocument,
+}: ContentProps) => {
   return (
-    <>
+    <Wrapper>
       <Typography variant="h1">{title}</Typography>
       <ViewCounter slug={slug} />
       <MarkdownRenderer
         dangerouslySetInnerHTML={{ __html: selectedDocument }}
       />
-    </>
+    </Wrapper>
   );
 };
 
-export const PostDetailContentWithoutSidebar = (props: ContentProps) => {
-  return (
-    <PostDetailContentWithoutSidebarWrapper>
-      <Common {...props} />
-    </PostDetailContentWithoutSidebarWrapper>
-  );
-};
-
-export const PostDetailContentWithSidebar = (props: ContentProps) => {
-  return (
-    <PostDetailContentWithSidebarWrapper>
-      <Common {...props} />
-    </PostDetailContentWithSidebarWrapper>
-  );
-};
-
-const BaseWrapper = styled('main')(() => ({
+const Wrapper = styled('main')(() => ({
   width: MAIN_PURE_WIDTH,
   height: '100%',
-}));
-
-const PostDetailContentWithoutSidebarWrapper = styled(BaseWrapper)(() => ({
-  margin: '0 auto',
-}));
-
-const PostDetailContentWithSidebarWrapper = styled(BaseWrapper)(() => ({
-  marginLeft: MAIN_LEFT_MARGIN_WIDTH,
+  '@media only screen and (max-width: 960px)': {
+    margin: '0 auto',
+  },
+  '@media only screen and (min-width: 961px)': {
+    marginLeft: MAIN_LEFT_MARGIN_WIDTH,
+  },
 }));
 
 const MarkdownRenderer = styled('div')(() => ({

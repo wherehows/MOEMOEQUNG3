@@ -1,10 +1,10 @@
 import { graphql } from 'gatsby';
-import { CollapsibleSidebar, FixedSidebar } from '@/components/Sidebar';
+import { Sidebar } from '@/components/Sidebar';
 import GlobalCss from '@/components/GlobalCss';
 import { Edge, IndexPageProps } from '@/types/document';
 import { ThemeProvider } from '@emotion/react';
 import { theme } from '@/utils/const';
-import { MainWithSidebar, MainWithoutSidebar } from '@/components/MainContent';
+import { MainContent } from '@/components/MainContent';
 import { useState } from 'react';
 import Header from '@/components/Header';
 import { getFolders } from '@/utils/helpers';
@@ -16,32 +16,36 @@ const Main = ({
   },
 }: IndexPageProps) => {
   const [isSidebarShown, setIsSidebarShown] = useState(false);
+
+  useResponsiveWeb([
+    {
+      bp: 960,
+      onIntersection: isUnderBp => {
+        if (isUnderBp) {
+          setIsSidebarShown(false);
+        } else {
+          setIsSidebarShown(true);
+        }
+      },
+    },
+  ]);
+
   const documents = getDocuments(edges);
   const folderInformations = getFolders(edges);
-  const { isUnder960px } = useResponsiveWeb();
 
   return (
     <>
       <GlobalCss />
       <ThemeProvider theme={theme}>
-        {isUnder960px ? (
-          <>
-            <Header
-              isSidebarShown={isSidebarShown}
-              setIsSidebarShown={setIsSidebarShown}
-            />
-            {isSidebarShown && (
-              <CollapsibleSidebar folderInformations={folderInformations} />
-            )}
-          </>
-        ) : (
-          <FixedSidebar folderInformations={folderInformations} />
-        )}
-        {isUnder960px ? (
-          <MainWithoutSidebar documents={documents} />
-        ) : (
-          <MainWithSidebar documents={documents} />
-        )}
+        <Header
+          isSidebarShown={isSidebarShown}
+          setIsSidebarShown={setIsSidebarShown}
+        />
+        <Sidebar
+          isSidebarShown={isSidebarShown}
+          folderInformations={folderInformations}
+        />
+        <MainContent documents={documents} />
       </ThemeProvider>
     </>
   );

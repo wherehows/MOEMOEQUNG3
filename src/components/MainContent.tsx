@@ -3,60 +3,50 @@ import { MAIN_LEFT_MARGIN_WIDTH, MAIN_PURE_WIDTH } from '@/utils/const';
 import CustomLink from './CustomLink';
 import Typography from './Typography';
 import { MarkdownDocument } from '@/types/document';
+import useResponsiveWeb from '@/hooks/useResponsiveWeb';
 
 interface ContentProps {
   documents: MarkdownDocument[];
 }
 
-const Common = ({ documents }: ContentProps) => {
+export const MainContent = ({ documents }: ContentProps) => {
+  const { isUnder960px } = useResponsiveWeb();
   return (
-    <DocumentList>
-      {documents?.map(({ html, title, date, slug }: MarkdownDocument) => (
-        <DocumentItem key={slug}>
-          <Button to={slug}>
-            <Typography variant="h2">{title}</Typography>
-            <PostDate dateTime={date.toString()}>{formatDate(date)}</PostDate>
-            <Typography as={Description}>
-              {changeMarkdownToTextContent(html)}
-            </Typography>
-          </Button>
-        </DocumentItem>
-      ))}
-    </DocumentList>
+    <Wrapper>
+      {!isUnder960px && (
+        <Typography variant="h1">
+          프론트엔드 개발 및 관심사를 기록하는 블로그
+        </Typography>
+      )}
+      <DocumentList>
+        {documents?.map(({ html, title, date, slug }: MarkdownDocument) => (
+          <DocumentItem key={slug}>
+            <Button to={slug}>
+              <Typography variant="h2">{title}</Typography>
+              <PostDate dateTime={date.toString()}>{formatDate(date)}</PostDate>
+              <Typography as={Description}>
+                {changeMarkdownToTextContent(html)}
+              </Typography>
+            </Button>
+          </DocumentItem>
+        ))}
+      </DocumentList>
+    </Wrapper>
   );
 };
 
-export const MainWithoutSidebar = ({ documents }: ContentProps) => {
-  return (
-    <MainContentWithoutSidebarWrapper>
-      <Common documents={documents} />
-    </MainContentWithoutSidebarWrapper>
-  );
-};
-
-export const MainWithSidebar = ({ documents }: ContentProps) => {
-  return (
-    <MainContentWithSidebarWrapper>
-      <Typography variant="h1">
-        프론트엔드 개발 및 관심사를 기록하는 블로그
-      </Typography>
-      <Common documents={documents} />
-    </MainContentWithSidebarWrapper>
-  );
-};
-
-const BaseWrapper = styled('main')(() => ({
-  diplay: 'flex',
+const Wrapper = styled('main')(() => ({
+  display: 'none',
   width: MAIN_PURE_WIDTH,
   height: '100%',
-}));
-
-const MainContentWithoutSidebarWrapper = styled(BaseWrapper)(() => ({
-  margin: '0 auto',
-}));
-
-const MainContentWithSidebarWrapper = styled(BaseWrapper)(() => ({
-  marginLeft: MAIN_LEFT_MARGIN_WIDTH,
+  '@media only screen and (max-width: 960px)': {
+    margin: '0 auto',
+    display: 'flex',
+  },
+  '@media only screen and (min-width: 961px)': {
+    marginLeft: MAIN_LEFT_MARGIN_WIDTH,
+    display: 'block',
+  },
 }));
 
 const DocumentItem = styled('li')(() => ({

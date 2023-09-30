@@ -46,25 +46,22 @@ export default function PostDetail({
   const { title } = selectedPost.frontmatter;
 
   return (
-    <>
-      <GlobalCss />
-      <ThemeProvider theme={theme}>
-        <Header
-          isDetailPage
-          isSidebarShown={isSidebarShown}
-          setIsSidebarShown={setIsSidebarShown}
-        />
-        <Sidebar
-          folderInformations={folderInformations}
-          isSidebarShown={isSidebarShown}
-        />
-        <PostDetailContent
-          title={title}
-          selectedDocument={selectedDocument}
-          slug={slug}
-        />
-      </ThemeProvider>
-    </>
+    <ThemeProvider theme={theme}>
+      <Header
+        isDetailPage
+        isSidebarShown={isSidebarShown}
+        setIsSidebarShown={setIsSidebarShown}
+      />
+      <Sidebar
+        folderInformations={folderInformations}
+        isSidebarShown={isSidebarShown}
+      />
+      <PostDetailContent
+        title={title}
+        selectedDocument={selectedDocument}
+        slug={slug}
+      />
+    </ThemeProvider>
   );
 }
 

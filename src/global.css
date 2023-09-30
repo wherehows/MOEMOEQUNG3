@@ -1,0 +1,92 @@
+:root {
+  --colors-primary: #d58135;
+  --colors-secondary: #cf9a12;
+}
+
+:root.dark {
+  --dark-background: #111314;
+  --dark-font: #fff;
+}
+
+:root.light {
+  --dark-background: #fff;
+  --dark-font: #111314;
+}
+
+body {
+  @font-face {
+    font-family: 'Pretendard';
+    src: url('./assets/Pretendard-Bold.woff') format('woff');
+    font-weight: 700;
+  }
+
+  @font-face {
+    font-family: 'Pretendard';
+    src: url('./assets/Pretendard-ExtraBold.woff') format('woff');
+    font-weight: 600;
+  }
+
+  @font-face {
+    font-family: 'Pretendard';
+    src: url('./assets/Pretendard-Medium.woff') format('woff');
+    font-weight: 500;
+  }
+
+  font-family: 'Pretendard', sans-serif;
+  background: var(--dark-background);
+  color: var(--dark-font);
+  -webkit-transition: color 1000ms ease-in-out;
+  -ms-transition: color 1000ms ease-in-out;
+  transition: color 1000ms ease-in-out;
+  -webkit-transition: background-color 1000ms ease-in-out;
+  -ms-transition: background-color 1000ms ease-in-out;
+  transition: background-color 1000ms ease-in-out;
+}
+
+/* reset CSS */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+#___gatsby {
+  isolation: isolate;
+}

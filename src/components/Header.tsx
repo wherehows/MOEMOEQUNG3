@@ -5,6 +5,8 @@ import NavigationCollapseToggle from './NavigationCollapseToggle';
 import { Dispatch } from 'react';
 import Logo from './Logo';
 import useResponsiveWeb from '@/hooks/useResponsiveWeb';
+import Oktocat from '@/assets/oktocat.svg';
+import CustomLink from './CustomLink';
 
 interface HeaderProps {
   isDetailPage?: boolean;
@@ -43,6 +45,11 @@ const Header = ({
           <DarkModeToggle />
         </List>
         <List>
+          <GithubLink to="https://github.com/wherehows">
+            <OktocatIcon />
+          </GithubLink>
+        </List>
+        <List>
           <NavigationCollapseToggle
             isSidebarShown={isSidebarShown}
             setIsSidebarShown={setIsSidebarShown}
@@ -76,4 +83,13 @@ const ListWrapper = styled('ul')(() => ({
 const List = styled('li')(() => ({
   listStyle: 'none',
   marginLeft: '16px',
+}));
+
+const GithubLink = styled(CustomLink)(() => ({
+  cursor: 'pointer',
+}));
+
+const OktocatIcon = styled(Oktocat)(() => ({
+  width: '24px',
+  height: '24px',
 }));

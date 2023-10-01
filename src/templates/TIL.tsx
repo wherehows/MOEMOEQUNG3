@@ -18,7 +18,7 @@ interface PageContextType {
   slug: string;
 }
 
-export default function TIL({
+export default function TILTemplate({
   data: {
     allPosts: { edges },
     tilList,

@@ -26,9 +26,8 @@ const DarkModeToggle = () => {
   }, []);
 
   return (
-    <Wrapper htmlFor="toggle-input">
+    <Wrapper>
       <ToggleBody
-        id="toggle-input"
         type="checkbox"
         checked={isOn}
         onChange={handleClickCheckBox}

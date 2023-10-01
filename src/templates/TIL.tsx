@@ -1,6 +1,6 @@
 import { Sidebar } from '@/components/Sidebar';
 import { graphql, PageProps } from 'gatsby';
-import { Edge, Node } from '@/types/document';
+import { PostEdge, TILEdge, TIL } from '@/types/document';
 import { ThemeProvider } from '@emotion/react';
 import { theme } from '@/utils/const';
 import Header from '@/components/Header';
@@ -10,8 +10,8 @@ import useResponsiveWeb from '@/hooks/useResponsiveWeb';
 import { TILContent } from '@/components/TILContent';
 
 interface QueryResultType {
-  allPosts: { edges: Edge[] };
-  tilList: Node;
+  allPosts: { edges: PostEdge[] };
+  allTil: { edges: TILEdge[] };
 }
 
 interface PageContextType {
@@ -20,8 +20,8 @@ interface PageContextType {
 
 export default function TILTemplate({
   data: {
-    allPosts: { edges },
-    tilList,
+    allPosts: { edges: allPostsEdges },
+    allTil: { edges: allTilEdges },
   },
 }: PageProps<QueryResultType, PageContextType>) {
   const [isSidebarShown, setIsSidebarShown] = useState(false);
@@ -39,7 +39,8 @@ export default function TILTemplate({
     },
   ]);
 
-  const folderInformations = getFolders(edges);
+  const folderInformations = getFolders(allPostsEdges);
+  const tils = getTils(allTilEdges);
 
   return (
     <ThemeProvider theme={theme}>
@@ -52,7 +53,7 @@ export default function TILTemplate({
         folderInformations={folderInformations}
         isSidebarShown={isSidebarShown}
       />
-      <TILContent />
+      <TILContent tils={tils} />
     </ThemeProvider>
   );
 }
@@ -64,7 +65,7 @@ export const getPosts = graphql`
     ) {
       ...MarkdownRemarkFields
     }
-    tilList: allMarkdownRemark(
+    allTil: allMarkdownRemark(
       filter: { fileAbsolutePath: { regex: "/(/til/)/" } }
     ) {
       edges {
@@ -82,3 +83,18 @@ export const getPosts = graphql`
     }
   }
 `;
+
+const getTils = (tilList: TILEdge[]): TIL[] =>
+  tilList.map(({ node }) => {
+    const { frontmatter, html, id } = node;
+    const { date, debts, hashtags, title } = frontmatter;
+
+    return {
+      title,
+      date,
+      debts: JSON.parse(debts) as string[],
+      hashtags: JSON.parse(hashtags) as string[],
+      html,
+      id,
+    };
+  });

@@ -2,8 +2,13 @@ import styled from '@emotion/styled';
 import { MAIN_LEFT_MARGIN_WIDTH, MAIN_PURE_WIDTH } from '@/utils/const';
 import Typography from './Typography';
 import useResponsiveWeb from '@/hooks/useResponsiveWeb';
+import { TIL } from '@/types/document';
 
-export const TILContent = () => {
+interface TILContentProps {
+  tils: TIL[];
+}
+
+export const TILContent = ({ tils }: TILContentProps) => {
   const { isUnder960px } = useResponsiveWeb();
   return (
     <Wrapper>

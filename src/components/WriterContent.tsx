@@ -37,11 +37,9 @@ export const WriterContent = () => {
           const filename = filenameRef.current?.value || '';
           const today = new Date();
 
-          const mdContent = `
----
+          const mdContent = `---
 title: '${title}'
 hashtags: '${JSON.stringify(hashtags)}'
-filename: '${filename}'
 date: '${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}'
 debt: '${JSON.stringify(debts)}'
 ---

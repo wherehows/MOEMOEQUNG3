@@ -1,6 +1,6 @@
 import { PageProps, graphql } from 'gatsby';
 import { Sidebar } from '@/components/Sidebar';
-import { AllPostsProp, Edge } from '@/types/document';
+import { AllPostsProp, PostEdge } from '@/types/document';
 import { ThemeProvider } from '@emotion/react';
 import { theme } from '@/utils/const';
 import { MainContent } from '@/components/MainContent';
@@ -59,8 +59,8 @@ export const getPosts = graphql`
   }
 `;
 
-const getDocuments = (edges: Edge[]) =>
-  edges.map(({ node }: Edge) => ({
+const getDocuments = (edges: PostEdge[]) =>
+  edges.map(({ node }: PostEdge) => ({
     ...node,
     ...node.frontmatter,
   }));

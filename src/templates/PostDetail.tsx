@@ -1,6 +1,6 @@
 import { Sidebar } from '@/components/Sidebar';
 import { graphql, PageProps } from 'gatsby';
-import { Edge, Node } from '@/types/document';
+import { PostEdge, PostNode } from '@/types/document';
 import { ThemeProvider } from '@emotion/react';
 import { theme } from '@/utils/const';
 import Header from '@/components/Header';
@@ -10,8 +10,8 @@ import { PostDetailContent } from '@/components/PostDetailContent';
 import useResponsiveWeb from '@/hooks/useResponsiveWeb';
 
 interface QueryResultType {
-  allPosts: { edges: Edge[] };
-  selectedPost: Node;
+  allPosts: { edges: PostEdge[] };
+  selectedPost: PostNode;
 }
 
 interface PageContextType {

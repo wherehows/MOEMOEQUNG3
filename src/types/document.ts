@@ -1,6 +1,6 @@
 export interface AllPostsProp {
   allPosts: {
-    edges: Edge[];
+    edges: PostEdge[];
   };
 }
 export interface FolderInformation {
@@ -17,7 +17,7 @@ interface DocumentInformation {
   html: string;
 }
 
-interface Frontmatter {
+interface PostFrontmatter {
   date: Date;
   title: string;
   subTitle: string;
@@ -26,13 +26,13 @@ interface Frontmatter {
   index: number;
 }
 
-export interface Node {
-  frontmatter: Frontmatter;
+export interface PostNode {
+  frontmatter: PostFrontmatter;
   html: string;
 }
 
-export interface Edge {
-  node: Node;
+export interface PostEdge {
+  node: PostNode;
 }
 
-export type MarkdownDocument = DocumentInformation & Frontmatter;
+export type MarkdownDocument = DocumentInformation & PostFrontmatter;

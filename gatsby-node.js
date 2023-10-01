@@ -27,6 +27,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions;
   const PostDetail = path.resolve(`src/templates/PostDetail.tsx`);
   const Writer = path.resolve(`src/templates/Writer.tsx`);
+  const TIL = path.resolve('src/templates/TIL.tsx');
   const Main = path.resolve(`src/templates/Main.tsx`);
 
   const result = await graphql(`
@@ -56,6 +57,11 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   createPage({
     path: '/writer',
     component: Writer,
+  });
+
+  createPage({
+    path: '/til',
+    component: TIL,
   });
 
   result.data.allMarkdownRemark.edges.forEach(

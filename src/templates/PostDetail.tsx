@@ -1,5 +1,4 @@
 import { Sidebar } from '@/components/Sidebar';
-import GlobalCss from '@/components/GlobalCss';
 import { graphql, PageProps } from 'gatsby';
 import { Edge, Node } from '@/types/document';
 import { ThemeProvider } from '@emotion/react';

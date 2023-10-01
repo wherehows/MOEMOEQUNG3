@@ -51,7 +51,7 @@ export default Main;
 
 export const getPosts = graphql`
   query {
-    AllPostsProp: allMarkdownRemark(
+    allPosts: allMarkdownRemark(
       sort: { fields: frontmatter___date, order: DESC }
     ) {
       ...MarkdownRemarkFields

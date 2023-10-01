@@ -12,7 +12,7 @@ const SidebarHeader = () => {
     <Wrapper>
       <Logo />
       <IconWrapper>
-        <GithubLink to="https://github.com/wherehows?tab=repositories">
+        <GithubLink to="https://github.com/wherehows">
           <OktocatIcon />
         </GithubLink>
         {!isUnder960px && <DarkModeToggle />}

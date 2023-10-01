@@ -11,10 +11,12 @@ const SidebarHeader = () => {
   return (
     <Wrapper>
       <Logo />
-      <GithubLink to="https://github.com/wherehows?tab=repositories">
-        <OktocatIcon />
-      </GithubLink>
-      {!isUnder960px && <DarkModeToggle />}
+      <IconWrapper>
+        <GithubLink to="https://github.com/wherehows?tab=repositories">
+          <OktocatIcon />
+        </GithubLink>
+        {!isUnder960px && <DarkModeToggle />}
+      </IconWrapper>
     </Wrapper>
   );
 };
@@ -36,4 +38,10 @@ const GithubLink = styled(CustomLink)(() => ({
 const OktocatIcon = styled(Oktocat)(() => ({
   width: '24px',
   height: '24px',
+}));
+
+const IconWrapper = styled('div')(() => ({
+  display: 'flex',
+  justifyContent: 'space-between',
+  width: '60px',
 }));

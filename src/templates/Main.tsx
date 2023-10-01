@@ -1,6 +1,6 @@
-import { graphql } from 'gatsby';
+import { PageProps, graphql } from 'gatsby';
 import { Sidebar } from '@/components/Sidebar';
-import { Edge, IndexPageProps } from '@/types/document';
+import { AllPostsProp, Edge } from '@/types/document';
 import { ThemeProvider } from '@emotion/react';
 import { theme } from '@/utils/const';
 import { MainContent } from '@/components/MainContent';
@@ -11,9 +11,9 @@ import useResponsiveWeb from '@/hooks/useResponsiveWeb';
 
 const Main = ({
   data: {
-    allMarkdownRemark: { edges },
+    allPosts: { edges },
   },
-}: IndexPageProps) => {
+}: PageProps<AllPostsProp>) => {
   const [isSidebarShown, setIsSidebarShown] = useState(false);
 
   useResponsiveWeb([
@@ -51,7 +51,9 @@ export default Main;
 
 export const getPosts = graphql`
   query {
-    allMarkdownRemark(sort: { fields: frontmatter___date, order: DESC }) {
+    AllPostsProp: allMarkdownRemark(
+      sort: { fields: frontmatter___date, order: DESC }
+    ) {
       ...MarkdownRemarkFields
     }
   }

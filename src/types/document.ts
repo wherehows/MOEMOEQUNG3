@@ -1,8 +1,6 @@
-export interface IndexPageProps {
-  data: {
-    allMarkdownRemark: {
-      edges: Edge[];
-    };
+export interface AllPostsProp {
+  allPosts: {
+    edges: Edge[];
   };
 }
 export interface FolderInformation {

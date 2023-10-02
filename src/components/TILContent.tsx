@@ -41,9 +41,13 @@ export const TILContent = ({ tils }: TILContentProps) => {
               )}
               <Typography variant="h2">{title}</Typography>
               <SubInformation>
-                <PostDate dateTime={date.toString()}>
-                  {formatDate(date)}s
-                </PostDate>
+                <Typography
+                  as="time"
+                  variant="label"
+                  dateTime={date.toString()}
+                >
+                  {formatDate(date)}
+                </Typography>
                 {!!debts.length && (
                   <DebtCount> | {debts.length}개의 부채가 있어요!</DebtCount>
                 )}
@@ -90,10 +94,6 @@ const Button = styled('button')(() => ({
   cursor: 'pointer',
   display: 'flex',
   flexDirection: 'column',
-}));
-
-const PostDate = styled('time')(({ theme }) => ({
-  ...theme.typography.label,
 }));
 
 const DebtCount = styled('span')(({ theme }) => ({

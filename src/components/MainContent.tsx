@@ -23,8 +23,25 @@ export const MainContent = ({ documents }: ContentProps) => {
           <DocumentItem key={slug}>
             <Button to={slug}>
               <Typography variant="h2">{title}</Typography>
-              <PostDate dateTime={date.toString()}>{formatDate(date)}</PostDate>
-              <Typography as={Description}>
+              <Typography variant="label" as="time" dateTime={date.toString()}>
+                {formatDate(date)}
+              </Typography>
+              <Typography
+                variant="body"
+                style={{
+                  display: 'inline-block',
+                  width: '100%',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  whiteSpace: 'normal',
+                  lineHeight: 1.2,
+                  height: '3.6rem',
+                  textAlign: 'left',
+                  wordWrap: 'break-word',
+                  WebkitLineClamp: 3,
+                  WebkitBoxOrient: 'vertical',
+                }}
+              >
                 {changeMarkdownToTextContent(html)}
               </Typography>
             </Button>
@@ -61,24 +78,6 @@ const Button = styled(CustomLink)(() => ({
   padding: 0,
   cursor: 'pointer',
   outline: 'none',
-}));
-
-const PostDate = styled('time')(({ theme }) => ({
-  ...theme.typography.label,
-}));
-
-const Description = styled('div')(() => ({
-  display: 'inline-block',
-  width: '100%',
-  overflow: 'hidden',
-  textOverflow: 'ellipsis',
-  whiteSpace: 'normal',
-  lineHeight: 1.2,
-  height: '3.6rem',
-  textAlign: 'left',
-  wordWrap: 'break-word',
-  webkitLineClamp: 3,
-  WebkitBoxOrient: 'vertical',
 }));
 
 const DocumentList = styled('ul')(() => ({

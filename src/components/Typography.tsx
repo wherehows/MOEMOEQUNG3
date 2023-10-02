@@ -12,7 +12,7 @@ interface TypographyProps {
   as?: ElementType;
 }
 
-const heading = ['h1', 'h2', 'h3'];
+const semantic = ['h1', 'h2', 'h3'];
 
 const Typography = ({
   children,
@@ -21,7 +21,7 @@ const Typography = ({
 }: StrictPropsWithChildren<TypographyProps>) => {
   return (
     <Wrapper
-      as={as || (heading.includes(variant) ? (variant as Heading) : 'div')}
+      as={as || (semantic.includes(variant) ? (variant as Heading) : 'div')}
       variant={variant}
     >
       {children}

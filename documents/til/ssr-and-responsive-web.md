@@ -1,6 +1,6 @@
 ---
-title: '서버 사이드 렌더링 조건에서 반응형 웹 개발하는 방법'
-hashtags: '["SEO","반응형 웹"]'
+title: 'SSR 환경에서 반응형 웹 구현'
+hashtags: '["SEO", "SSR", "반응형"]'
 date: '2023-10-1'
 debts: '[]'
 ---

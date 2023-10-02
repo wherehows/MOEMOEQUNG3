@@ -17,6 +17,54 @@ export const TILContent = ({ tils }: TILContentProps) => {
           프론트엔드 개발 및 관심사를 기록하는 블로그
         </Typography>
       )}
+      <DocumentList>
+        {tils?.map(({ title, date, html, hashtags, debts, id }) => (
+          <DocumentItem key={id}>
+            <Button
+              onClick={e => {
+                const detail = e.currentTarget
+                  .nextElementSibling as HTMLDivElement;
+
+                if (detail.style.display === 'none') {
+                  detail.style.display = 'block';
+                } else {
+                  detail.style.display = 'none';
+                }
+              }}
+            >
+              {!!hashtags.length && (
+                <HashtagList>
+                  {hashtags.map((hashtag, index) => (
+                    <Hashtag key={index}>#{hashtag}</Hashtag>
+                  ))}
+                </HashtagList>
+              )}
+              <Typography variant="h2">{title}</Typography>
+              <SubInformation>
+                <PostDate dateTime={date.toString()}>
+                  {formatDate(date)}s
+                </PostDate>
+                {!!debts.length && (
+                  <DebtCount> | {debts.length}개의 부채가 있어요!</DebtCount>
+                )}
+              </SubInformation>
+            </Button>
+            <Collapsible>
+              <MarkdownRenderer dangerouslySetInnerHTML={{ __html: html }} />
+              {!!debts.length && (
+                <>
+                  <Typography variant="h2">부채</Typography>
+                  <DebtList>
+                    {debts.map(debt => (
+                      <Debt>{debt}</Debt>
+                    ))}
+                  </DebtList>
+                </>
+              )}
+            </Collapsible>
+          </DocumentItem>
+        ))}
+      </DocumentList>
     </Wrapper>
   );
 };
@@ -31,3 +79,67 @@ const Wrapper = styled('main')(() => ({
     marginLeft: MAIN_LEFT_MARGIN_WIDTH,
   },
 }));
+
+const DocumentItem = styled('li')(() => ({
+  listStyle: 'none',
+  marginBottom: '2rem',
+}));
+
+const Button = styled('button')(() => ({
+  width: '100%',
+  cursor: 'pointer',
+  display: 'flex',
+  flexDirection: 'column',
+}));
+
+const PostDate = styled('time')(({ theme }) => ({
+  ...theme.typography.label,
+}));
+
+const DebtCount = styled('span')(({ theme }) => ({
+  ...theme.typography.label,
+  color: 'red',
+}));
+
+const DocumentList = styled('ul')(() => ({
+  padding: 0,
+  margin: 0,
+}));
+
+const Collapsible = styled('div')(() => ({
+  display: 'none',
+}));
+
+const SubInformation = styled('div')(() => ({}));
+
+const MarkdownRenderer = styled('div')(() => ({
+  width: '100%',
+  fontSize: '1rem',
+  a: {
+    color: 'var(--colors-primary)',
+    textDecoration: 'none',
+    fontWeight: 'bold',
+  },
+
+  'a:visited': {
+    color: 'var(--colors-primary)',
+    fontWieght: 'bold',
+  },
+}));
+
+const HashtagList = styled('ul')(() => ({
+  display: 'flex',
+}));
+
+const Hashtag = styled('li')(() => ({
+  marginRight: '4px',
+}));
+
+const DebtList = styled('ul')(() => ({}));
+
+const Debt = styled('li')(() => ({}));
+
+const formatDate = (date: Date) => {
+  const sArray = date.toString().split('-');
+  return `${sArray[0].slice(2, 4)}년 ${sArray[1]}월 ${sArray[2]}일`;
+};

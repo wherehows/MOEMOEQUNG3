@@ -1,6 +1,6 @@
-import { graphql } from 'gatsby';
+import { PageProps, graphql } from 'gatsby';
 import { Sidebar } from '@/components/Sidebar';
-import { IndexPageProps } from '@/types/document';
+import { AllPostsProp } from '@/types/document';
 import { ThemeProvider } from '@emotion/react';
 import { theme } from '@/utils/const';
 import { useState } from 'react';
@@ -11,9 +11,9 @@ import { WriterContent } from '@/components/WriterContent';
 
 const Writer = ({
   data: {
-    allMarkdownRemark: { edges },
+    allPosts: { edges },
   },
-}: IndexPageProps) => {
+}: PageProps<AllPostsProp>) => {
   const [isSidebarShown, setIsSidebarShown] = useState(false);
 
   useResponsiveWeb([
@@ -50,7 +50,10 @@ export default Writer;
 
 export const getPosts = graphql`
   query {
-    allMarkdownRemark(sort: { fields: frontmatter___date, order: DESC }) {
+    allPosts: allMarkdownRemark(
+      sort: { fields: frontmatter___date, order: DESC }
+      filter: { fileAbsolutePath: { regex: "/(/archive/)/" } }
+    ) {
       ...MarkdownRemarkFields
     }
   }

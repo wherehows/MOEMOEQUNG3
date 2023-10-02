@@ -1,6 +1,6 @@
-import { graphql } from 'gatsby';
+import { PageProps, graphql } from 'gatsby';
 import { Sidebar } from '@/components/Sidebar';
-import { Edge, IndexPageProps } from '@/types/document';
+import { AllPostsProp, PostEdge } from '@/types/document';
 import { ThemeProvider } from '@emotion/react';
 import { theme } from '@/utils/const';
 import { MainContent } from '@/components/MainContent';
@@ -11,9 +11,9 @@ import useResponsiveWeb from '@/hooks/useResponsiveWeb';
 
 const Main = ({
   data: {
-    allMarkdownRemark: { edges },
+    allPosts: { edges },
   },
-}: IndexPageProps) => {
+}: PageProps<AllPostsProp>) => {
   const [isSidebarShown, setIsSidebarShown] = useState(false);
 
   useResponsiveWeb([
@@ -51,14 +51,17 @@ export default Main;
 
 export const getPosts = graphql`
   query {
-    allMarkdownRemark(sort: { fields: frontmatter___date, order: DESC }) {
+    allPosts: allMarkdownRemark(
+      sort: { fields: frontmatter___date, order: DESC }
+      filter: { fileAbsolutePath: { regex: "/(/archive/)/" } }
+    ) {
       ...MarkdownRemarkFields
     }
   }
 `;
 
-const getDocuments = (edges: Edge[]) =>
-  edges.map(({ node }: Edge) => ({
+const getDocuments = (edges: PostEdge[]) =>
+  edges.map(({ node }: PostEdge) => ({
     ...node,
     ...node.frontmatter,
   }));

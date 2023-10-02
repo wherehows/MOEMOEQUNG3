@@ -1,29 +1,28 @@
 import { Sidebar } from '@/components/Sidebar';
 import { graphql, PageProps } from 'gatsby';
-import { PostEdge, PostNode } from '@/types/document';
+import { PostEdge, TILEdge, TIL } from '@/types/document';
 import { ThemeProvider } from '@emotion/react';
 import { theme } from '@/utils/const';
 import Header from '@/components/Header';
 import { useState } from 'react';
 import { getFolders } from '@/utils/helpers';
-import { PostDetailContent } from '@/components/PostDetailContent';
 import useResponsiveWeb from '@/hooks/useResponsiveWeb';
+import { TILContent } from '@/components/TILContent';
 
 interface QueryResultType {
   allPosts: { edges: PostEdge[] };
-  selectedPost: PostNode;
+  allTil: { edges: TILEdge[] };
 }
 
 interface PageContextType {
   slug: string;
 }
 
-export default function PostDetail({
+export default function TILTemplate({
   data: {
-    allPosts: { edges },
-    selectedPost,
+    allPosts: { edges: allPostsEdges },
+    allTil: { edges: allTilEdges },
   },
-  pageContext: { slug },
 }: PageProps<QueryResultType, PageContextType>) {
   const [isSidebarShown, setIsSidebarShown] = useState(false);
 
@@ -40,9 +39,8 @@ export default function PostDetail({
     },
   ]);
 
-  const folderInformations = getFolders(edges);
-  const selectedDocument = selectedPost.html;
-  const { title } = selectedPost.frontmatter;
+  const folderInformations = getFolders(allPostsEdges);
+  const tils = getTils(allTilEdges);
 
   return (
     <ThemeProvider theme={theme}>
@@ -55,32 +53,49 @@ export default function PostDetail({
         folderInformations={folderInformations}
         isSidebarShown={isSidebarShown}
       />
-      <PostDetailContent
-        title={title}
-        selectedDocument={selectedDocument}
-        slug={slug}
-      />
+      <TILContent tils={tils} />
     </ThemeProvider>
   );
 }
 
 export const getPosts = graphql`
-  query ($slug: String!) {
+  query {
     allPosts: allMarkdownRemark(
       sort: { fields: frontmatter___date, order: DESC }
       filter: { fileAbsolutePath: { regex: "/(/archive/)/" } }
     ) {
       ...MarkdownRemarkFields
     }
-    selectedPost: markdownRemark(frontmatter: { slug: { eq: $slug } }) {
-      frontmatter {
-        date
-        folder
-        slug
-        subTitle
-        title
+    allTil: allMarkdownRemark(
+      filter: { fileAbsolutePath: { regex: "/(/til/)/" } }
+    ) {
+      edges {
+        node {
+          id
+          html
+          frontmatter {
+            date
+            debts
+            hashtags
+            title
+          }
+        }
       }
-      html
     }
   }
 `;
+
+const getTils = (tilList: TILEdge[]): TIL[] =>
+  tilList.map(({ node }) => {
+    const { frontmatter, html, id } = node;
+    const { date, debts, hashtags, title } = frontmatter;
+
+    return {
+      title,
+      date,
+      debts: JSON.parse(debts) as string[],
+      hashtags: JSON.parse(hashtags) as string[],
+      html,
+      id,
+    };
+  });

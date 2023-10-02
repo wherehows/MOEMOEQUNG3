@@ -41,7 +41,7 @@ export const WriterContent = () => {
 title: '${title}'
 hashtags: '${JSON.stringify(hashtags)}'
 date: '${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}'
-debt: '${JSON.stringify(debts)}'
+debts: '${JSON.stringify(debts)}'
 ---
 
 ${value}

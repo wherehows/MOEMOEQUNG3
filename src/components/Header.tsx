@@ -6,6 +6,7 @@ import { Dispatch } from 'react';
 import Logo from './Logo';
 import useResponsiveWeb from '@/hooks/useResponsiveWeb';
 import Oktocat from '@/assets/oktocat.svg';
+import LinkedIn from '@/assets/linkedin.svg';
 import CustomLink from './CustomLink';
 
 interface HeaderProps {
@@ -50,6 +51,11 @@ const Header = ({
           </GithubLink>
         </List>
         <List>
+          <LinkedInLink to="https://github.com/wherehows">
+            <LinkedInIcon />
+          </LinkedInLink>
+        </List>
+        <List>
           <NavigationCollapseToggle
             isSidebarShown={isSidebarShown}
             setIsSidebarShown={setIsSidebarShown}
@@ -90,6 +96,15 @@ const GithubLink = styled(CustomLink)(() => ({
 }));
 
 const OktocatIcon = styled(Oktocat)(() => ({
+  width: '24px',
+  height: '24px',
+}));
+
+const LinkedInLink = styled(CustomLink)(() => ({
+  cursor: 'pointer',
+}));
+
+const LinkedInIcon = styled(LinkedIn)(() => ({
   width: '24px',
   height: '24px',
 }));

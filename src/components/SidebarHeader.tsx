@@ -1,29 +1,22 @@
 import styled from '@emotion/styled';
 import DarkModeToggle from './DarkModeToggle';
-import useResponsiveWeb from '@/hooks/useResponsiveWeb';
 import Logo from './Logo';
 import Oktocat from '@/assets/oktocat.svg';
 import LinkedIn from '@/assets/linkedin.svg';
 import CustomLink from './CustomLink';
 
 const SidebarHeader = () => {
-  const { isUnder960px } = useResponsiveWeb();
-
   return (
     <Wrapper>
       <Logo />
       <IconWrapper>
-        {!isUnder960px && (
-          <>
-            <DarkModeToggle />
-            <GithubLink to="https://github.com/wherehows">
-              <OktocatIcon />
-            </GithubLink>
-            <LinkedInLink to="https://www.linkedin.com/in/%EC%98%81%ED%9B%84-%EA%B9%80-542165238/">
-              <LinkedInIcon />
-            </LinkedInLink>
-          </>
-        )}
+        <DarkModeToggle />
+        <GithubLink to="https://github.com/wherehows">
+          <OktocatIcon />
+        </GithubLink>
+        <LinkedInLink to="https://www.linkedin.com/in/%EC%98%81%ED%9B%84-%EA%B9%80-542165238/">
+          <LinkedInIcon />
+        </LinkedInLink>
       </IconWrapper>
     </Wrapper>
   );
@@ -58,7 +51,11 @@ const OktocatIcon = styled(Oktocat)(() => ({
 }));
 
 const IconWrapper = styled('div')(() => ({
-  display: 'flex',
+  display: 'none',
   justifyContent: 'space-between',
   width: '100px',
+
+  '@media only screen and (min-width: 961px)': {
+    display: 'flex',
+  },
 }));

@@ -4,7 +4,6 @@ import DarkModeToggle from './DarkModeToggle';
 import NavigationCollapseToggle from './NavigationCollapseToggle';
 import { Dispatch } from 'react';
 import Logo from './Logo';
-import useResponsiveWeb from '@/hooks/useResponsiveWeb';
 import Oktocat from '@/assets/oktocat.svg';
 import LinkedIn from '@/assets/linkedin.svg';
 import CustomLink from './CustomLink';
@@ -20,27 +19,15 @@ const Header = ({
   isSidebarShown,
   setIsSidebarShown,
 }: HeaderProps) => {
-  const { isUnder960px } = useResponsiveWeb();
-
-  const getLeftContent = () => {
-    if (!isUnder960px) {
-      return <></>;
-    }
-
-    if (isDetailPage) {
-      return <Logo />;
-    }
-
-    return (
-      <Typography variant="h1">
-        녕후킴의 프론트 엔드 개발 및 관심사 기록 블로그
-      </Typography>
-    );
-  };
-
   return (
     <Wrapper>
-      {getLeftContent()}
+      {isDetailPage ? (
+        <Logo />
+      ) : (
+        <Typography variant="h1">
+          녕후킴의 프론트 엔드 개발 및 관심사 기록 블로그
+        </Typography>
+      )}
       <ListWrapper>
         <List>
           <DarkModeToggle />
@@ -74,6 +61,7 @@ const Wrapper = styled('header')(() => ({
   display: 'none',
   alignItems: 'center',
   justifyContent: 'space-between',
+
   '@media only screen and (max-width: 960px)': {
     display: 'flex',
   },

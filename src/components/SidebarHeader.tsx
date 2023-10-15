@@ -13,13 +13,17 @@ const SidebarHeader = () => {
     <Wrapper>
       <Logo />
       <IconWrapper>
-        {!isUnder960px && <DarkModeToggle />}
-        <GithubLink to="https://github.com/wherehows">
-          <OktocatIcon />
-        </GithubLink>
-        <LinkedInLink to="https://www.linkedin.com/in/%EC%98%81%ED%9B%84-%EA%B9%80-542165238/">
-          <LinkedInIcon />
-        </LinkedInLink>
+        {!isUnder960px && (
+          <>
+            <DarkModeToggle />
+            <GithubLink to="https://github.com/wherehows">
+              <OktocatIcon />
+            </GithubLink>
+            <LinkedInLink to="https://www.linkedin.com/in/%EC%98%81%ED%9B%84-%EA%B9%80-542165238/">
+              <LinkedInIcon />
+            </LinkedInLink>
+          </>
+        )}
       </IconWrapper>
     </Wrapper>
   );

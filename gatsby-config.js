@@ -17,6 +17,13 @@ module.exports = {
     `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,
     {
+      resolve: 'gatsby-source-sanity',
+      options: {
+        projectId: 'aullhjjx',
+        dataset: 'production',
+      },
+    },
+    {
       resolve: 'gatsby-plugin-react-svg',
       options: {
         rule: {

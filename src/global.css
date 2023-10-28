@@ -1,6 +1,10 @@
 :root {
-  --colors-primary: #d58135;
-  --colors-secondary: #cf9a12;
+  --colors-violet-01: #5857ff;
+  --colors-violet-02: #8f9aff;
+
+  --colors-orange-01: #ff8663;
+
+  --colors-grey-01: #cccccc;
 }
 
 :root.dark {

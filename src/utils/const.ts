@@ -21,9 +21,9 @@ export {
 
 export const theme = {
   typography: {
-    h1: { fontSize: '30px', fontWeight: 700, margin: 0 },
-    h2: { fontSize: '22px', fontWeight: 600, margin: 0 },
-    h3: { fontSize: '18px', fontWeight: 500, margin: 0 },
+    h1: { fontSize: '30px', fontWeight: 900, margin: 0 },
+    h2: { fontSize: '22px', fontWeight: 700, margin: 0 },
+    h3: { fontSize: '18px', fontWeight: 600, margin: 0 },
     logo: { fontSize: '30px', fontWeight: 700 },
     label: { fontSize: '14px', fontWeight: 500 },
     subtitle: { fontSize: '16px', fontWeight: 600 },

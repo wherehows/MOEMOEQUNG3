@@ -1,6 +1,5 @@
 import { Sidebar } from '@/components/Sidebar';
 import { graphql, PageProps } from 'gatsby';
-import { PostEdge, TILEdge, TIL } from '@/types/document';
 import { ThemeProvider } from '@emotion/react';
 import { theme } from '@/utils/const';
 import Header from '@/components/Header';
@@ -8,22 +7,14 @@ import { useState } from 'react';
 import { getFolders } from '@/utils/helpers';
 import useResponsiveWeb from '@/hooks/useResponsiveWeb';
 import { TILContent } from '@/components/TILContent';
-
-interface QueryResultType {
-  allPosts: { edges: PostEdge[] };
-  allTil: { edges: TILEdge[] };
-}
-
-interface PageContextType {
-  slug: string;
-}
+import { PostEdge } from '@/types/document';
 
 export default function TILTemplate({
   data: {
     allPosts: { edges: allPostsEdges },
-    allTil: { edges: allTilEdges },
+    allMemos: { nodes },
   },
-}: PageProps<QueryResultType, PageContextType>) {
+}: PageProps<Queries.TILTemplateQuery>) {
   const [isSidebarShown, setIsSidebarShown] = useState(false);
 
   useResponsiveWeb([
@@ -39,8 +30,8 @@ export default function TILTemplate({
     },
   ]);
 
-  const folderInformations = getFolders(allPostsEdges);
-  const tils = getTils(allTilEdges);
+  // TODO: Planned Typegen Integration
+  const folderInformations = getFolders(allPostsEdges as unknown as PostEdge[]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -53,49 +44,39 @@ export default function TILTemplate({
         folderInformations={folderInformations}
         isSidebarShown={isSidebarShown}
       />
-      <TILContent tils={tils} />
+      <TILContent nodes={nodes} />
     </ThemeProvider>
   );
 }
 
 export const getPosts = graphql`
-  query {
+  query TILTemplate {
     allPosts: allMarkdownRemark(
       sort: { fields: frontmatter___date, order: DESC }
       filter: { fileAbsolutePath: { regex: "/(/archive/)/" } }
     ) {
       ...MarkdownRemarkFields
     }
-    allTil: allMarkdownRemark(
-      filter: { fileAbsolutePath: { regex: "/(/til/)/" } }
-    ) {
-      edges {
-        node {
-          id
-          html
-          frontmatter {
-            date
-            debts
-            hashtags
-            title
-          }
+    allMemos: allSanityPost {
+      nodes {
+        _updatedAt
+        id
+        publishedAt
+        title
+        content
+        debts {
+          _key
+          _type
+          label
+          value
+        }
+        tags {
+          _key
+          _type
+          label
+          value
         }
       }
     }
   }
 `;
-
-const getTils = (tilList: TILEdge[]): TIL[] =>
-  tilList.map(({ node }) => {
-    const { frontmatter, html, id } = node;
-    const { date, debts, hashtags, title } = frontmatter;
-
-    return {
-      title,
-      date,
-      debts: JSON.parse(debts) as string[],
-      hashtags: JSON.parse(hashtags) as string[],
-      html,
-      id,
-    };
-  });

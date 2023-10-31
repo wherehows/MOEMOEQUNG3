@@ -2,72 +2,157 @@ import styled from '@emotion/styled';
 import { MAIN_LEFT_MARGIN_WIDTH, MAIN_PURE_WIDTH } from '@/utils/const';
 import Typography from './Typography';
 import useResponsiveWeb from '@/hooks/useResponsiveWeb';
-import { TIL } from '@/types/document';
+import Markdown from 'react-markdown';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { cb } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { changeUTCToYYYYMMDD } from '@/utils/time';
 
-interface TILContentProps {
-  tils: TIL[];
-}
-
-export const TILContent = ({ tils }: TILContentProps) => {
+export const TILContent = ({ nodes }: Queries.TILTemplateQuery['allMemos']) => {
   const { isUnder960px } = useResponsiveWeb();
+
   return (
     <Wrapper>
       {!isUnder960px && (
-        <Typography variant="h1">
-          프론트엔드 개발 및 관심사를 기록하는 블로그
-        </Typography>
+        <Typography variant="h1">지극히 개인적인 공간이에요 🫠</Typography>
       )}
       <DocumentList>
-        {tils?.map(({ title, date, html, hashtags, debts, id }) => (
-          <DocumentItem key={id}>
-            <Button
-              onClick={e => {
-                const detail = e.currentTarget
-                  .nextElementSibling as HTMLDivElement;
+        {nodes.map(({ title, publishedAt, tags, content, id, _updatedAt }) => {
+          return (
+            <DocumentItem key={id}>
+              <Button
+                onClick={e => {
+                  const detail = e.currentTarget
+                    .nextElementSibling as HTMLDivElement;
 
-                if (detail.style.display === 'none') {
-                  detail.style.display = 'block';
-                } else {
-                  detail.style.display = 'none';
-                }
-              }}
-            >
-              {!!hashtags.length && (
-                <HashtagList>
-                  {hashtags.map((hashtag, index) => (
-                    <Hashtag key={index}>#{hashtag}</Hashtag>
-                  ))}
-                </HashtagList>
-              )}
-              <Typography variant="h2">{title}</Typography>
-              <SubInformation>
-                <Typography
-                  as="time"
-                  variant="label"
-                  dateTime={date.toString()}
-                >
-                  {formatDate(date)}
-                </Typography>
-                {!!debts.length && (
-                  <DebtCount> | {debts.length}개의 부채가 있어요!</DebtCount>
+                  if (detail.style.display === 'none') {
+                    detail.style.display = 'block';
+                  } else {
+                    detail.style.display = 'none';
+                  }
+                }}
+              >
+                <Typography variant="h2">{title}</Typography>
+                {!!tags?.length && (
+                  <Tags>
+                    {tags.map(tag => {
+                      const { label, value } = tag;
+                      if (!label || !value) {
+                        return <></>;
+                      }
+
+                      return <Tag key={value}>{label}</Tag>;
+                    })}
+                  </Tags>
                 )}
-              </SubInformation>
-            </Button>
-            <Collapsible>
-              <MarkdownRenderer dangerouslySetInnerHTML={{ __html: html }} />
-              {!!debts.length && (
-                <>
-                  <Typography variant="h2">부채</Typography>
-                  <DebtList>
-                    {debts.map(debt => (
-                      <Debt>{debt}</Debt>
-                    ))}
-                  </DebtList>
-                </>
-              )}
-            </Collapsible>
-          </DocumentItem>
-        ))}
+                <SubInformation>
+                  <Typography
+                    as="time"
+                    variant="label"
+                    dateTime={changeUTCToYYYYMMDD(publishedAt)}
+                  >
+                    published at {changeUTCToYYYYMMDD(publishedAt)} | updated at{' '}
+                    {changeUTCToYYYYMMDD(_updatedAt)}
+                  </Typography>
+                </SubInformation>
+              </Button>
+              <Collapsible>
+                <Markdown
+                  children={content}
+                  components={{
+                    code(props) {
+                      // The type of 'ref' is inferred incorrectly.
+                      const { children, className, ref, ...rest } = props;
+
+                      const match = /language-(\w+)/.exec(className || '');
+                      return match ? (
+                        <SyntaxHighlighter
+                          {...rest}
+                          children={String(children).replace(/\n$/, '')}
+                          style={cb}
+                          language={match[1]}
+                          PreTag="div"
+                        />
+                      ) : (
+                        <code
+                          {...rest}
+                          style={{
+                            fontFamily: 'inherit',
+                            fontWeight: '400',
+                            borderBottom: '2px dashed var(--colors-orange-01)',
+                          }}
+                        >
+                          {children}
+                        </code>
+                      );
+                    },
+                    li(props) {
+                      const { children, ...rest } = props;
+                      return (
+                        <li
+                          {...rest}
+                          style={{
+                            listStyle: 'auto',
+                          }}
+                        >
+                          {children}
+                        </li>
+                      );
+                    },
+                    h3(props) {
+                      const { children, ...rest } = props;
+
+                      return (
+                        <h3
+                          {...rest}
+                          style={{
+                            borderBottom: '1px dashed var(--colors-grey-01)',
+                            padding: '0 0 4px 0',
+                            margin: 0,
+                          }}
+                        >
+                          📎 {children}
+                        </h3>
+                      );
+                    },
+                    p(props) {
+                      const { children, ...rest } = props;
+                      let style = {};
+
+                      if (
+                        typeof children === 'object' &&
+                        children &&
+                        'props' in children &&
+                        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+                        children.props.node.tagName === 'a'
+                      ) {
+                        style = { textAlign: 'right' };
+                      }
+
+                      return (
+                        <p {...rest} style={style}>
+                          {children}
+                        </p>
+                      );
+                    },
+                    a(props) {
+                      return (
+                        <a
+                          {...props}
+                          style={{
+                            color: 'var(--colors-violet-01)',
+                            textDecoration: 'none',
+                            fontWeight: '700',
+                            fontSize: '16px',
+                          }}
+                        />
+                      );
+                    },
+                  }}
+                />
+              </Collapsible>
+            </DocumentItem>
+          );
+        })}
       </DocumentList>
     </Wrapper>
   );
@@ -86,7 +171,7 @@ const Wrapper = styled('main')(() => ({
 
 const DocumentItem = styled('li')(() => ({
   listStyle: 'none',
-  marginBottom: '2rem',
+  marginBottom: '16px',
 }));
 
 const Button = styled('button')(() => ({
@@ -96,11 +181,6 @@ const Button = styled('button')(() => ({
   flexDirection: 'column',
 }));
 
-const DebtCount = styled('span')(({ theme }) => ({
-  ...theme.typography.label,
-  color: 'red',
-}));
-
 const DocumentList = styled('ul')(() => ({
   padding: 0,
   margin: 0,
@@ -108,38 +188,22 @@ const DocumentList = styled('ul')(() => ({
 
 const Collapsible = styled('div')(() => ({
   display: 'none',
+  borderTop: '2px solid var(--colors-violet-02)',
+  padding: '12px 16px 0',
 }));
 
 const SubInformation = styled('div')(() => ({}));
 
-const MarkdownRenderer = styled('div')(() => ({
-  width: '100%',
-  fontSize: '1rem',
-  a: {
-    color: 'var(--colors-primary)',
-    textDecoration: 'none',
-    fontWeight: 'bold',
-  },
-
-  'a:visited': {
-    color: 'var(--colors-primary)',
-    fontWieght: 'bold',
-  },
-}));
-
-const HashtagList = styled('ul')(() => ({
+const Tags = styled('ul')(() => ({
   display: 'flex',
 }));
 
-const Hashtag = styled('li')(() => ({
-  marginRight: '4px',
+const Tag = styled('li')(() => ({
+  borderRadius: '6px',
+  backgroundColor: 'var(--colors-violet-02)',
+  padding: '0 6px',
+  marginRight: '8px',
+  fontSize: '14px',
+  fontWeight: 500,
+  color: 'white',
 }));
-
-const DebtList = styled('ul')(() => ({}));
-
-const Debt = styled('li')(() => ({}));
-
-const formatDate = (date: Date) => {
-  const sArray = date.toString().split('-');
-  return `${sArray[0].slice(2, 4)}년 ${sArray[1]}월 ${sArray[2]}일`;
-};

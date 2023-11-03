@@ -7,6 +7,7 @@ import Logo from './Logo';
 import Oktocat from '@/assets/oktocat.svg';
 import LinkedIn from '@/assets/linkedin.svg';
 import CustomLink from './CustomLink';
+import Crown from '@/assets/crown.svg';
 
 interface HeaderProps {
   isDetailPage?: boolean;
@@ -31,6 +32,11 @@ const Header = ({
       <ListWrapper>
         <List>
           <DarkModeToggle />
+        </List>
+        <List>
+          <PrivatePageLink to="/til">
+            <CrownIcon />
+          </PrivatePageLink>
         </List>
         <List>
           <GithubLink to="https://github.com/wherehows">
@@ -84,8 +90,8 @@ const GithubLink = styled(CustomLink)(() => ({
 }));
 
 const OktocatIcon = styled(Oktocat)(() => ({
-  width: '24px',
-  height: '24px',
+  width: '22px',
+  height: '22px',
 }));
 
 const LinkedInLink = styled(CustomLink)(() => ({
@@ -93,6 +99,15 @@ const LinkedInLink = styled(CustomLink)(() => ({
 }));
 
 const LinkedInIcon = styled(LinkedIn)(() => ({
-  width: '24px',
-  height: '24px',
+  width: '22px',
+  height: '22px',
+}));
+
+const PrivatePageLink = styled(CustomLink)(() => ({
+  cursor: 'pointer',
+}));
+
+const CrownIcon = styled(Crown)(() => ({
+  width: '22px',
+  height: '22px',
 }));

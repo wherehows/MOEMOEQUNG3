@@ -14,6 +14,33 @@ exports.onCreateWebpackConfig = ({ actions }) => {
   });
 };
 
+exports.createSchemaCustomization = ({ actions }) => {
+  actions.createTypes(`
+    type SanityPost {
+      publishedAt: Date!
+      title: String!
+      _updatedAt: Date!
+      content: String!
+      tags: [Tag!]!
+      debts: [Debt!]!
+    }
+
+    type Tag {
+      _key: String!
+      _type: String!
+      label: String!
+      value: String!
+    }
+
+    type Debt {
+      _key: String!
+      _type: String!
+      label: String!
+      value: String!
+    }
+  `);
+};
+
 exports.onCreateBabelConfig = ({ actions }) => {
   actions.setBabelPlugin({
     name: '@babel/plugin-transform-react-jsx',

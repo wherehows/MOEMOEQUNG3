@@ -36,26 +36,3 @@ export interface PostEdge {
 }
 
 export type MarkdownDocument = DocumentInformation & PostFrontmatter;
-
-interface TILFrontmatter {
-  title: string;
-  date: Date;
-  hashtags: string;
-  debts: string;
-}
-
-export type TIL = Omit<TILFrontmatter, 'hashtags' | 'debts'> &
-  Omit<TILNode, 'frontmatter'> & {
-    hashtags: string[];
-    debts: string[];
-  };
-
-export interface TILNode {
-  frontmatter: TILFrontmatter;
-  html: string;
-  id: string;
-}
-
-export interface TILEdge {
-  node: TILNode;
-}

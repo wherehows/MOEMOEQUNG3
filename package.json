@@ -41,6 +41,7 @@
   },
   "devDependencies": {
     "@types/react-dom": "^18.0.6",
+    "@types/react-syntax-highlighter": "^15.5.9",
     "@types/react-toggle": "^4.0.3",
     "env-cmd": "^10.1.0",
     "prettier": "^2.7.1",
@@ -52,7 +53,7 @@
   "license": "0BSD",
   "scripts": {
     "build": "gatsby build",
-    "develop": "env-cmd -f .env gatsby develop",
+    "dev": "env-cmd -f .env gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,css}\"",
     "start": "env-cmd -f .env gatsby develop",
     "serve": "gatsby serve",

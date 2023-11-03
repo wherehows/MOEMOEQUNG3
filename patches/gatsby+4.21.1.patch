@@ -1,0 +1,49 @@
+diff --git a/node_modules/gatsby/dist/utils/webpack.config.js b/node_modules/gatsby/dist/utils/webpack.config.js
+index cf4bdd5..dc7013a 100644
+--- a/node_modules/gatsby/dist/utils/webpack.config.js
++++ b/node_modules/gatsby/dist/utils/webpack.config.js
+@@ -746,15 +746,35 @@ module.exports = async (program, directory, suppliedStage, port, {
+       if (stage === `build-html`) {
+         const builtinModulesToTrack = [`fs`, `http`, `http2`, `https`, `child_process`];
+ 
+-        const builtinsExternalsDictionary = _module.builtinModules.reduce((acc, builtinModule) => {
+-          if (builtinModulesToTrack.includes(builtinModule)) {
+-            acc[builtinModule] = `commonjs ${path.join(program.directory, `.cache`, `ssr-builtin-trackers`, builtinModule)}`;
+-          } else {
+-            acc[builtinModule] = `commonjs ${builtinModule}`;
+-          }
+-
+-          return acc;
+-        }, {});
++        const builtinsExternalsDictionary = _module.builtinModules.reduce(
++          (acc, builtinModule) => {
++            if (builtinModulesToTrack.includes(builtinModule)) {
++              const builtinModuleTracked = path.join(
++                program.directory,
++                `.cache`,
++                `ssr-builtin-trackers`,
++                builtinModule
++              )
++              acc[builtinModule] = `commonjs ${builtinModuleTracked}`
++              acc[`node:${builtinModule}`] = `commonjs ${builtinModuleTracked}`
++            } else {
++              acc[builtinModule] = `commonjs ${builtinModule}`
++              acc[`node:${builtinModule}`] = `commonjs ${builtinModule}`
++            }
++            return acc
++          },
++          {}
++        )
++
++        // const builtinsExternalsDictionary = _module.builtinModules.reduce((acc, builtinModule) => {
++        //   if (builtinModulesToTrack.includes(builtinModule)) {
++        //     acc[builtinModule] = `commonjs ${path.join(program.directory, `.cache`, `ssr-builtin-trackers`, builtinModule)}`;
++        //   } else {
++        //     acc[builtinModule] = `commonjs ${builtinModule}`;
++        //   }
++
++        //   return acc;
++        // }, {});
+ 
+         config.externals.unshift(builtinsExternalsDictionary);
+       }

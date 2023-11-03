@@ -47,13 +47,13 @@ const ToggleBody = styled('input')(() => ({
 }));
 
 const SunIcon = styled(Sun)(() => ({
-  width: '24px',
-  height: '24px',
+  width: '22px',
+  height: '22px',
 }));
 
 const MoonIcon = styled(Moon)(() => ({
-  width: '24px',
-  height: '24px',
+  width: '22px',
+  height: '22px',
   color: '#ffffff',
 }));
 

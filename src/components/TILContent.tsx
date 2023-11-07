@@ -119,11 +119,11 @@ export const TILContent = ({ nodes }: Queries.TILTemplateQuery['allMemos']) => {
                       let style = {};
 
                       if (
-                        typeof children === 'object' &&
                         children &&
+                        typeof children === 'object' &&
                         'props' in children &&
                         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-                        children.props.node.tagName === 'a'
+                        children?.props?.node?.tagName === 'a'
                       ) {
                         style = { textAlign: 'right' };
                       }

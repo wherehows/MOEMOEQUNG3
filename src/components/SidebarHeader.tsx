@@ -3,7 +3,7 @@ import DarkModeToggle from './DarkModeToggle';
 import Logo from './Logo';
 import Oktocat from '@/assets/oktocat.svg';
 import LinkedIn from '@/assets/linkedin.svg';
-import Crown from '@/assets/crown.svg';
+// import Crown from '@/assets/crown.svg';
 import CustomLink from './CustomLink';
 
 const SidebarHeader = () => {
@@ -12,9 +12,9 @@ const SidebarHeader = () => {
       <Logo />
       <IconWrapper>
         <DarkModeToggle />
-        <PrivatePageLink to="/til">
+        {/* <PrivatePageLink to="/til">
           <CrownIcon />
-        </PrivatePageLink>
+        </PrivatePageLink> */}
         <GithubLink to="https://github.com/wherehows">
           <OktocatIcon />
         </GithubLink>
@@ -36,14 +36,14 @@ const Wrapper = styled('div')(() => ({
   width: '100%',
 }));
 
-const PrivatePageLink = styled(CustomLink)(() => ({
-  cursor: 'pointer',
-}));
+// const PrivatePageLink = styled(CustomLink)(() => ({
+//   cursor: 'pointer',
+// }));
 
-const CrownIcon = styled(Crown)(() => ({
-  width: '22px',
-  height: '22px',
-}));
+// const CrownIcon = styled(Crown)(() => ({
+//   width: '22px',
+//   height: '22px',
+// }));
 
 const GithubLink = styled(CustomLink)(() => ({
   cursor: 'pointer',
@@ -66,7 +66,7 @@ const OktocatIcon = styled(Oktocat)(() => ({
 const IconWrapper = styled('div')(() => ({
   display: 'none',
   justifyContent: 'space-between',
-  width: '130px',
+  width: '90px',
 
   '@media only screen and (min-width: 961px)': {
     display: 'flex',

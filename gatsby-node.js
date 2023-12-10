@@ -16,13 +16,31 @@ exports.onCreateWebpackConfig = ({ actions }) => {
 
 exports.createSchemaCustomization = ({ actions }) => {
   actions.createTypes(`
-    type SanityPost {
+    type SanityMemo {
       publishedAt: Date!
       title: String!
       _updatedAt: Date!
       content: String!
+      slug: Slug
       tags: [Tag!]!
       debts: [Debt!]!
+    }
+
+    type SanityPublished {
+      publishedAt: Date!
+      title: String!
+      _updatedAt: Date!
+      content: String!
+      slug: Slug!
+      tags: [Tag!]!
+      debts: [Debt!]!
+    }
+
+    type Slug {
+      _key: String
+      _type: String
+      current: String
+      source: String
     }
 
     type Tag {

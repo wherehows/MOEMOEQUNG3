@@ -1,31 +1,18 @@
 import { Sidebar } from '@/components/Sidebar';
 import { graphql, PageProps } from 'gatsby';
-import { PostEdge, PostNode } from '@/types/document';
 import { ThemeProvider } from '@emotion/react';
 import { theme } from '@/utils/const';
 import Header from '@/components/Header';
 import { useState } from 'react';
-import { getFolders } from '@/utils/helpers';
 import { PostDetailContent } from '@/components/PostDetailContent';
 import useResponsiveWeb from '@/hooks/useResponsiveWeb';
-
-interface QueryResultType {
-  allPosts: { edges: PostEdge[] };
-  selectedPost: PostNode;
-}
-
-interface PageContextType {
-  slug: string;
-}
+import { getCategoryInformation } from '@/utils/post';
 
 export default function PostDetail({
-  data: {
-    allPosts: { edges },
-    selectedPost,
-  },
-  pageContext: { slug },
-}: PageProps<QueryResultType, PageContextType>) {
+  data: { postsQueryData, selectedPostQueryData },
+}: PageProps<Queries.TypegenPageQuery>) {
   const [isSidebarShown, setIsSidebarShown] = useState(false);
+  const categoryInformation = getCategoryInformation(postsQueryData);
 
   useResponsiveWeb([
     {
@@ -40,10 +27,6 @@ export default function PostDetail({
     },
   ]);
 
-  const folderInformations = getFolders(edges);
-  const selectedDocument = selectedPost.html;
-  const { title } = selectedPost.frontmatter;
-
   return (
     <ThemeProvider theme={theme}>
       <Header
@@ -52,35 +35,67 @@ export default function PostDetail({
         setIsSidebarShown={setIsSidebarShown}
       />
       <Sidebar
-        folderInformations={folderInformations}
+        categoryInformation={categoryInformation}
         isSidebarShown={isSidebarShown}
       />
-      <PostDetailContent
-        title={title}
-        selectedDocument={selectedDocument}
-        slug={slug}
-      />
+      <PostDetailContent selectedPost={selectedPostQueryData} />
     </ThemeProvider>
   );
 }
 
 export const getPosts = graphql`
-  query ($slug: String!) {
-    allPosts: allMarkdownRemark(
-      sort: { fields: frontmatter___date, order: DESC }
-      filter: { fileAbsolutePath: { regex: "/(/archive/)/" } }
-    ) {
-      ...MarkdownRemarkFields
-    }
-    selectedPost: markdownRemark(frontmatter: { slug: { eq: $slug } }) {
-      frontmatter {
-        date
-        folder
-        slug
-        subTitle
+  query TypegenPage($current: String!) {
+    postsQueryData: allSanityPosts {
+      nodes {
+        _updatedAt
+        id
+        slug {
+          _key
+          _type
+          current
+          source
+        }
+        publishedAt
         title
+        content
+        debts {
+          _key
+          _type
+          label
+          value
+        }
+        tags {
+          _key
+          _type
+          label
+          value
+        }
       }
-      html
+    }
+    selectedPostQueryData: sanityPosts(slug: { current: { eq: $current } }) {
+      _updatedAt
+      id
+      slug {
+        _key
+        _type
+        current
+        source
+      }
+      publishedAt
+      title
+      content
+      debts {
+        _key
+        _type
+        label
+        value
+      }
+      tags {
+        _key
+        _type
+        label
+        value
+      }
     }
   }
 `;

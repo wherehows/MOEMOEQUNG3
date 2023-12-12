@@ -26,7 +26,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       debts: [Debt!]!
     }
 
-    type SanityPublished {
+    type SanityPosts {
       publishedAt: Date!
       title: String!
       _updatedAt: Date!
@@ -39,7 +39,7 @@ exports.createSchemaCustomization = ({ actions }) => {
     type Slug {
       _key: String
       _type: String
-      current: String
+      current: String!
       source: String
     }
 
@@ -71,21 +71,17 @@ exports.onCreateBabelConfig = ({ actions }) => {
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions;
   const PostDetail = path.resolve(`src/templates/PostDetail.tsx`);
-  const Writer = path.resolve(`src/templates/Writer.tsx`);
-  const TIL = path.resolve('src/templates/TIL.tsx');
-  const Main = path.resolve(`src/templates/Main.tsx`);
+  const List = path.resolve('src/templates/List.tsx');
 
   const result = await graphql(`
     {
-      allMarkdownRemark(
-        sort: { order: DESC, fields: frontmatter___date }
-        filter: { fileAbsolutePath: { regex: "/(/archive/)/" } }
-      ) {
-        edges {
-          node {
-            frontmatter {
-              slug
-            }
+      allSanityPosts {
+        nodes {
+          tags {
+            value
+          }
+          slug {
+            current
           }
         }
       }
@@ -94,36 +90,36 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   if (result.errors) {
     reporter.panicOnBuild(`Error while running GraphQL query.`);
-    return;
   }
 
   createPage({
     path: '/',
-    component: Main,
+    component: List,
   });
 
-  createPage({
-    path: '/writer',
-    component: Writer,
-  });
+  const visitedTagInformation = {};
 
-  createPage({
-    path: '/til',
-    component: TIL,
-  });
+  result.data.allSanityPosts.nodes.forEach(({ tags, slug: { current } }) => {
+    const { value } = tags[0];
 
-  result.data.allMarkdownRemark.edges.forEach(
-    ({
-      node: {
-        frontmatter: { slug },
-      },
-    }) =>
+    if (!(value in visitedTagInformation)) {
+      visitedTagInformation[value] = value;
+
       createPage({
-        path: slug,
-        component: PostDetail,
+        path: `/${value}`,
+        component: List,
         context: {
-          slug,
+          value,
         },
-      }),
-  );
+      });
+    }
+
+    createPage({
+      path: current,
+      component: PostDetail,
+      context: {
+        current,
+      },
+    });
+  });
 };

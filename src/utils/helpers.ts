@@ -1,47 +1,4 @@
-import { PostEdge, FolderInformation } from '@/types/document';
-
 export const isOnDevelopment = () => process.env.GATSBY_MODE === 'development';
-
-interface FolderNameToFolderInformationMap {
-  [key: string]: FolderInformation;
-}
-
-export const getFolders = (edges: PostEdge[]) => {
-  const folderNameToFolderInformationMap = edges.reduce(
-    (acc: FolderNameToFolderInformationMap, { node }: PostEdge) => {
-      const { frontmatter, html } = node;
-      const { date, title, subTitle, folder, slug } = frontmatter;
-      const documentInformation = {
-        date,
-        folder,
-        title,
-        subTitle,
-        slug,
-        html,
-      };
-
-      if (!Reflect.has(acc, folder)) {
-        acc[folder] = {
-          folder,
-          documents: [documentInformation],
-        };
-      } else {
-        acc[folder].documents.push(documentInformation);
-      }
-
-      return acc;
-    },
-    {},
-  );
-
-  return moveTargetToLast(
-    moveTargetToLast(
-      Object.values(folderNameToFolderInformationMap),
-      target => target.folder === 'ETC',
-    ),
-    target => target.folder === 'Weekly Journal',
-  );
-};
 
 export const moveTargetToLast = <T>(
   arr: T[],

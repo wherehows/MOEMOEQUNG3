@@ -2,47 +2,35 @@ import styled from '@emotion/styled';
 import { MAIN_LEFT_MARGIN_WIDTH, MAIN_PURE_WIDTH } from '@/utils/const';
 import CustomLink from './CustomLink';
 import Typography from './Typography';
-import { MarkdownDocument } from '@/types/document';
 import useResponsiveWeb from '@/hooks/useResponsiveWeb';
+import { changeUTCToYYYYMMDD } from '@/utils/time';
+import { Post } from '@/utils/post';
 
-interface ContentProps {
-  documents: MarkdownDocument[];
+interface ListContentProps {
+  listName?: string;
+  posts?: Post[];
 }
 
-export const MainContent = ({ documents }: ContentProps) => {
+export const ListContent = ({ listName, posts }: ListContentProps) => {
   const { isUnder960px } = useResponsiveWeb();
+
   return (
     <Wrapper>
-      {!isUnder960px && (
-        <Typography variant="h1">
-          프론트엔드 개발 및 관심사를 기록하는 블로그
-        </Typography>
+      {!isUnder960px && listName && (
+        <Typography variant="h2">{listName}</Typography>
       )}
       <DocumentList>
-        {documents?.map(({ html, title, date, slug }: MarkdownDocument) => (
+        {posts?.map(({ title, slug, publishedAt, _updatedAt }) => (
           <DocumentItem key={slug}>
             <Button to={slug}>
               <Typography variant="h2">{title}</Typography>
-              <Typography variant="label" as="time" dateTime={date.toString()}>
-                {formatDate(date)}
-              </Typography>
               <Typography
-                variant="body"
-                style={{
-                  display: 'inline-block',
-                  width: '100%',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
-                  whiteSpace: 'normal',
-                  lineHeight: 1.2,
-                  height: '3.6rem',
-                  textAlign: 'left',
-                  wordWrap: 'break-word',
-                  WebkitLineClamp: 3,
-                  WebkitBoxOrient: 'vertical',
-                }}
+                as="time"
+                variant="label"
+                dateTime={changeUTCToYYYYMMDD(publishedAt)}
               >
-                {changeMarkdownToTextContent(html)}
+                written at {changeUTCToYYYYMMDD(publishedAt)} | updated at{' '}
+                {changeUTCToYYYYMMDD(_updatedAt)}
               </Typography>
             </Button>
           </DocumentItem>
@@ -84,11 +72,3 @@ const DocumentList = styled('ul')(() => ({
   padding: 0,
   margin: 0,
 }));
-
-const changeMarkdownToTextContent = (html: MarkdownDocument['html']) =>
-  html.replace(/<[^>]+>/g, '');
-
-const formatDate = (date: MarkdownDocument['date']) => {
-  const sArray = date.toString().split('-');
-  return `${sArray[0].slice(2, 4)}년 ${sArray[1]}월 ${sArray[2]}일`;
-};

@@ -1,24 +1,17 @@
 import styled from '@emotion/styled';
 import CustomLink from './CustomLink';
-import { FolderInformation } from '@/types/document';
-import Typography from './Typography';
 
 interface FolderItemProps {
-  folderInformation: FolderInformation;
+  documentCount: number;
+  categoryName: string;
 }
 
-const FolderItem = ({ folderInformation }: FolderItemProps) => {
-  const { folder, documents } = folderInformation;
-
+const FolderItem = ({ documentCount, categoryName }: FolderItemProps) => {
   return (
     <Wrapper>
-      <Typography variant="subtitle">{folder}</Typography>
       <DocumentList>
-        {documents.map(({ slug, subTitle }) => (
-          <DocumentItem key={slug}>
-            <LinkButton to={slug}>{subTitle}</LinkButton>
-          </DocumentItem>
-        ))}
+        <LinkButton to={`/${categoryName}`}>{categoryName}</LinkButton> __{' '}
+        {documentCount} posts
       </DocumentList>
     </Wrapper>
   );
@@ -44,10 +37,4 @@ const LinkButton = styled(CustomLink)(({ theme }) => ({
   '&:hover': {
     fontWeight: 600,
   },
-}));
-
-const DocumentItem = styled('li')(() => ({
-  listStyleType: 'none',
-  padding: '0',
-  margin: '0 0 0 1.8rem',
 }));

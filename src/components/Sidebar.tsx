@@ -6,15 +6,15 @@ import {
 } from '@/utils/const';
 import FolderItem from './FolderItem';
 import SidebarHeader from './SidebarHeader';
-import { FolderInformation } from '@/types/document';
+import { Post } from '@/utils/post';
 
 interface SidebarProps {
-  folderInformations: FolderInformation[];
+  categoryInformation: { [slug: string]: Post[] };
   isSidebarShown: boolean;
 }
 
 export const Sidebar = ({
-  folderInformations,
+  categoryInformation,
   isSidebarShown,
 }: SidebarProps) => (
   <>
@@ -24,8 +24,12 @@ export const Sidebar = ({
           <SidebarHeader />
           <FolderListWrapper>
             <FolderList>
-              {folderInformations.map((folderInformation, index) => (
-                <FolderItem key={index} folderInformation={folderInformation} />
+              {Object.keys(categoryInformation).map((category, index) => (
+                <FolderItem
+                  key={index}
+                  documentCount={+categoryInformation[category].length}
+                  categoryName={category}
+                />
               ))}
             </FolderList>
           </FolderListWrapper>

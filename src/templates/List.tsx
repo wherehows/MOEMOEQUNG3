@@ -1,18 +1,25 @@
+import { PageProps, graphql } from 'gatsby';
 import { Sidebar } from '@/components/Sidebar';
-import { graphql, PageProps } from 'gatsby';
 import { ThemeProvider } from '@emotion/react';
 import { theme } from '@/utils/const';
-import Header from '@/components/Header';
+import { ListContent } from '@/components/ListContent';
 import { useState } from 'react';
-import { PostDetailContent } from '@/components/PostDetailContent';
+import Header from '@/components/Header';
 import useResponsiveWeb from '@/hooks/useResponsiveWeb';
-import { getCategoryInformation } from '@/utils/post';
+import { getAllPosts, getCategoryInformation } from '@/utils/post';
 
-export default function PostDetail({
-  data: { postsQueryData, selectedPostQueryData },
-}: PageProps<Queries.TypegenPageQuery>) {
+const List = ({
+  data: { postsQueryData },
+  pageContext: { value: currentPageCategory },
+}: PageProps<
+  Queries.TypegenPageQuery,
+  {
+    value: string;
+  }
+>) => {
   const [isSidebarShown, setIsSidebarShown] = useState(false);
   const categoryInformation = getCategoryInformation(postsQueryData);
+  const allDocuments = getAllPosts(postsQueryData);
 
   useResponsiveWeb([
     {
@@ -30,21 +37,33 @@ export default function PostDetail({
   return (
     <ThemeProvider theme={theme}>
       <Header
-        isDetailPage
         isSidebarShown={isSidebarShown}
         setIsSidebarShown={setIsSidebarShown}
       />
       <Sidebar
-        categoryInformation={categoryInformation}
         isSidebarShown={isSidebarShown}
+        categoryInformation={categoryInformation}
       />
-      <PostDetailContent selectedPost={selectedPostQueryData} />
+      <ListContent
+        listName={currentPageCategory && `${currentPageCategory} 관련`}
+        posts={
+          currentPageCategory
+            ? categoryInformation[currentPageCategory].sort((a, b) => {
+                return +new Date(b.publishedAt) - +new Date(a.publishedAt);
+              })
+            : allDocuments.sort((a, b) => {
+                return +new Date(b.publishedAt) - +new Date(a.publishedAt);
+              })
+        }
+      />
     </ThemeProvider>
   );
-}
+};
+
+export default List;
 
 export const getPosts = graphql`
-  query TypegenPage($current: String!) {
+  query {
     postsQueryData: allSanityPosts {
       nodes {
         _updatedAt
@@ -70,31 +89,6 @@ export const getPosts = graphql`
           label
           value
         }
-      }
-    }
-    selectedPostQueryData: sanityPosts(slug: { current: { eq: $current } }) {
-      _updatedAt
-      id
-      slug {
-        _key
-        _type
-        current
-        source
-      }
-      publishedAt
-      title
-      content
-      debts {
-        _key
-        _type
-        label
-        value
-      }
-      tags {
-        _key
-        _type
-        label
-        value
       }
     }
   }

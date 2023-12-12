@@ -6,6 +6,8 @@
 
 // You can delete this file if you're not using it
 require('firebase/compat/database');
+const ClientOnlyVisibleWrapper =
+  require('./src/components/ClientOnlyVisibleWrapper').default;
 
 export const onRenderBody = ({ setHeadComponents }) => {
   setHeadComponents([
@@ -52,4 +54,8 @@ export const onRenderBody = ({ setHeadComponents }) => {
       }}
     />,
   ]);
+};
+
+export const wrapPageElement = ({ element }) => {
+  return <ClientOnlyVisibleWrapper>{element}</ClientOnlyVisibleWrapper>;
 };

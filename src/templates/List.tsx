@@ -2,7 +2,7 @@ import { PageProps, graphql } from 'gatsby';
 import { Sidebar } from '@/components/Sidebar';
 import { ThemeProvider } from '@emotion/react';
 import { theme } from '@/utils/const';
-import { ListContent } from '@/components/MainContent';
+import { ListContent } from '@/components/ListContent';
 import { useState } from 'react';
 import Header from '@/components/Header';
 import useResponsiveWeb from '@/hooks/useResponsiveWeb';

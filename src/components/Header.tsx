@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import Typography from './Typography';
 import DarkModeToggle from './DarkModeToggle';
 import NavigationCollapseToggle from './NavigationCollapseToggle';
 import { Dispatch } from 'react';
@@ -7,7 +6,6 @@ import Logo from './Logo';
 import Oktocat from '@/assets/oktocat.svg';
 import LinkedIn from '@/assets/linkedin.svg';
 import CustomLink from './CustomLink';
-// import Crown from '@/assets/crown.svg';
 
 interface HeaderProps {
   isDetailPage?: boolean;
@@ -22,22 +20,11 @@ const Header = ({
 }: HeaderProps) => {
   return (
     <Wrapper>
-      {isDetailPage ? (
-        <Logo />
-      ) : (
-        <Typography variant="h1">
-          녕후킴의 프론트 엔드 개발 및 관심사 기록 블로그
-        </Typography>
-      )}
+      <Logo isDetailPage={isDetailPage} />
       <ListWrapper>
         <List>
           <DarkModeToggle />
         </List>
-        {/* <List>
-          <PrivatePageLink to="/til">
-            <CrownIcon />
-          </PrivatePageLink>
-        </List> */}
         <List>
           <GithubLink to="https://github.com/wherehows">
             <OktocatIcon />
@@ -102,12 +89,3 @@ const LinkedInIcon = styled(LinkedIn)(() => ({
   width: '22px',
   height: '22px',
 }));
-
-// const PrivatePageLink = styled(CustomLink)(() => ({
-//   cursor: 'pointer',
-// }));
-
-// const CrownIcon = styled(Crown)(() => ({
-//   width: '22px',
-//   height: '22px',
-// }));

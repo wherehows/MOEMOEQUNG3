@@ -1,21 +1,32 @@
 import styled from '@emotion/styled';
 import CustomLink from './CustomLink';
+import Typography from './Typography';
 
-const Logo = () => {
+interface LogoProps {
+  isDetailPage?: boolean;
+}
+
+const Logo = ({ isDetailPage }: LogoProps) => {
   return (
-    <NameWrapper>
-      <Name to="/">녕후킴</Name>
-    </NameWrapper>
+    <>
+      {isDetailPage ? (
+        <NameWrapper>
+          <Name to="/">녕후킴</Name>
+        </NameWrapper>
+      ) : (
+        <Typography variant="h1">
+          <Name to="/">녕후킴</Name>
+        </Typography>
+      )}
+    </>
   );
 };
 
 export default Logo;
 
-const Name = styled(CustomLink)(({ theme }) => ({
+const Name = styled(CustomLink)(({ theme }) => ({}));
+
+const NameWrapper = styled('div')(({ theme }) => ({
   ...theme.typography.h1,
   fontWeight: 'bold',
-}));
-
-const NameWrapper = styled('div')(() => ({
-  fontSize: '1.8rem',
 }));

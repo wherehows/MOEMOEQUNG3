@@ -45,5 +45,5 @@ const incrementViews = async (slug: ViewCounter['slug']) => {
 
 const View = styled('div')(({ theme }) => ({
   ...theme.typography.label,
-  color: '#7e7e7e',
+  color: 'var(--colors-grey-02)',
 }));

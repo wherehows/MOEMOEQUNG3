@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import CustomLink from './CustomLink';
+import Typography from './Typography';
 
 interface FolderItemProps {
   documentCount: number;
@@ -10,8 +11,16 @@ const FolderItem = ({ documentCount, categoryName }: FolderItemProps) => {
   return (
     <Wrapper>
       <DocumentList>
-        <LinkButton to={`/${categoryName}`}>{categoryName}</LinkButton> __{' '}
-        {documentCount} posts
+        <LinkButton to={`/${categoryName}`}>{categoryName}</LinkButton>{' '}
+        <Typography
+          as="span"
+          variant="label"
+          style={{
+            color: 'var(--colors-grey-02)',
+          }}
+        >
+          __ {documentCount} posts
+        </Typography>
       </DocumentList>
     </Wrapper>
   );

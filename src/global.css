@@ -10,13 +10,13 @@
 }
 
 :root.dark {
-  --dark-background: #111314;
-  --dark-font: #fff;
+  --dark-mode-background: #111314;
+  --dark-mode-font: #fff;
 }
 
 :root.light {
-  --dark-background: #fff;
-  --dark-font: #111314;
+  --dark-mode-background: #fff;
+  --dark-mode-font: #111314;
 }
 
 body {
@@ -75,8 +75,8 @@ body {
   }
 
   font-family: 'Pretendard', sans-serif;
-  background: var(--dark-background);
-  color: var(--dark-font);
+  background: var(--dark-mode-background);
+  color: var(--dark-mode-font);
   -webkit-transition: color 1000ms ease-in-out;
   -ms-transition: color 1000ms ease-in-out;
   transition: color 1000ms ease-in-out;

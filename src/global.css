@@ -12,11 +12,13 @@
 :root.dark {
   --dark-mode-background: #111314;
   --dark-mode-font: #fff;
+  --dark-mode-violet: var(--colors-violet-02);
 }
 
 :root.light {
   --dark-mode-background: #fff;
   --dark-mode-font: #111314;
+  --dark-mode-violet: var(--colors-violet-03);
 }
 
 body {

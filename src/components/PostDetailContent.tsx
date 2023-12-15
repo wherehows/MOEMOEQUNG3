@@ -43,7 +43,7 @@ export const PostDetailContent = ({ selectedPost }: ContentProps) => {
                 style={{
                   fontFamily: 'inherit',
                   fontWeight: '400',
-                  borderBottom: '2px dashed var(--colors-orange-01)',
+                  borderBottom: '3px solid #ffe359',
                 }}
               >
                 {children}
@@ -128,7 +128,7 @@ export const PostDetailContent = ({ selectedPost }: ContentProps) => {
               <a
                 {...props}
                 style={{
-                  color: 'var(--colors-violet-03)',
+                  color: 'var(--dark-mode-violet)',
                   textDecoration: 'none',
                   fontWeight: '700',
                   fontSize: '16px',

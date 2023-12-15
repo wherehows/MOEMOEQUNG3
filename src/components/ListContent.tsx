@@ -23,7 +23,7 @@ export const ListContent = ({ listName, posts }: ListContentProps) => {
         {posts?.map(({ title, slug, publishedAt, _updatedAt }) => (
           <DocumentItem key={slug}>
             <Button to={slug}>
-              <Typography variant="h2">{title}</Typography>
+              <Title placeholder={title}>{title}</Title>
               <Typography
                 as="time"
                 variant="label"
@@ -74,4 +74,23 @@ const Button = styled(CustomLink)(() => ({
 const DocumentList = styled('ul')(() => ({
   padding: 0,
   margin: 0,
+}));
+
+const Title = styled('h2')(({ theme }) => ({
+  ...theme.typography['h2'],
+  whiteSpace: 'normal',
+
+  '&:before': {
+    content: 'attr(placeholder)',
+    position: 'absolute',
+    ...theme.typography['h2'],
+    color: 'var(--dark-mode-violet)',
+    width: 0,
+    overflow: 'hidden',
+    transition: 'all 0.6s',
+    whiteSpace: 'pre',
+  },
+  '&:hover:before': {
+    width: '100%',
+  },
 }));

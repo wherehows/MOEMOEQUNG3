@@ -28,7 +28,7 @@ export const ListContent = ({ listName, posts }: ListContentProps) => {
                 as="time"
                 variant="label"
                 style={{
-                  color: 'var(--colors-grey-02)',
+                  color: 'var(--colors-grey-03)',
                 }}
                 dateTime={changeUTCToYYYYMMDD(publishedAt)}
               >

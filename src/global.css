@@ -5,8 +5,10 @@
 
   --colors-orange-01: #ff8663;
 
+  --colors-grey-01: #ececec;
   --colors-grey-02: #cccccc;
   --colors-grey-03: #ababab;
+  --colors-grey-04: #2c2c2c;
 }
 
 :root.dark {

@@ -15,12 +15,14 @@
   --dark-mode-background: #111314;
   --dark-mode-font: #fff;
   --dark-mode-violet: var(--colors-violet-02);
+  --dark-mode-grey: var(--colors-grey-04);
 }
 
 :root.light {
   --dark-mode-background: #fff;
   --dark-mode-font: #111314;
   --dark-mode-violet: var(--colors-violet-03);
+  --dark-mode-grey: var(--colors-grey-01);
 }
 
 body {

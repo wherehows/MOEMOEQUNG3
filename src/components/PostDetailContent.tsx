@@ -43,7 +43,10 @@ export const PostDetailContent = ({ selectedPost }: ContentProps) => {
                 style={{
                   fontFamily: 'inherit',
                   fontWeight: '400',
-                  borderBottom: '3px solid #ffe359',
+                  backgroundColor: 'var(--dark-mode-grey)',
+                  borderRadius: '4px',
+                  padding: '2px 5px',
+                  marginRight: '2px',
                 }}
               >
                 {children}

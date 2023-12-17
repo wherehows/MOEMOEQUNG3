@@ -84,7 +84,7 @@ export const PostDetailContent = ({ selectedPost }: ContentProps) => {
               <h2
                 {...rest}
                 style={{
-                  borderBottom: '1px dashed var(--colors-grey-01)',
+                  borderBottom: '1px dashed var(--colors-grey-02)',
                   padding: '0 0 4px 0',
                   margin: 0,
                 }}

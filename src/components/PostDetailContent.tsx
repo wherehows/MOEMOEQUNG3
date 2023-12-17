@@ -132,8 +132,7 @@ export const PostDetailContent = ({ selectedPost }: ContentProps) => {
                 {...props}
                 style={{
                   color: 'var(--dark-mode-violet)',
-                  textDecoration: 'none',
-                  fontWeight: '700',
+                  fontWeight: '500',
                   fontSize: '16px',
                 }}
               />

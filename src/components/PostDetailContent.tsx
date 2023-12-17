@@ -43,7 +43,10 @@ export const PostDetailContent = ({ selectedPost }: ContentProps) => {
                 style={{
                   fontFamily: 'inherit',
                   fontWeight: '400',
-                  borderBottom: '3px solid #ffe359',
+                  backgroundColor: 'var(--dark-mode-grey)',
+                  borderRadius: '4px',
+                  padding: '2px 5px',
+                  marginRight: '2px',
                 }}
               >
                 {children}
@@ -84,7 +87,7 @@ export const PostDetailContent = ({ selectedPost }: ContentProps) => {
               <h2
                 {...rest}
                 style={{
-                  borderBottom: '1px dashed var(--colors-grey-01)',
+                  borderBottom: '1px dashed var(--colors-grey-02)',
                   padding: '0 0 4px 0',
                   margin: 0,
                 }}
@@ -129,8 +132,7 @@ export const PostDetailContent = ({ selectedPost }: ContentProps) => {
                 {...props}
                 style={{
                   color: 'var(--dark-mode-violet)',
-                  textDecoration: 'none',
-                  fontWeight: '700',
+                  fontWeight: '500',
                   fontSize: '16px',
                 }}
               />

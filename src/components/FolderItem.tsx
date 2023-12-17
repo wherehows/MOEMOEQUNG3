@@ -16,7 +16,7 @@ const FolderItem = ({ documentCount, categoryName }: FolderItemProps) => {
           as="span"
           variant="label"
           style={{
-            color: 'var(--colors-grey-02)',
+            color: 'var(--colors-grey-03)',
           }}
         >
           __ {documentCount} posts

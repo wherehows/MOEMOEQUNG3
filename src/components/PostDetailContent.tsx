@@ -41,6 +41,7 @@ export const PostDetailContent = ({ selectedPost }: ContentProps) => {
               <code
                 {...rest}
                 style={{
+                  display: 'inline-block',
                   fontFamily: 'inherit',
                   fontWeight: '400',
                   backgroundColor: 'var(--dark-mode-grey)',

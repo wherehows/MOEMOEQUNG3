@@ -122,7 +122,7 @@ export const PostDetailContent = ({ selectedPost }: ContentProps) => {
               <img
                 {...props}
                 style={{
-                  margin: '0 auto',
+                  margin: '32px auto',
                 }}
               />
             );

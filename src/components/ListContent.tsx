@@ -20,7 +20,7 @@ export const ListContent = ({ listName, posts }: ListContentProps) => {
         <Typography variant="h2">{listName}</Typography>
       )}
       <DocumentList>
-        {posts?.map(({ title, slug, publishedAt, _updatedAt }) => (
+        {posts?.map(({ title, slug, publishedAt }) => (
           <DocumentItem key={slug}>
             <Button to={slug}>
               <Title placeholder={title}>{title}</Title>
@@ -32,8 +32,7 @@ export const ListContent = ({ listName, posts }: ListContentProps) => {
                 }}
                 dateTime={changeUTCToYYYYMMDD(publishedAt)}
               >
-                written at {changeUTCToYYYYMMDD(publishedAt)} | updated at{' '}
-                {changeUTCToYYYYMMDD(_updatedAt)}
+                written at {changeUTCToYYYYMMDD(publishedAt)}
               </Typography>
             </Button>
           </DocumentItem>

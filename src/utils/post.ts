@@ -1,6 +1,6 @@
 export type Post = Pick<
   Queries.TypegenPageQuery['postsQueryData']['nodes'][0],
-  'title' | 'publishedAt' | '_updatedAt'
+  'title' | 'publishedAt'
 > & { slug: string };
 
 export const getCategoryInformation = ({
@@ -11,12 +11,11 @@ export const getCategoryInformation = ({
   } = {};
 
   for (let i = 0; i < nodes.length; i++) {
-    const { title, tags, publishedAt, _updatedAt, slug } = nodes[i];
+    const { title, tags, publishedAt, slug } = nodes[i];
     const { value: category } = tags[0];
     const post = {
       title,
       publishedAt,
-      _updatedAt,
       slug: slug.current,
     };
 
@@ -37,11 +36,10 @@ export const getAllPosts = (
   const allPosts: Post[] = [];
 
   for (let i = 0; i < nodes.length; i++) {
-    const { title, publishedAt, _updatedAt, slug } = nodes[i];
+    const { title, publishedAt, slug } = nodes[i];
     const post = {
       title,
       publishedAt,
-      _updatedAt,
       slug: slug.current,
     };
 

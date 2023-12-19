@@ -46,7 +46,7 @@ export const PostDetailContent = ({ selectedPost }: ContentProps) => {
                   fontWeight: '400',
                   backgroundColor: 'var(--dark-mode-grey)',
                   borderRadius: '4px',
-                  padding: '2px 5px',
+                  padding: '0px 5px',
                   marginRight: '2px',
                 }}
               >

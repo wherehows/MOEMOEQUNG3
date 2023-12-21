@@ -1,4 +1,4 @@
-## About The Project
+## About The Repo
 개발 과정 중에 공부한 내용을 적는 블로그입니다.
 
 ## Built With

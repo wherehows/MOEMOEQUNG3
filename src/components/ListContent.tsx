@@ -32,8 +32,7 @@ export const ListContent = ({ listName, posts }: ListContentProps) => {
                 }}
                 dateTime={changeUTCToYYYYMMDD(publishedAt)}
               >
-                written at {changeUTCToYYYYMMDD(publishedAt)} | updated at{' '}
-                {changeUTCToYYYYMMDD(_updatedAt)}
+                written at {changeUTCToYYYYMMDD(publishedAt)}
               </Typography>
             </Button>
           </DocumentItem>

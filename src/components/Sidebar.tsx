@@ -60,7 +60,7 @@ const Wrapper = styled('div')(() => ({
     zIndex: 1,
     top: 0,
     padding: '0 12px',
-    backgroundColor: 'var(--dark-background)',
+    backgroundColor: 'var(--dark-mode-background)',
     display: 'flex',
   },
   '@media only screen and (min-width: 961px)': {

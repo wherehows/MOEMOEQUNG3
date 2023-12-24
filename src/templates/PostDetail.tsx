@@ -11,7 +11,7 @@ import { getCategoryInformation } from '@/utils/post';
 export default function PostDetail({
   data: { postsQueryData, selectedPostQueryData },
 }: PageProps<Queries.TypegenPageQuery>) {
-  const [isSidebarShown, setIsSidebarShown] = useState(false);
+  const [isSidebarShown, setIsSidebarShown] = useState(true);
   const categoryInformation = getCategoryInformation(postsQueryData);
 
   useResponsiveWeb([

@@ -17,7 +17,7 @@ const List = ({
     value: string;
   }
 >) => {
-  const [isSidebarShown, setIsSidebarShown] = useState(false);
+  const [isSidebarShown, setIsSidebarShown] = useState(true);
   const categoryInformation = getCategoryInformation(postsQueryData);
   const allDocuments = getAllPosts(postsQueryData);
 

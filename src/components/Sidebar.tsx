@@ -87,6 +87,8 @@ const FolderList = styled('ul')(() => ({
 }));
 
 const AvatarWrapper = styled('div')(() => ({
+  position: 'relative',
+  zIndex: 0,
   borderRadius: '50%',
   overflow: 'hidden',
   margin: '32px 0',

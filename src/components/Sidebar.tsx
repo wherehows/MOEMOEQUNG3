@@ -7,6 +7,7 @@ import {
 import FolderItem from './FolderItem';
 import SidebarHeader from './SidebarHeader';
 import { Post } from '@/utils/post';
+import { StaticImage } from 'gatsby-plugin-image';
 
 interface SidebarProps {
   categoryInformation: { [slug: string]: Post[] };
@@ -22,6 +23,14 @@ export const Sidebar = ({
       <Wrapper>
         <SubWrapper>
           <SidebarHeader />
+          <AvatarWrapper>
+            <StaticImage
+              src="../assets/avatar.png"
+              alt="블로그 주인의 프로필 그림"
+              width={256}
+              height={256}
+            />
+          </AvatarWrapper>
           <FolderListWrapper>
             <FolderList>
               {Object.keys(categoryInformation).map((category, index) => (
@@ -51,7 +60,7 @@ const Wrapper = styled('div')(() => ({
     zIndex: 1,
     top: 0,
     padding: '0 12px',
-    backgroundColor: 'var(--dark-background)',
+    backgroundColor: 'var(--dark-mode-background)',
     display: 'flex',
   },
   '@media only screen and (min-width: 961px)': {
@@ -73,4 +82,11 @@ const FolderList = styled('ul')(() => ({
   position: 'relative',
   marginTop: 0,
   padding: 0,
+}));
+
+const AvatarWrapper = styled('div')(() => ({
+  borderRadius: '50%',
+  overflow: 'hidden',
+  margin: '32px 0',
+  border: '3px solid var(--colors-grey-04)',
 }));

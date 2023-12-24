@@ -57,10 +57,12 @@ const Wrapper = styled('div')(() => ({
   position: 'fixed',
   paddingRight: PADDING_BETWEEN_SIDEBAR_AND_SCROLL,
   '@media only screen and (max-width: 960px)': {
+    color: 'white',
     zIndex: 1,
     top: 0,
     padding: '0 12px',
-    backgroundColor: 'var(--dark-mode-background)',
+    backgroundColor: 'var(--colors-violet-04)',
+    borderRadius: '0 25px 25px 0',
     display: 'flex',
   },
   '@media only screen and (min-width: 961px)': {

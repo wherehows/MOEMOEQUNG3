@@ -1,5 +1,9 @@
 import styled from '@emotion/styled';
-import { MAIN_LEFT_MARGIN_WIDTH, MAIN_PURE_WIDTH } from '@/utils/const';
+import {
+  LAYOUT_PADDING,
+  MAIN_LEFT_MARGIN_WIDTH,
+  MAIN_PURE_WIDTH,
+} from '@/utils/const';
 import ViewCounter from './ViewCounter';
 import Typography from './Typography';
 import Markdown from 'react-markdown';
@@ -146,6 +150,7 @@ export const PostDetailContent = ({ selectedPost }: ContentProps) => {
 
 const Wrapper = styled('main')(() => ({
   width: MAIN_PURE_WIDTH,
+  paddingBottom: LAYOUT_PADDING,
   height: '100%',
   '@media only screen and (max-width: 960px)': {
     margin: '0 auto',

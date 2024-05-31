@@ -1,5 +1,9 @@
 import styled from '@emotion/styled';
-import { MAIN_LEFT_MARGIN_WIDTH, MAIN_PURE_WIDTH } from '@/utils/const';
+import {
+  LAYOUT_PADDING,
+  MAIN_LEFT_MARGIN_WIDTH,
+  MAIN_PURE_WIDTH,
+} from '@/utils/const';
 import CustomLink from './CustomLink';
 import Typography from './Typography';
 import useResponsiveWeb from '@/hooks/useResponsiveWeb';
@@ -46,6 +50,7 @@ const Wrapper = styled('main')(() => ({
   display: 'none',
   width: MAIN_PURE_WIDTH,
   height: '100%',
+  paddingBottom: LAYOUT_PADDING,
   '@media only screen and (max-width: 960px)': {
     margin: '0 auto',
     display: 'flex',

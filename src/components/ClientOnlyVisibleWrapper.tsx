@@ -1,3 +1,4 @@
+import { LAYOUT_PADDING } from '@/utils/const';
 import { ReactNode, useEffect, useState } from 'react';
 
 interface ClientOnlyVisibleWrapper {
@@ -14,6 +15,7 @@ const ClientOnlyVisibleWrapper = ({ children }: ClientOnlyVisibleWrapper) => {
   return (
     <div
       style={{
+        paddingTop: LAYOUT_PADDING,
         visibility: isMounted ? 'initial' : 'hidden',
       }}
     >

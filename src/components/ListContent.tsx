@@ -48,7 +48,7 @@ export const ListContent = ({ listName, posts }: ListContentProps) => {
 
 const Wrapper = styled('main')(() => ({
   display: 'none',
-  width: MAIN_PURE_WIDTH,
+  maxWidth: MAIN_PURE_WIDTH,
   height: '100%',
   paddingBottom: LAYOUT_PADDING,
   '@media only screen and (max-width: 960px)': {

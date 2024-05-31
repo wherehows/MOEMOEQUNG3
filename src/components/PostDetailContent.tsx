@@ -149,7 +149,7 @@ export const PostDetailContent = ({ selectedPost }: ContentProps) => {
 };
 
 const Wrapper = styled('main')(() => ({
-  width: MAIN_PURE_WIDTH,
+  maxWidth: MAIN_PURE_WIDTH,
   paddingBottom: LAYOUT_PADDING,
   height: '100%',
   '@media only screen and (max-width: 960px)': {

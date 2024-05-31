@@ -75,7 +75,6 @@ const Wrapper = styled('div')(() => ({
 
 const SubWrapper = styled('div')(() => ({
   width: SIDEBAR_PURE_WIDTH,
-  paddingTop: LAYOUT_PADDING,
 }));
 
 const FolderListWrapper = styled('nav')(() => ({}));

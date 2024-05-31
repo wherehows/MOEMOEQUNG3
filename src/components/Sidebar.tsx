@@ -61,7 +61,7 @@ const Wrapper = styled('div')(() => ({
     zIndex: 1,
     top: 0,
     padding: '0 12px',
-    backgroundColor: 'var(--colors-violet-04)',
+    backgroundColor: 'var(--colors-grey-04)',
     borderRadius: '0 25px 25px 0',
     display: 'flex',
   },

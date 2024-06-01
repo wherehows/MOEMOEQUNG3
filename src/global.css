@@ -114,6 +114,11 @@ h3 {
   box-sizing: border-box;
 }
 
+html {
+  width: 100vw;
+  overflow-x: hidden;
+}
+
 html,
 body {
   height: 100%;

@@ -50,7 +50,6 @@ const Wrapper = styled('main')(() => ({
   display: 'none',
   maxWidth: MAIN_PURE_WIDTH,
   height: '100%',
-  paddingBottom: LAYOUT_PADDING,
   '@media only screen and (max-width: 960px)': {
     margin: '0 auto',
     display: 'flex',
@@ -58,6 +57,7 @@ const Wrapper = styled('main')(() => ({
   '@media only screen and (min-width: 961px)': {
     marginLeft: MAIN_LEFT_MARGIN_WIDTH,
     display: 'block',
+    paddingBottom: LAYOUT_PADDING,
   },
 }));
 
@@ -78,4 +78,7 @@ const Button = styled(CustomLink)(() => ({
 const DocumentList = styled('ul')(() => ({
   padding: 0,
   margin: 0,
+  '@media only screen and (max-width: 960px)': {
+    padding: LAYOUT_PADDING,
+  },
 }));

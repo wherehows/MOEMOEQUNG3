@@ -12,14 +12,14 @@
   --colors-grey-04: #2c2c2c;
 }
 
-:root.dark {
+[data-preferred-theme='dark'] {
   --dark-mode-background: #111314;
   --dark-mode-font: #fff;
   --dark-mode-violet: var(--colors-violet-02);
   --dark-mode-grey: var(--colors-grey-04);
 }
 
-:root.light {
+[data-preferred-theme='light'] {
   --dark-mode-background: #fff;
   --dark-mode-font: #111314;
   --dark-mode-violet: var(--colors-violet-03);
@@ -84,6 +84,7 @@ body {
   font-family: 'Pretendard', sans-serif;
   background: var(--dark-mode-background);
   color: var(--dark-mode-font);
+
   -webkit-transition: color 1000ms ease-in-out;
   -ms-transition: color 1000ms ease-in-out;
   transition: color 1000ms ease-in-out;

@@ -17,3 +17,5 @@ export const moveTargetToLast = <T>(
 
   return lastValue ? [...res, lastValue] : res;
 };
+
+export const isInClient = () => typeof window !== 'undefined';

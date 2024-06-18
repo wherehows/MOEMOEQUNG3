@@ -15,42 +15,18 @@ export const onRenderBody = ({ setHeadComponents }) => {
       dangerouslySetInnerHTML={{
         __html: `
             (function() {
-              function setTheme(theme) {
-                if (theme === 'dark') {
-                  document.documentElement.className = 'dark';
-                } else {
-                  document.documentElement.className = 'light';
-                }
-
-                window.__theme = theme;
-              };
-
-              window.__setPreferredTheme = function(theme) {
-                setTheme(theme);
-                try {
-                  localStorage.setItem('preferred-theme', theme);
-                } catch (e) {}
-              };
-
-              var preferredTheme;
+              let preferredTheme = null;
 
               try {
-                preferredTheme = localStorage.getItem('preferred-theme');
-              } catch (e) {}
-
-              window.__themeListeners = [];
-
-              var darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
-              darkQuery.addListener(function(e) {
-                window.__setPreferredTheme(e.matches ? 'dark' : 'light');
-                window.__themeListeners.forEach(function(listener) {
-                  listener();
-                });
-              });
-
-              setTheme(preferredTheme || (darkQuery.matches ? 'dark' : 'light'));
+                preferredTheme = localStorage.getItem('preferred-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+              } catch {
+                console.error('다크, 라이트 모드 정보를 가져올 수 없습니다.');
+              }
+                
+              document.documentElement.setAttribute('data-preferred-theme', preferredTheme);
+              window.__theme = preferredTheme;
             })();
-  `,
+          `,
       }}
     />,
   ]);

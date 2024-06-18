@@ -15,10 +15,16 @@ const DarkModeToggle = () => {
   const [isMounted, setIsMounted] = useState(false);
 
   const handleClickCheckBox = (e: ChangeEvent<HTMLInputElement>) => {
-    const isChecked = e.target.checked;
-    setIsOn(isChecked);
+    const mode = e.target.checked ? 'dark' : 'light';
+    setIsOn(e.target.checked);
 
-    window.__setPreferredTheme(isChecked ? 'dark' : 'light');
+    try {
+      window.localStorage.setItem('preferred-theme', mode);
+    } catch {
+      console.error('다크, 라이트 모드 정보를 스토리지에 저장할 수 없습니다.');
+    }
+
+    document.documentElement.setAttribute('data-preferred-theme', mode);
   };
 
   useLayoutEffect(() => {

@@ -72,6 +72,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions;
   const PostDetail = path.resolve(`src/templates/PostDetail.tsx`);
   const List = path.resolve('src/templates/List.tsx');
+  const Charts = path.resolve('src/templates/Charts.tsx');
 
   const result = await graphql(`
     {
@@ -95,6 +96,11 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   createPage({
     path: '/',
     component: List,
+  });
+
+  createPage({
+    path: '/charts',
+    component: Charts,
   });
 
   const visitedTagInformation = {};

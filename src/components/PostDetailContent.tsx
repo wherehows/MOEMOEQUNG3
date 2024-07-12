@@ -23,9 +23,14 @@ export const PostDetailContent = ({ selectedPost }: ContentProps) => {
 
   return (
     <Wrapper>
+      <link
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        rel="stylesheet"
+      />
       <Typography variant="h1">{title}</Typography>
       <ViewCounter slug={slug.current} />
-      <blockquote
+      <Blockquote />
+      {/* <blockquote
         style={{
           fontSize: '18px',
           color: '#444',
@@ -54,7 +59,7 @@ export const PostDetailContent = ({ selectedPost }: ContentProps) => {
         >
           블로그 주인장의 첫 회사 사수
         </cite>
-      </blockquote>
+      </blockquote> */}
       {/* <blockquote
         style={{
           fontSize: '1.2em',
@@ -232,6 +237,67 @@ export const PostDetailContent = ({ selectedPost }: ContentProps) => {
         }}
       />
     </Wrapper>
+  );
+};
+
+const blockquoteStyle = {
+  fontSize: '1.2em',
+  fontStyle: 'italic',
+  color: '#333',
+  borderLeft: '8px solid #8f9aff',
+  paddingLeft: '1em',
+  margin: '1em 0',
+  backgroundColor: '#f9f9f9',
+  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+  position: 'relative',
+  padding: '30px 0px 8px 12px',
+};
+
+const quoteMarkStyle = {
+  position: 'absolute',
+  fontSize: '4em',
+  color: '#8f9aff',
+  lineHeight: '0.5em',
+};
+
+const citeStyle = {
+  display: 'block',
+  marginTop: '1em',
+  fontSize: '1em',
+  fontStyle: 'normal',
+  color: '#555',
+};
+
+const authorStyle = {
+  fontWeight: 'bold',
+};
+
+const sourceStyle = {
+  fontStyle: 'italic',
+  color: '#777',
+};
+
+const Blockquote = () => {
+  return (
+    <blockquote style={blockquoteStyle}>
+      <span style={quoteMarkStyle}>&ldquo;</span>
+      <div
+        style={{
+          margin: '24px',
+        }}
+      >
+        <div>
+          아는 것과 모르는 것은 다르고, 제대로 아는 것과 아는 것은 또 다르다.
+          <br />
+          아는 것은 아는 것 대로 중요하고, 제대로 아는 것은 제대로 아는 것 대로
+          중요하다
+        </div>
+        <cite style={citeStyle}>
+          <span style={authorStyle}>ㅡ 블로그 주인의 첫 직장 사수</span>{' '}
+          {/* <span style={sourceStyle}>Source Title</span> */}
+        </cite>
+      </div>
+    </blockquote>
   );
 };
 

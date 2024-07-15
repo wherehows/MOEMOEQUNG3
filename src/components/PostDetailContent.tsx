@@ -9,6 +9,8 @@ import Typography from './Typography';
 import Markdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { cb } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import Quote from './Quote';
+import useIsMounted from '@/hooks/useIsMounted';
 
 interface ContentProps {
   selectedPost: Queries.TypegenPageQuery['selectedPostQueryData'];
@@ -18,105 +20,13 @@ export const PostDetailContent = ({ selectedPost }: ContentProps) => {
   if (!selectedPost) {
     return <></>;
   }
-
+  const isMounted = useIsMounted();
   const { title, slug, content } = selectedPost;
 
   return (
     <Wrapper>
-      <link
-        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-        rel="stylesheet"
-      />
       <Typography variant="h1">{title}</Typography>
       <ViewCounter slug={slug.current} />
-      <Blockquote />
-      {/* <blockquote
-        style={{
-          fontSize: '18px',
-          color: '#444',
-          borderLeft: '8px solid #2c2c2c',
-          padding: '8px 16px',
-          margin: '18px 0',
-          background: '#ffffff',
-          boxShadow: '0 1px 4px rgba(0, 0, 0, 0.1)',
-          fontStyle: 'normal',
-        }}
-      >
-        <div>
-          아는 것과 모르는 것은 다르고, 제대로 아는 것과 아는 것은 또 다르다.
-          <br />
-          아는 것은 아는 것 대로 중요하고, 제대로 아는 것은 제대로 아는 것 대로
-          중요하다.
-        </div>
-        <cite
-          style={{
-            display: 'block',
-            textAlign: 'right',
-            marginTop: '20px',
-            color: '#2c2c2c',
-            fontWeight: 'bold',
-          }}
-        >
-          블로그 주인장의 첫 회사 사수
-        </cite>
-      </blockquote> */}
-      {/* <blockquote
-        style={{
-          fontSize: '1.2em',
-          color: '#333',
-          borderLeft: '15px solid #ccc',
-          padding: '8px 12px',
-          margin: '18px 0',
-          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-          // background: '#f9f9f9',
-        }}
-      >
-        <div>
-          아는 것과 모르는 것은 다르고, 제대로 아는 것과 아는 것은 또 다르다.
-          <br />
-          아는 것은 아는 것 대로 중요하고, 제대로 아는 것은 제대로 아는 것 대로
-          중요하다
-        </div>
-        <cite
-          style={{
-            display: 'block',
-            textAlign: 'right',
-            marginTop: '22px',
-          }}
-        >
-          - 블로그 주인장의 첫 회사 사수
-        </cite>
-      </blockquote> */}
-      {/* <blockquote
-        style={
-          {
-            // margin: '12px 0',
-            // position: 'relative',
-            // fontSize: '16px',
-            // padding: '8px 12px  ',
-            // borderLeft: '15px solid var(--colors-violet-02)',
-            // '-moz-box-shadow': '2px 2px 15px #ccc',
-            // '-webkit-box-shadow': '2px 2px 15px #ccc',
-            // boxShadow: '2px 2px 15px #ccc',
-          }
-        }
-      >
-        <div>
-          아는 것과 모르는 것은 다르고, 제대로 아는 것과 아는 것은 또 다르다.
-          <br />
-          아는 것은 아는 것 대로 중요하고, 제대로 아는 것은 제대로 아는 것 대로
-          중요하다
-        </div>
-        <cite
-          style={{
-            display: 'block',
-            textAlign: 'right',
-            marginTop: '22px',
-          }}
-        >
-          - 블로그 주인장의 첫 회사 사수
-        </cite>
-      </blockquote> */}
       <Markdown
         children={content}
         components={{
@@ -236,70 +146,110 @@ export const PostDetailContent = ({ selectedPost }: ContentProps) => {
           },
         }}
       />
+      {isMounted && <Quote />}
     </Wrapper>
   );
 };
 
-const blockquoteStyle = {
-  fontSize: '1.2em',
-  fontStyle: 'italic',
-  color: '#333',
-  borderLeft: '8px solid #8f9aff',
-  paddingLeft: '1em',
-  margin: '1em 0',
-  backgroundColor: '#f9f9f9',
-  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-  position: 'relative',
-  padding: '30px 0px 8px 12px',
-};
+const Blockquote = styled.blockquote`
+  width: 100% !important;
+  padding: 25px 0 20px 25px !important;
+  border-left: 5px solid #5857ff;
+  border-bottom: 5px solid #5857ff;
+  position: relative;
+  margin: 0;
 
-const quoteMarkStyle = {
-  position: 'absolute',
-  fontSize: '4em',
-  color: '#8f9aff',
-  lineHeight: '0.5em',
-};
+  &:before {
+    content: '';
+    position: absolute !important;
+    width: 10%;
+    height: 100% !important;
+    top: 0;
+    left: -1px;
+    border-top: 5px solid #5857ff;
+  }
 
-const citeStyle = {
-  display: 'block',
-  marginTop: '1em',
-  fontSize: '1em',
-  fontStyle: 'normal',
-  color: '#555',
-};
+  &:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 15%;
+    bottom: -5px;
+    left: 0;
+    box-shadow: inset -5px 0 0 0 #5857ff;
+  }
 
-const authorStyle = {
-  fontWeight: 'bold',
-};
+  p {
+    font-style: italic;
+    font-size: 32px;
+    line-height: 44px;
+    font-weight: 500;
+    padding-bottom: 27px;
+  }
+`;
 
-const sourceStyle = {
-  fontStyle: 'italic',
-  color: '#777',
-};
+// const blockquoteStyle = {
+//   position: 'relative',
+//   fontSize: '1.2em',
+//   // fontStyle: 'italic',
+//   color: '#333',
+//   borderLeft: '8px solid #8f9aff',
+//   margin: '1em 0',
+//   backgroundColor: '#f9f9f9',
+//   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+//   padding: '20px 8px',
+// };
 
-const Blockquote = () => {
-  return (
-    <blockquote style={blockquoteStyle}>
-      <span style={quoteMarkStyle}>&ldquo;</span>
-      <div
-        style={{
-          margin: '24px',
-        }}
-      >
-        <div>
-          아는 것과 모르는 것은 다르고, 제대로 아는 것과 아는 것은 또 다르다.
-          <br />
-          아는 것은 아는 것 대로 중요하고, 제대로 아는 것은 제대로 아는 것 대로
-          중요하다
-        </div>
-        <cite style={citeStyle}>
-          <span style={authorStyle}>ㅡ 블로그 주인의 첫 직장 사수</span>{' '}
-          {/* <span style={sourceStyle}>Source Title</span> */}
-        </cite>
-      </div>
-    </blockquote>
-  );
-};
+// const quoteMarkStyle = {
+//   position: 'absolute',
+//   fontSize: '3em',
+//   color: '#8f9aff',
+// };
+
+// const citeStyle = {
+//   display: 'block',
+//   marginTop: '1em',
+//   fontSize: '1em',
+//   fontStyle: 'normal',
+//   color: '#555',
+// };
+
+// const authorStyle = {
+//   fontWeight: 'bold',
+// };
+
+// const sourceStyle = {
+//   fontStyle: 'italic',
+//   color: '#777',
+// };
+
+// const Blockquote = () => {
+//   return (
+//     <blockquote style={blockquoteStyle}>
+//       <span style={quoteMarkStyle}>&ldquo;</span>
+//       <div style={{}}>
+//         <div>
+//           아는 것과 모르는 것은 다르고, 제대로 아는 것과 아는 것은 또 다르다.
+//           <br />
+//           아는 것은 아는 것 대로 중요하고, 제대로 아는 것은 제대로 아는 것 대로
+//           중요하다
+//         </div>
+//         <cite style={citeStyle}>
+//           <span style={authorStyle}>ㅡ 블로그 주인의 첫 직장 사수</span>{' '}
+//           {/* <span style={sourceStyle}>Source Title</span> */}
+//         </cite>
+//       </div>
+//     </blockquote>
+//   );
+// };
+
+// const WiseSaying = styled('div')(() => ({
+//   '&::first-letter': {
+//     float: 'left',
+//     fontSize: '35px',
+//     fontWeight: 'bold',
+//   },
+// }));
 
 const Wrapper = styled('main')(() => ({
   maxWidth: MAIN_PURE_WIDTH,

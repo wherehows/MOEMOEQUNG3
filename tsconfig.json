@@ -1,6 +1,7 @@
 {
   "include": ["./src/**/*"],
   "compilerOptions": {
+    "resolveJsonModule": true,
     "target": "ES6",
     "moduleResolution": "node",
     "jsx": "react-jsx",

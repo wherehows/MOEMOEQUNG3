@@ -13,6 +13,8 @@
 }
 
 [data-preferred-theme='dark'] {
+  --dark-mode-boxShadow: 0px -10px 15px -10px rgba(255, 255, 255, 0.2),
+    0px 10px 15px -10px rgba(255, 255, 255, 0.2);
   --dark-mode-background: #111314;
   --dark-mode-font: #fff;
   --dark-mode-violet: var(--colors-violet-02);
@@ -20,6 +22,8 @@
 }
 
 [data-preferred-theme='light'] {
+  --dark-mode-boxShadow: 0px -10px 15px -10px rgba(0, 0, 0, 0.3),
+    0px 10px 15px -10px rgba(0, 0, 0, 0.3);
   --dark-mode-background: #fff;
   --dark-mode-font: #111314;
   --dark-mode-violet: var(--colors-violet-03);

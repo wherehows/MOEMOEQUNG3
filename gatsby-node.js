@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs');
 
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
@@ -88,9 +89,27 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     }
   `);
 
-  if (result.errors) {
+  const quoteResult = await graphql(`
+    {
+      allSanityQuote {
+        nodes {
+          author
+          quote
+          isBook
+        }
+      }
+    }
+  `);
+
+  if (result.errors || quoteResult.errors) {
     reporter.panicOnBuild(`Error while running GraphQL query.`);
   }
+
+  const quotePath = path.resolve(__dirname, 'src/assets/quote.json');
+  fs.writeFileSync(
+    quotePath,
+    JSON.stringify({ quotes: quoteResult.data.allSanityQuote.nodes }),
+  );
 
   createPage({
     path: '/',
